@@ -1,13 +1,15 @@
 import React from "react";
-import Header from "./Header";
+import { Link, Outlet } from "react-router-dom";
+
+import Header from "../Header";
 import Home from "./Home";
-import Footer from "./Footer";
+import Footer from "../Footer";
 
 const Index = () => {
   return (
     <div>
       <Header />
-      <Home />
+      <Outlet />
       <Footer />
     </div>
   );
