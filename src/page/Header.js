@@ -45,9 +45,6 @@ const Header = () => {
             <h1 onClick={showModal} className="cursor-pointer">
               ĐĂNG NHẬP
             </h1>
-            {/* <Link to="/login" onClick={showModal}>
-              ĐĂNG NHẬP/
-            </Link> */}
             <Link to="/register">ĐĂNG KÝ</Link>
           </div>
         </div>
