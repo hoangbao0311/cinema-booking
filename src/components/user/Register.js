@@ -2,9 +2,54 @@ import React, { useContext, useEffect, useState } from "react";
 import { Button, Checkbox, Form, Input } from "antd";
 import axios from "axios";
 import { Context } from "../../context/Context";
-const onFinish = (values) => {
-  console.log("Success:", values);
+const postData = async (data) => {
+  const response = await axios.post("http://localhost:3004/users", {
+    fullname: data.fullname,
+    email: data.email,
+    password: data.password,
+    role: "user",
+  });
+  if (response.status === 200) {
+  }
 };
+const onFinish = async (values) => {
+  console.log("Success:", values);
+  const data = {
+    email: values.email,
+    fullname: values.fullname,
+    password: values.password,
+    confirmpassword: values["confirm password"],
+  };
+
+  if (data.password !== data.confirmpassword) {
+    alert("Nhập lại mật khẩu sai");
+    return;
+  }
+  let checkEmail = false;
+  axios
+    .get("http://localhost:3004/users")
+    .then((response) => {
+      response.data.forEach((check) => {
+        const mail = check.email;
+        if (data.email === mail) {
+          checkEmail = false;
+        } else {
+          checkEmail = true;
+        }
+      });
+      if (checkEmail) {
+        postData(values);
+        alert("Tạo tài khoản thành công");
+        // navigate('/login')
+      } else {
+        alert("Email đã tồn tại");
+      }
+    })
+    .catch((error) => {
+      console.error("Lỗi khi gửi yêu cầu GET ", error);
+    });
+};
+
 const onFinishFailed = (errorInfo) => {
   console.log("Failed:", errorInfo);
 };
@@ -12,8 +57,6 @@ const onFinishFailed = (errorInfo) => {
 const App = () => {
   const { listUser } = useContext(Context);
   console.log(listUser);
-
-  
   return (
     <div>
       <div className="flex justify-center flex-col items-center gap-5">
@@ -38,7 +81,7 @@ const App = () => {
         >
           <Form.Item
             label="Fullname"
-            name="Fullname"
+            name="fullname"
             rules={[
               {
                 required: true,
@@ -50,12 +93,12 @@ const App = () => {
           </Form.Item>
 
           <Form.Item
-            label="Username"
-            name="username"
+            label="Email"
+            name="email"
             rules={[
               {
                 required: true,
-                message: "Please input your username!",
+                message: "Please input your Email!",
               },
             ]}
           >

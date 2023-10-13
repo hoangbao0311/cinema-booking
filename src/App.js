@@ -5,6 +5,8 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Login from "./components/user/Login";
 import Register from "./components/user/Register";
+import EditUser from "./components/user/EditUser";
+import ForgotPassword from "./components/user/Fogotpassword";
 
 function App() {
   return (
@@ -14,6 +16,8 @@ function App() {
           <Route path="/" element={<Index />}>
             <Route path="/" element={<Home />} />
             <Route path="/register" element={<Register />} />
+            <Route path="/fogotpassword" element={<ForgotPassword />} />
+            <Route path="/editUser" element={<EditUser />} />
           </Route>
         </Routes>
       </BrowserRouter>
