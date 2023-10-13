@@ -5,6 +5,9 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Login from "./components/user/Login";
 import Register from "./components/user/Register";
+import Film from "./page/FilmInfo/Index";
+import SelectSeat from "./page/SelectSeat/Index.js";
+import EditUser from "./components/user/EditUser";
 
 function App() {
   return (
@@ -14,6 +17,9 @@ function App() {
           <Route path="/" element={<Index />}>
             <Route path="/" element={<Home />} />
             <Route path="/register" element={<Register />} />
+            <Route path="/editUser" element={<EditUser />} />
+            <Route path="/film/:id" element={<Film />} />
+            <Route path="/selectseat/:id" element={<SelectSeat />} />
           </Route>
         </Routes>
       </BrowserRouter>

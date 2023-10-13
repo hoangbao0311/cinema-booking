@@ -1,7 +1,9 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Link, Outlet } from "react-router-dom";
 import { Button, Modal } from "antd";
 import Login from "../components/user/Login";
+import { Context } from "../context/Context";
+import { useNavigate } from "react-router-dom";
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -10,8 +12,11 @@ const Header = () => {
     setIsOpen(!isOpen);
   };
 
+  const userLogin = localStorage.getItem("fullname");
+
   // Modal
   const [isModalOpen, setIsModalOpen] = useState(false);
+
   const showModal = () => {
     setIsModalOpen(true);
   };
@@ -22,6 +27,14 @@ const Header = () => {
     setIsModalOpen(false);
   };
   const modalFooter = [];
+
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    window.localStorage.removeItem("fullname");
+    navigate("/");
+  };
+
   return (
     <div>
       <>
@@ -41,12 +54,22 @@ const Header = () => {
             <p>TIN MỚI & KHUYÊN MÃI</p>
             <p>VÉ CỦA TÔI</p>
           </div>
-          <div className="flex">
-            <h1 onClick={showModal} className="cursor-pointer">
-              ĐĂNG NHẬP
-            </h1>
-            <Link to="/register">ĐĂNG KÝ</Link>
-          </div>
+          {userLogin ? (
+            <div className="flex gap-5">
+              <p>{userLogin}</p>
+              <button className="text-black" onClick={handleLogout}>
+                Đăng xuất
+              </button>
+              <Link to={"/editUser"}>Tài khoản</Link>
+            </div>
+          ) : (
+            <div className="flex gap-2">
+              <h1 onClick={showModal} className="cursor-pointer">
+                ĐĂNG NHẬP
+              </h1>
+              /<Link to="/register">ĐĂNG KÝ</Link>
+            </div>
+          )}
         </div>
 
         <div className="bg-white text-black w-full">
@@ -102,7 +125,9 @@ const Header = () => {
             >
               <ul className="lg:flex space-x-4 items-end lg:justify-between font-bold text-lg ">
                 <li className="hidden lg:block ">
-                  <img src="/image/cgvlogo.png" alt="CGV Logo" />
+                  <Link to="/">
+                    <img src="/image/cgvlogo.png" alt="CGV Logo" />
+                  </Link>
                 </li>
                 <li>
                   <p>PHIM</p>

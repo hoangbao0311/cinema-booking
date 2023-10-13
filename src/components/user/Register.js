@@ -1,19 +1,65 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Button, Checkbox, Form, Input } from "antd";
 import axios from "axios";
-import { Context } from "../../context/Context";
-const onFinish = (values) => {
-  console.log("Success:", values);
-};
-const onFinishFailed = (errorInfo) => {
-  console.log("Failed:", errorInfo);
-};
+import { Link, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const App = () => {
-  const { listUser } = useContext(Context);
-  console.log(listUser);
+  const navigate = useNavigate();
+  const postData = async (data) => {
+    const response = await axios.post("https://k8r87v-8080.csb.app/users", {
+      fullname: data.fullname,
+      email: data.email,
+      password: data.password,
+      role: "user",
+    });
+    if (response.status === 200) {
+    }
+  };
+  const onFinish = async (values) => {
+    const data = {
+      email: values.email,
+      fullname: values.fullname,
+      password: values.password,
+      confirmpassword: values["confirm password"],
+    };
 
-  
+    if (data.password !== data.confirmpassword) {
+      toast.warning("Nhập lại mật khẩu sai !");
+
+      return;
+    }
+    let checkEmail = false;
+    axios
+      .get("https://k8r87v-8080.csb.app/users")
+      .then((response) => {
+        response.data.forEach((check) => {
+          const mail = check.email;
+          if (data.email === mail) {
+            checkEmail = false;
+          } else {
+            checkEmail = true;
+          }
+        });
+        if (checkEmail) {
+          postData(values);
+          window.localStorage.setItem("fullname", values.fullname);
+          toast.success("Tạo tài khoản thành công !");
+
+          navigate("/");
+        } else {
+          toast.warning("Email đã tồn tại !");
+        }
+      })
+      .catch((error) => {
+        console.error("Lỗi khi gửi yêu cầu GET ", error);
+      });
+  };
+
+  const onFinishFailed = (errorInfo) => {
+    console.log("Failed:", errorInfo);
+  };
+
   return (
     <div>
       <div className="flex justify-center flex-col items-center gap-5">
@@ -35,10 +81,11 @@ const App = () => {
           onFinish={onFinish}
           onFinishFailed={onFinishFailed}
           autoComplete="off"
+          className="w-full"
         >
           <Form.Item
             label="Fullname"
-            name="Fullname"
+            name="fullname"
             rules={[
               {
                 required: true,
@@ -50,12 +97,12 @@ const App = () => {
           </Form.Item>
 
           <Form.Item
-            label="Username"
-            name="username"
+            label="Email"
+            name="email"
             rules={[
               {
                 required: true,
-                message: "Please input your username!",
+                message: "Please input your Email!",
               },
             ]}
           >
@@ -86,17 +133,6 @@ const App = () => {
             ]}
           >
             <Input.Password />
-          </Form.Item>
-
-          <Form.Item
-            name="remember"
-            valuePropName="checked"
-            wrapperCol={{
-              offset: 8,
-              span: 16,
-            }}
-          >
-            <Checkbox>Remember me</Checkbox>
           </Form.Item>
 
           <Form.Item

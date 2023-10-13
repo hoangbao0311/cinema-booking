@@ -4,12 +4,15 @@ import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { MyContext } from "./context/Context";
+import { RoomContext } from "./context/roomContext";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
 root.render(
   <React.StrictMode>
     <MyContext>
-      <App />
+      <RoomContext>
+        <App />
+      </RoomContext>
     </MyContext>
   </React.StrictMode>
 );
