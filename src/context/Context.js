@@ -17,14 +17,14 @@ function MyContext({ children }) {
   const [state, setState] = useState(initialState);
 
   const getDataUser = async () => {
-    const response = await axios.get("https://k8r87v-8080.csb.app/users");
+    const response = await axios.get("http://localhost:3004/users");
     if (response.status === 200) {
       setListUser(response.data);
     }
   };
 
   const getDataFilm = async () => {
-    const response = await axios.get("https://k8r87v-8080.csb.app/films");
+    const response = await axios.get("http://localhost:3004/films");
     if (response.status === 200) {
       setListFilm(response.data);
     }

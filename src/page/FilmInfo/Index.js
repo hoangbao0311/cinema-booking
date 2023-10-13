@@ -17,7 +17,7 @@ const Index = () => {
   const data = async () => {
     // API
     const responseShowtime = await axios.get(
-      "https://k8r87v-8080.csb.app/showtime?_expand=films&_expand=rooms&_expand=cinemas"
+      "http://localhost:3004/showtime?_expand=films&_expand=rooms&_expand=cinemas"
     );
     if (responseShowtime.status === 200) {
       setListDataShowtime(responseShowtime.data);
@@ -25,7 +25,7 @@ const Index = () => {
       console.log("loi");
     }
 
-    const responseFilms = await axios.get("https://k8r87v-8080.csb.app/films");
+    const responseFilms = await axios.get("http://localhost:3004/films");
     if (responseFilms.status === 200) {
       setListFilm(responseFilms.data);
     } else {
@@ -33,15 +33,13 @@ const Index = () => {
     }
 
     const responseRoom = await axios.get(
-      "https://k8r87v-8080.csb.app/rooms?_expand=cinemas"
+      "http://localhost:3004/rooms?_expand=cinemas"
     );
     if (responseRoom.status === 200) {
       setListDataRoom(responseRoom.data);
     }
 
-    const responseCinema = await axios.get(
-      "https://k8r87v-8080.csb.app/cinemas"
-    );
+    const responseCinema = await axios.get("http://localhost:3004/cinemas");
     if (responseCinema.status === 200) {
       setListCinema(responseCinema.data);
     }

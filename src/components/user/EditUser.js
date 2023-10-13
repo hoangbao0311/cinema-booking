@@ -9,7 +9,7 @@ function EditUser() {
 
   const getData = async () => {
     try {
-      const response = await axios.get(`https://k8r87v-8080.csb.app/users`);
+      const response = await axios.get(`http://localhost:3004/users`);
       if (response.status === 200) {
         setListUser(response.data);
       }
@@ -38,7 +38,7 @@ function EditUser() {
 
     try {
       const response = await axios.patch(
-        `https://k8r87v-8080.csb.app/users/${object.id}`,
+        `http://localhost:3004/users/${object.id}`,
         {
           fullname: fullname,
           phone: fullname,

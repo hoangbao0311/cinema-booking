@@ -7,7 +7,7 @@ import { toast } from "react-toastify";
 const App = () => {
   const navigate = useNavigate();
   const postData = async (data) => {
-    const response = await axios.post("https://k8r87v-8080.csb.app/users", {
+    const response = await axios.post("http://localhost:3004/users", {
       fullname: data.fullname,
       email: data.email,
       password: data.password,
@@ -31,7 +31,7 @@ const App = () => {
     }
     let checkEmail = false;
     axios
-      .get("https://k8r87v-8080.csb.app/users")
+      .get("http://localhost:3004/users")
       .then((response) => {
         response.data.forEach((check) => {
           const mail = check.email;
