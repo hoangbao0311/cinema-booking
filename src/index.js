@@ -5,13 +5,17 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { MyContext } from "./context/Context";
 import { RoomContext } from "./context/roomContext";
+import { TicketContext } from "./context/ticketContext";
+
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
 root.render(
   <React.StrictMode>
     <MyContext>
       <RoomContext>
-        <App />
+        <TicketContext>
+          <App />
+        </TicketContext>
       </RoomContext>
     </MyContext>
   </React.StrictMode>

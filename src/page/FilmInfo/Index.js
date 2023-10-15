@@ -1,10 +1,13 @@
 import React, { useState, useEffect, useContext } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import { Context, TicketContext } from "../../context/ticketContext";
 
 const Index = () => {
   const { id } = useParams();
+  const navigate = useNavigate();
+  const { setTicketInfo, setCinemaInfo } = useContext(Context);
 
   const [listDataShowtime, setListDataShowtime] = useState([]);
   const [listDataRoom, setListDataRoom] = useState([]);
@@ -17,14 +20,13 @@ const Index = () => {
   const data = async () => {
     // API
     const responseShowtime = await axios.get(
-      "http://localhost:3004/showtime?_expand=films&_expand=rooms&_expand=cinemas"
+      "http://localhost:3004/showtimes?_expand=films&_expand=rooms&_expand=cinemas"
     );
     if (responseShowtime.status === 200) {
       setListDataShowtime(responseShowtime.data);
     } else {
       console.log("loi");
     }
-
     const responseFilms = await axios.get("http://localhost:3004/films");
     if (responseFilms.status === 200) {
       setListFilm(responseFilms.data);
@@ -60,18 +62,27 @@ const Index = () => {
       const showtime = item.starttime;
       const idShowtime = item.id;
       const roomId = item.roomsId;
-      console.log(roomId);
+      const date = item.date;
+
       if (cinemaShowtimes.has(cinemaName)) {
         cinemaShowtimes
           .get(cinemaName)
-          .push({ showtime, id: idShowtime, roomsId: roomId });
+          .push({ showtime, id: idShowtime, roomsId: roomId, date: date });
       } else {
         cinemaShowtimes.set(cinemaName, [
-          { showtime, id: idShowtime, roomsId: roomId },
+          { showtime, id: idShowtime, roomsId: roomId, date: date },
         ]);
       }
     });
     setListShowTimeInCinema(cinemaShowtimes);
+  };
+
+  const handleItemClick = async (item, cinema, id) => {
+    console.log("Bạn đã click vào mục:", item);
+    console.log("Thuộc rạp chiếu:", cinema);
+    await setTicketInfo(item);
+    await setCinemaInfo(cinema);
+    navigate(`/selectseat/${id}`);
   };
 
   useEffect(() => {
@@ -129,7 +140,11 @@ const Index = () => {
                     {showtimes?.map((item, index) => {
                       return (
                         <div>
-                          <Link to={`/selectseat/${item.id}`}>
+                          <Link
+                            onClick={() =>
+                              handleItemClick(item, cinema, item.id)
+                            }
+                          >
                             <div key={index}>
                               <div className="font-medium border-[1px] border-stone-400 py-1 px-4 cursor-pointer hover:border-[#f26b38] hover:text-[#f26b38]">
                                 {item.showtime}

@@ -1,8 +1,9 @@
-import React, { useState, createContext } from "react";
-import { RoomContext } from "../../context/roomContext";
+import React, { useState, createContext, useContext } from "react";
+import { Context, TicketContext } from "../../context/ticketContext";
 
 const SeatPicker = ({ numRows, numColumns, bookedSeats }) => {
-  const [selectedSeats, setSelectedSeats] = useState([]);
+  // const [selectedSeats, setSelectedSeats] = useState([]);
+  const { selectedSeats, setSelectedSeats } = useContext(Context);
 
   const toggleSeat = (row, col) => {
     const seat = `${row}-${col}`;
@@ -30,17 +31,16 @@ const SeatPicker = ({ numRows, numColumns, bookedSeats }) => {
         const isSelected = isSeatSelected(row, col);
         const isBooked = isSeatBooked(row, col);
         const seatClass = isSelected
-          ? "bg-red-500"
+          ? "bg-green-500 cursor-pointer"
           : isBooked
-          ? "bg-white cursor-not-allowed"
-          : "bg-green-500 cursor-pointer";
+          ? "bg-red-500 cursor-not-allowed text-white  "
+          : "bg-gray-300 cursor-pointer ";
         const clickHandler = isBooked ? null : () => toggleSeat(row, col);
         rowSeats.push(
           <div
             key={seat}
-            className={`w-10 h-10 m-1 flex items-center justify-center ${seatClass}`}
+            className={`w-10 h-10 m-1 flex items-center justify-center  ${seatClass}`}
             onClick={clickHandler}
-            // Thêm thuộc tính 'disabled' nếu ghế đã đặt
             disabled={isBooked}
           >
             {`${row}-${col}`}
@@ -58,14 +58,25 @@ const SeatPicker = ({ numRows, numColumns, bookedSeats }) => {
 
   return (
     <div>
-      <h2 className="text-2xl font-bold mb-4">Chọn ghế xem phim</h2>
       <div className="flex gap-5 flex-col justify-center items-center">
         <div>Màng hình</div>
         <div>{renderSeats()}</div>
+        <div className="flex justify-center items-center gap-2">
+          <div className="flex justify-center items-center gap-2">
+            <div className="bg-green-500 w-2 h-2" for=""></div>
+            <label for="">Ghế đang chọn: </label>
+          </div>
+          <div className="flex justify-center items-center gap-2">
+            <div className="bg-red-500 w-2 h-2" for=""></div>
+            <label for="">Ghế đã bán: </label>
+          </div>
+          <div className="flex justify-center items-center gap-2">
+            <div className="bg-gray-300 w-2 h-2" for=""></div>
+            <label for="">Có thể chọn: </label>
+          </div>
+        </div>
       </div>
-      <div className="mt-4">
-        <p>Ghế đã chọn: {selectedSeats.join(", ")}</p>
-      </div>
+      <div className="mt-4"></div>
     </div>
   );
 };
