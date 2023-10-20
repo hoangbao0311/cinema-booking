@@ -12,7 +12,8 @@ import Payment from "./page/Payment/Payment";
 import Food from "./page/Food/Food";
 import Err from "./page/Err/Err";
 import Success from "./page/Err/Success/Success";
-
+import SearchMovie from "./components/search/FilterFindter";
+import Search from "./components/search/Search";
 function App() {
   return (
     <div className="">
@@ -28,6 +29,9 @@ function App() {
             <Route path="/payment" element={<Payment />} />
             <Route path="/err" element={<Err />} />
             <Route path="/success" element={<Success />} />
+
+            <Route path="/searchfilter" element={<SearchMovie />} />
+            <Route path="/search" element={<Search />} />
           </Route>
         </Routes>
       </BrowserRouter>
