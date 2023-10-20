@@ -7,8 +7,11 @@ const Provider = Context.Provider;
 function TicketContext({ children }) {
   const [ticketInfo, setTicketInfo] = useState({});
   const [cinemaInfo, setCinemaInfo] = useState({});
-
   const [selectedSeats, setSelectedSeats] = useState([]);
+  const [listFoodContext, setListFoodContext] = useState([]);
+  const [listDataShowtime, setListDataShowtime] = useState(null);
+  const [listDataRoomFind, setListDataRoomFind] = useState(null);
+  const [priceShowtime, setPriceShowtime] = useState(null);
 
   return (
     <Provider
@@ -19,6 +22,14 @@ function TicketContext({ children }) {
         setSelectedSeats,
         setCinemaInfo,
         cinemaInfo,
+        setListDataShowtime,
+        listDataShowtime,
+        setListDataRoomFind,
+        listDataRoomFind,
+        setPriceShowtime,
+        priceShowtime,
+        setListFoodContext,
+        listFoodContext,
       }}
     >
       {children}

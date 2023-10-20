@@ -15,6 +15,7 @@ function MyContext({ children }) {
   const [listUser, setListUser] = useState([]);
   const [listFilm, setListFilm] = useState([]);
   const [state, setState] = useState(initialState);
+  const [id, setId] = useState(null);
 
   const getDataUser = async () => {
     const response = await axios.get("http://localhost:3004/users");

@@ -2,7 +2,6 @@ import React, { useContext, useState } from "react";
 import { Link, Outlet } from "react-router-dom";
 import { Button, Modal } from "antd";
 import Login from "../components/user/Login";
-import { Context } from "../context/Context";
 import { useNavigate } from "react-router-dom";
 
 const Header = () => {

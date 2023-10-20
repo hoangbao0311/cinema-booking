@@ -1,23 +1,24 @@
 import React, { useState, useEffect, useContext } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import Seat from "../../components/CinemaSeat/index";
 import axios from "axios";
 import { Context, TicketContext } from "../../context/ticketContext";
+import SelectFilm from "../../components/SelectFilm/SelectFilm";
 
 const Index = () => {
   const { id } = useParams();
 
-  const { ticketInfo, selectedSeats, cinemaInfo } = useContext(Context);
-  const [listDataShowtime, setListDataShowtime] = useState(null);
+  const {
+    ticketInfo,
+    setListDataShowtime,
+    setListDataRoomFind,
+    setPriceShowtime,
+  } = useContext(Context);
   const [listDataTicket, setListDataTicket] = useState([]);
   const [listDataRoom, setListDataRoom] = useState([]);
-  const [listDataRoomFind, setListDataRoomFind] = useState(null);
-
   const [numRow, setNumRow] = useState([]);
   const [numCol, setNumCol] = useState([]);
   const [bookedSeats, setBookedSeats] = useState([]);
-
-  // let seatArr = [];
 
   const data = async () => {
     const responseShowtime = await axios.get(
@@ -51,10 +52,8 @@ const Index = () => {
       (item) => item.id == ticketInfo.roomsId
     );
     setListDataRoomFind(roomFind);
-    console.log("roomFind", roomFind);
 
-    console.log("Ticket", responseTicket.data);
-    console.log("Showtime", responseShowtime.data);
+    setPriceShowtime(responseShowtime.data.unitPrice);
 
     const ticketFilter = await responseTicket.data.filter(
       (item) => item.showtimes.id == id
@@ -86,56 +85,22 @@ const Index = () => {
           />
         </div>
       </div>
-      <div className="flex flex-col gap-2 justify-center text-start">
-        {listDataShowtime != null ? (
-          <div className="flex flex-col items-center gap-1">
-            <img className="h-40" src={listDataShowtime?.films.banner} alt="" />
-            <div className="font-semibold">{listDataShowtime.films.name}</div>
-          </div>
-        ) : (
-          <div>loading...</div>
-        )}
+      <div className="flex flex-col gap-5 justify-around">
+        <SelectFilm />
         <div className="flex gap-2">
-          <div className="font-semibold">Xuất chiếu:</div>
-          <div>{ticketInfo.showtime}</div>
-          {console.log(ticketInfo)}
-          <div>|</div>
-          <div>{ticketInfo.date}</div>
+          <Link
+            className=" rounded-xl text-[#F58020] font-bold text-center px-10 py-2"
+            to={`/film/${id}`}
+          >
+            Quay lại
+          </Link>
+          <Link
+            className="bg-[#F58020] rounded-xl text-white font-bold text-center hover:bg-[#e8933f] px-10 py-2"
+            to={`/food/${id}`}
+          >
+            Tiếp tục
+          </Link>
         </div>
-        {listDataRoomFind != null ? (
-          <div className="flex gap-2">
-            <div>
-              <label className="font-semibold" for="">
-                Rạp:
-              </label>{" "}
-              {cinemaInfo}
-            </div>
-            <div>|</div>
-            <div>
-              <label className="font-semibold" for="">
-                Phòng:
-              </label>{" "}
-              {listDataRoomFind.nameRoom}
-            </div>
-          </div>
-        ) : (
-          <div>loading...</div>
-        )}
-        {selectedSeats.length != 0 ? (
-          <div>
-            <p>
-              <label className="font-semibold" for="">
-                Ghế đã chọn:
-              </label>{" "}
-              {selectedSeats.join(", ")}
-            </p>
-          </div>
-        ) : (
-          <div className="font-semibold">Ghế đã chọn:</div>
-        )}
-        <button className="bg-green-500 text-white font-bold py-2 hover:bg-green-600">
-          Tiến hành thanh toán
-        </button>
       </div>
     </div>
   );

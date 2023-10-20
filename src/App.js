@@ -6,8 +6,12 @@ import "react-toastify/dist/ReactToastify.css";
 import Login from "./components/user/Login";
 import Register from "./components/user/Register";
 import Film from "./page/FilmInfo/Index";
-import SelectSeat from "./page/SelectSeat/Index.js";
+import SelectSeat from "./page/SelectSeat/SelectSeat.js";
 import EditUser from "./components/user/EditUser";
+import Payment from "./page/Payment/Payment";
+import Food from "./page/Food/Food";
+import Err from "./page/Err/Err";
+import Success from "./page/Err/Success/Success";
 
 function App() {
   return (
@@ -20,6 +24,10 @@ function App() {
             <Route path="/editUser" element={<EditUser />} />
             <Route path="/film/:id" element={<Film />} />
             <Route path="/selectseat/:id" element={<SelectSeat />} />
+            <Route path="/food/:id" element={<Food />} />
+            <Route path="/payment" element={<Payment />} />
+            <Route path="/err" element={<Err />} />
+            <Route path="/success" element={<Success />} />
           </Route>
         </Routes>
       </BrowserRouter>

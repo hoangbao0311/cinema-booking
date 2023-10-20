@@ -78,8 +78,6 @@ const Index = () => {
   };
 
   const handleItemClick = async (item, cinema, id) => {
-    console.log("Bạn đã click vào mục:", item);
-    console.log("Thuộc rạp chiếu:", cinema);
     await setTicketInfo(item);
     await setCinemaInfo(cinema);
     navigate(`/selectseat/${id}`);
