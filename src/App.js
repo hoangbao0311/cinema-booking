@@ -8,7 +8,8 @@ import Register from "./components/user/Register";
 import Film from "./page/FilmInfo/Index";
 import SelectSeat from "./page/SelectSeat/Index.js";
 import EditUser from "./components/user/EditUser";
-
+import SearchMovie from "./components/search/FilterFindter";
+import Search from "./components/search/Search";
 function App() {
   return (
     <div className="">
@@ -20,6 +21,8 @@ function App() {
             <Route path="/editUser" element={<EditUser />} />
             <Route path="/film/:id" element={<Film />} />
             <Route path="/selectseat/:id" element={<SelectSeat />} />
+            <Route path="/searchfilter" element={<SearchMovie />} />
+            <Route path="/search" element={<Search />} />
           </Route>
         </Routes>
       </BrowserRouter>
