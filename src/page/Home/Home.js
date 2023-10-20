@@ -2,7 +2,6 @@ import React, { useState, useEffect, useContext } from "react";
 import SlideShow from "./SlideShow";
 import { Link } from "react-router-dom";
 import { Context } from "../../context/Context";
-
 const Home = () => {
   const [selectedCategory, setSelectedCategory] = useState("PHIM ĐANG CHIẾU");
   const { listFilm } = useContext(Context);
@@ -84,6 +83,7 @@ const Home = () => {
             </label>
           </div>
         </div>
+
         <div className="flex justify-center">
           {selectedCategory === "PHIM ĐANG CHIẾU" && (
             <div>
