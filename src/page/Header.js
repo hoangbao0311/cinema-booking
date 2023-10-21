@@ -3,6 +3,13 @@ import { Link, Outlet } from "react-router-dom";
 import { Button, Modal } from "antd";
 import Login from "../components/user/Login";
 import { useNavigate } from "react-router-dom";
+import Search from "../components/search/Search";
+import {
+  InfoCircleOutlined,
+  InfoOutlined,
+  LogoutOutlined,
+  UserOutlined,
+} from "@ant-design/icons";
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -47,30 +54,7 @@ const Header = () => {
           <Login />
         </Modal>
       </>
-      <div className="h-full lg:h-[180px]">
-        <div className="flex gap-5 justify-center font-bold">
-          <div className=" hidden lg:flex gap-5">
-            <p>TIN MỚI & KHUYÊN MÃI</p>
-            <p>VÉ CỦA TÔI</p>
-          </div>
-          {userLogin ? (
-            <div className="flex gap-5">
-              <p>{userLogin}</p>
-              <button className="text-black" onClick={handleLogout}>
-                Đăng xuất
-              </button>
-              <Link to={"/editUser"}>Tài khoản</Link>
-            </div>
-          ) : (
-            <div className="flex gap-2">
-              <h1 onClick={showModal} className="cursor-pointer">
-                ĐĂNG NHẬP
-              </h1>
-              /<Link to="/register">ĐĂNG KÝ</Link>
-            </div>
-          )}
-        </div>
-
+      <div className="h-full py-7 bg-[#FFFFFF]">
         <div className="bg-white text-black w-full">
           <div className="flex items-center justify-between w-full">
             <div className="flex justify-center items-center"></div>
@@ -79,7 +63,10 @@ const Header = () => {
               onClick={toggleMenu}
               className="lg:hidden text-white focus:outline-none focus:text-white flex w-full justify-between items-center"
             >
-              <img src="/image/cgvlogo.png" alt="CGV Logo" />
+              <img
+                src={`https://www.galaxycine.vn/_next/image/?url=%2F_next%2Fstatic%2Fmedia%2Fgalaxy-logo-mobile.074abeac.png&w=128&q=75`}
+                alt="CGV Logo"
+              />
 
               {isOpen ? (
                 <svg
@@ -114,42 +101,80 @@ const Header = () => {
               )}
             </button>
           </div>
-          <div className="bg-cgv hidden lg:block"></div>
 
-          <div className="w-[980px] mx-auto lg:relative lg:bottom-28 ">
+          <div className="w-full mx-auto lg:bottom-28">
             <div
               className={`lg:flex ${
                 isOpen ? "block" : "hidden"
-              } mt-4 lg:mt-0 w-full lg:justify-around `}
+              } mt-4 lg:mt-0 w-full lg:justify-center gap-4 items-center `}
             >
-              <ul className="lg:flex space-x-4 items-end lg:justify-between font-bold text-lg ">
+              <ul className="lg:flex space-x-4 lg:justify-center gap-4 items-center font-semibold text-lg w-full">
                 <li className="hidden lg:block ">
                   <Link to="/">
-                    <img src="/image/cgvlogo.png" alt="CGV Logo" />
+                    <img
+                      src={`https://www.galaxycine.vn/_next/image/?url=%2F_next%2Fstatic%2Fmedia%2Fgalaxy-logo-mobile.074abeac.png&w=128&q=75`}
+                      alt="CGV Logo"
+                    />
                   </Link>
                 </li>
                 <li>
                   <p>PHIM</p>
                 </li>
                 <li>
-                  <p>RẠP CGV</p>
+                  <p>GÓC ĐIỆN ẢNH</p>
                 </li>
                 <li>
-                  <p>THÀNH VIÊN</p>
+                  <p>SỰ KIỆN</p>
                 </li>
                 <li>
-                  <p>CULTUREPLEX</p>
+                  <p>RẠP</p>
                 </li>
                 <li>
                   <p>TUYỂN DỤNG</p>
                 </li>
                 <li>
-                  <img src="/image/kenhcine.gif" alt="" />
+                  <Search />
                 </li>
                 <li>
-                  <img src="/image/mua-ve_ngay.png" alt="" />
+                  <div class="group relative">
+                    <button
+                      class="bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600 px-6"
+                      type=""
+                    >
+                      <UserOutlined />
+                    </button>
+                    <div class="hidden absolute z-10 -ml-2 w-44 space-y-2 bg-white text-gray-700 border rounded-md group-hover:block">
+                      {userLogin ? (
+                        <div className="flex gap-5 flex-col justify-center items-center w-full ">
+                          <div className="flex justify-start px-5 gap-5 p-2 items-center w-full">
+                            <InfoOutlined />
+                            <div>{userLogin}</div>
+                          </div>
+                          <div className="flex justify-start px-5 gap-5 p-2 items-center w-full">
+                            <InfoCircleOutlined />
+                            <Link to={"/editUser"}>Tài khoản </Link>
+                          </div>
+                          <button
+                            className="text-black w-full flex justify-start px-5 gap-5 p-2 items-center"
+                            onClick={handleLogout}
+                          >
+                            <LogoutOutlined />
+                            Đăng xuất
+                          </button>
+                        </div>
+                      ) : (
+                        <div className="flex gap-2 flex-col justify-center items-center">
+                          <h1 onClick={showModal} className="cursor-pointer">
+                            ĐĂNG NHẬP
+                          </h1>
+                          <Link to="/register">ĐĂNG KÝ</Link>
+                        </div>
+                      )}
+                    </div>
+                  </div>
                 </li>
               </ul>
+
               <div className="flex flex-col lg:flex-row justify-center items-center lg:items-center gap-2 "></div>
             </div>
           </div>

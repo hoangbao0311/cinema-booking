@@ -18,7 +18,6 @@ function SearchFilter() {
   const [selectedTime, setSelectedTime] = useState("");
   const [room, setRoom] = useState(null);
   const [roomId, setRoomId] = useState(0);
-  
 
   console.log(ticketInfo, cinemaInfo);
 
@@ -114,7 +113,7 @@ function SearchFilter() {
 
   console.log("roomId", roomId);
 
-  const idRoom = roomId ? roomId.roomsId : null; 
+  const idRoom = roomId ? roomId.roomsId : null;
 
   const ticketContexts = {
     showtime: selectedTime,
@@ -135,18 +134,15 @@ function SearchFilter() {
     }
   };
   return (
-    <div className="bg-[#000000cc] w-[356px]">
-      <div className="flex flex-col gap-5 pb-[20px]">
-        <h1 className="bg-[#f26b38] text-white text-[17px] p-[12px_26px] w-[170px] font-medium">
-          Mua Vé Nhanh
-        </h1>
-        <div className="flex flex-col gap-3 px-[10px]">
+    <div className="pb-9">
+      <div className="flex flex-col gap-5 py-3 shadow-xl">
+        <div className="flex w-full px-5 ">
           <select
             value={selectedFilm}
             onChange={(e) => setSelectedFilm(e.target.value)}
-            className="bg-[#ffffffb3]  p-[13px_20px_13px_12px] text-white cursor-pointer"
+            className="flex-1 text-black outline-none p-4 cursor-pointer "
           >
-            <option value="" className="text-black">
+            <option value="" className="text-black p-2">
               Chọn phim
             </option>
             {films.map((film) => (
@@ -159,9 +155,11 @@ function SearchFilter() {
           <select
             value={selectedCinema}
             onChange={(e) => setSelectedCinema(e.target.value)}
-            className="bg-[#ffffffb3]  p-[13px_20px_13px_12px] text-white "
+            className="flex-1 text-black outline-none p-4 "
           >
-            <option value="">Chọn rạp</option>
+            <option value="" className="text-black p-2">
+              Chọn rạp
+            </option>
             {cinemas.map((cinema, index) => (
               <option key={index} value={cinema} className="text-black">
                 {cinema}
@@ -172,9 +170,11 @@ function SearchFilter() {
           <select
             value={selectedDate}
             onChange={(e) => setSelectedDate(e.target.value)}
-            className="bg-[#ffffffb3]  p-[13px_20px_13px_12px] text-white "
+            className="flex-1 text-black outline-none p-4 "
           >
-            <option value="">Chọn ngày</option>
+            <option value="" className="text-black p-2">
+              Chọn ngày
+            </option>
             {dates.map((date, index) => (
               <option key={index} value={date} className="text-black">
                 {date}
@@ -185,20 +185,22 @@ function SearchFilter() {
           <select
             value={selectedTime}
             onChange={(e) => setSelectedTime(e.target.value)}
-            className="bg-[#ffffffb3]  p-[13px_20px_13px_12px] text-white "
+            className="flex-1 text-black outline-none p-4 "
           >
-            <option value="">Chọn suất</option>
+            <option value="" className="text-black p-2">
+              Chọn suất
+            </option>
             {times.map((time, index) => (
               <option key={index} value={time} className="text-black">
                 {time}
               </option>
             ))}
           </select>
-        </div>
-        <div onClick={() => handleBuy()} className="px-[10px]">
-          <button className="bg-[#f26b38] text-white text-[17px] p-[11px_15px] w-[88px] float-right">
-            Mua vé
-          </button>
+          <div onClick={() => handleBuy()} className="">
+            <button className="bg-[#f26b38] text-white text-[17px] p-[11px_15px]">
+              Mua vé nhanh
+            </button>
+          </div>
         </div>
       </div>
     </div>

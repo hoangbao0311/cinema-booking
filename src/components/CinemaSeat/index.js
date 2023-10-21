@@ -2,7 +2,6 @@ import React, { useState, createContext, useContext } from "react";
 import { Context, TicketContext } from "../../context/ticketContext";
 
 const SeatPicker = ({ numRows, numColumns, bookedSeats }) => {
-  // const [selectedSeats, setSelectedSeats] = useState([]);
   const { selectedSeats, setSelectedSeats } = useContext(Context);
 
   const toggleSeat = (row, col) => {

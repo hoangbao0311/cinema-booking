@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
-import { Context, TicketContext } from "../../context/ticketContext";
+import { Context } from "../../context/ticketContext";
 import axios from "axios";
 
 const SelectFood = () => {
@@ -72,7 +72,7 @@ const SelectFood = () => {
                       type="number"
                       name="quantity"
                       min="0"
-                      defaultValue={listFoodContext[index]?.quantity}
+                      // defaultValue={listFoodContext[index]?.quantity}
                       onChange={(e) =>
                         handleInputChange(e, item.id, item.nameFood, item.price)
                       }

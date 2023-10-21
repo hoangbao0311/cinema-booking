@@ -2,6 +2,8 @@ import React, { useState, useEffect, useContext } from "react";
 import SlideShow from "./SlideShow";
 import { Link } from "react-router-dom";
 import { Context } from "../../context/Context";
+import SearchFilter from "../../components/search/FilterFindter";
+
 const Home = () => {
   const [selectedCategory, setSelectedCategory] = useState("PHIM ĐANG CHIẾU");
   const { listFilm } = useContext(Context);
@@ -31,6 +33,9 @@ const Home = () => {
     <div>
       <div className="hidden lg:block">
         <SlideShow />
+      </div>
+      <div>
+        <SearchFilter />
       </div>
       <div>
         <div className="w-full flex mt-3 gap-3">

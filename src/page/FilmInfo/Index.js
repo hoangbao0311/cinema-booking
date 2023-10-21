@@ -45,7 +45,6 @@ const Index = () => {
     if (responseCinema.status === 200) {
       setListCinema(responseCinema.data);
     }
-    console.log("responseCinema", responseCinema.data);
 
     const showtimeDataFind = await responseShowtime.data.filter(
       (item) => item.films.id == id
@@ -75,6 +74,7 @@ const Index = () => {
       }
     });
     setListShowTimeInCinema(cinemaShowtimes);
+    console.log(cinemaShowtimes);
   };
 
   const handleItemClick = async (item, cinema, id) => {

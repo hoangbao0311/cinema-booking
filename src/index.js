@@ -6,6 +6,7 @@ import reportWebVitals from "./reportWebVitals";
 import { MyContext } from "./context/Context";
 import { RoomContext } from "./context/roomContext";
 import { TicketContext } from "./context/ticketContext";
+import { AppSearch } from "./context/searchContext";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
@@ -14,7 +15,9 @@ root.render(
     <MyContext>
       <RoomContext>
         <TicketContext>
-          <App />
+          <AppSearch>
+            <App />
+          </AppSearch>
         </TicketContext>
       </RoomContext>
     </MyContext>

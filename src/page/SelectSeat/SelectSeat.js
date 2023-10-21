@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, useNavigate } from "react-router-dom";
 import Seat from "../../components/CinemaSeat/index";
 import axios from "axios";
 import { Context, TicketContext } from "../../context/ticketContext";
@@ -7,12 +7,13 @@ import SelectFilm from "../../components/SelectFilm/SelectFilm";
 
 const Index = () => {
   const { id } = useParams();
-
+  const navigate = useNavigate();
   const {
     ticketInfo,
     setListDataShowtime,
     setListDataRoomFind,
     setPriceShowtime,
+    selectedSeats,
   } = useContext(Context);
   const [listDataTicket, setListDataTicket] = useState([]);
   const [listDataRoom, setListDataRoom] = useState([]);
@@ -69,6 +70,10 @@ const Index = () => {
     setBookedSeats(seatMap);
   };
 
+  const handleGoBack = () => {
+    navigate(-1);
+  };
+  console.log(selectedSeats.length);
   useEffect(() => {
     data();
   }, [id]);
@@ -90,16 +95,27 @@ const Index = () => {
         <div className="flex gap-2">
           <Link
             className=" rounded-xl text-[#F58020] font-bold text-center px-10 py-2"
-            to={`/film/${id}`}
+            onClick={handleGoBack}
           >
             Quay lại
           </Link>
-          <Link
-            className="bg-[#F58020] rounded-xl text-white font-bold text-center hover:bg-[#e8933f] px-10 py-2"
-            to={`/food/${id}`}
-          >
-            Tiếp tục
-          </Link>
+          {selectedSeats.length === 0 ? (
+            // Hiển thị một nút không hoạt động khi selectedSeats.length === 0
+            <button
+              className="bg-gray-400 rounded-xl text-white font-bold text-center px-10 py-2 cursor-not-allowed"
+              disabled
+            >
+              Tiếp tục
+            </button>
+          ) : (
+            // Hiển thị nút Tiếp tục bình thường khi selectedSeats.length > 0
+            <Link
+              className="bg-[#F58020] rounded-xl text-white font-bold text-center hover:bg-[#e8933f] px-10 py-2"
+              to={`/food/${id}`}
+            >
+              Tiếp tục
+            </Link>
+          )}
         </div>
       </div>
     </div>
