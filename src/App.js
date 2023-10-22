@@ -15,6 +15,7 @@ import Success from "./page/Err/Success/Success";
 import SearchMovie from "./components/search/FilterFindter";
 import Search from "./components/search/Search";
 import SearchResult from "./components/search/SearchResult";
+import TicketEmail from "./components/email/TicketEmail";
 
 function App() {
   return (
@@ -34,6 +35,7 @@ function App() {
             <Route path="/searchfilter" element={<SearchMovie />} />
             <Route path="/search" element={<Search />} />
             <Route path="/searchResult" element={<SearchResult />} />
+            <Route path="/ticketemail" element={<TicketEmail />} />
           </Route>
         </Routes>
       </BrowserRouter>
