@@ -5,13 +5,14 @@ import { toast } from "react-toastify";
 const TicketEmail = () => {
   const form = useRef();
   const [toEmail, setToEmail] = useState('');
+  const [fullname, setFullname] = useState('');
 
   const sendEmail = (e) => {
     e.preventDefault();
 
-    
     const emailParams = {
       toemail: toEmail, 
+      fullname: fullname, 
     };
 
     emailjs
@@ -32,6 +33,13 @@ const TicketEmail = () => {
           placeholder="Nhập địa chỉ email"
           value={toEmail}
           onChange={(e) => setToEmail(e.target.value)}
+          required
+        />
+        <input
+          type="text"
+          placeholder="name"
+          value={fullname}
+          onChange={(e) => setFullname(e.target.value)}
           required
         />
         <button type="submit">Gửi mail</button>
