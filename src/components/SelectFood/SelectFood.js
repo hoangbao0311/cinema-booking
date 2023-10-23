@@ -72,7 +72,7 @@ const SelectFood = () => {
                       type="number"
                       name="quantity"
                       min="0"
-                      // defaultValue={listFoodContext[index]?.quantity}
+                      defaultValue={listFoodContext[index]?.quantity}
                       onChange={(e) =>
                         handleInputChange(e, item.id, item.nameFood, item.price)
                       }

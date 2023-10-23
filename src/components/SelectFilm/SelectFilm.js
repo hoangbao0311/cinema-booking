@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Context, TicketContext } from "../../context/ticketContext";
 import { Link, useParams } from "react-router-dom";
+import emailjs from "@emailjs/browser";
 
 const SelectFilm = () => {
   const {
@@ -11,12 +12,21 @@ const SelectFilm = () => {
     listDataRoomFind,
     priceShowtime,
     listFoodContext,
+    setAmount,
+    amount,
   } = useContext(Context);
+
+  console.log(ticketInfo, "ticketInfo");
 
   let totalFood = 0;
   let totalFilm = 0;
   let total = 0;
+  console.log(listFoodContext);
 
+  useEffect(() => {
+    setAmount(total);
+  }, [total]);
+  console.log(amount);
   listFoodContext?.map((item) => {
     totalFood += parseFloat(item?.quantity) * parseFloat(item?.price);
     return totalFood;
@@ -71,7 +81,7 @@ const SelectFilm = () => {
               {selectedSeats.join(", ")}
             </p>
             <label className="font-semibold" for="">
-              {totalFilm}
+              {parseInt(totalFilm).toLocaleString("vi-VN")} Đ
             </label>
           </div>
         ) : (
@@ -92,7 +102,10 @@ const SelectFilm = () => {
                         <div className="">{item.foodname}</div>
                       </div>
                       <div className="font-semibold ">
-                        {item.price * item.quantity}
+                        {parseInt(item.price * item.quantity).toLocaleString(
+                          "vi-VN"
+                        )}{" "}
+                        Đ
                       </div>
                     </div>
                   );

@@ -61,7 +61,7 @@ const Index = () => {
     );
 
     const seatMap = await ticketFilter.reduce(
-      (acc, item) => acc.concat(item.seats.name),
+      (acc, item) => acc.concat(item.seat),
       []
     );
 
@@ -73,6 +73,7 @@ const Index = () => {
   const handleGoBack = () => {
     navigate(-1);
   };
+
   console.log(selectedSeats.length);
   useEffect(() => {
     data();
@@ -100,7 +101,6 @@ const Index = () => {
             Quay lại
           </Link>
           {selectedSeats.length === 0 ? (
-            // Hiển thị một nút không hoạt động khi selectedSeats.length === 0
             <button
               className="bg-gray-400 rounded-xl text-white font-bold text-center px-10 py-2 cursor-not-allowed"
               disabled
@@ -108,7 +108,6 @@ const Index = () => {
               Tiếp tục
             </button>
           ) : (
-            // Hiển thị nút Tiếp tục bình thường khi selectedSeats.length > 0
             <Link
               className="bg-[#F58020] rounded-xl text-white font-bold text-center hover:bg-[#e8933f] px-10 py-2"
               to={`/food/${id}`}

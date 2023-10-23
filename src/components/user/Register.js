@@ -44,6 +44,8 @@ const App = () => {
         if (checkEmail) {
           postData(values);
           window.localStorage.setItem("fullname", values.fullname);
+          window.localStorage.setItem("email", values.email);
+
           toast.success("Tạo tài khoản thành công !");
 
           navigate("/");

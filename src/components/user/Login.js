@@ -16,7 +16,7 @@ const App = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const { state, setState } = useContext(Context);
-
+  console.log(email);
   const onFinish = (values) => {
     console.log("Finish:", values);
     const foundUser = listUser.find(
@@ -24,8 +24,9 @@ const App = () => {
     );
 
     if (foundUser) {
-      toast.success("Đăng nhập thành công !");
       window.localStorage.setItem("fullname", foundUser.fullname);
+      window.localStorage.setItem("email", email);
+      toast.success("Đăng nhập thành công !");
       window.location.href = "/";
       setState(foundUser);
     } else {

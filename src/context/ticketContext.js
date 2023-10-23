@@ -12,6 +12,7 @@ function TicketContext({ children }) {
   const [listDataShowtime, setListDataShowtime] = useState(null);
   const [listDataRoomFind, setListDataRoomFind] = useState(null);
   const [priceShowtime, setPriceShowtime] = useState(null);
+  const [amount, setAmount] = useState(null);
 
   return (
     <Provider
@@ -30,6 +31,8 @@ function TicketContext({ children }) {
         priceShowtime,
         setListFoodContext,
         listFoodContext,
+        setAmount,
+        amount,
       }}
     >
       {children}

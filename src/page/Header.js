@@ -38,6 +38,8 @@ const Header = () => {
 
   const handleLogout = () => {
     window.localStorage.removeItem("fullname");
+    window.localStorage.removeItem("email");
+
     navigate("/");
   };
 
