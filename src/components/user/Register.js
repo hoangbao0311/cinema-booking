@@ -12,6 +12,7 @@ const App = () => {
       email: data.email,
       password: data.password,
       role: "user",
+      resetpassword:''
     });
     if (response.status === 200) {
     }
