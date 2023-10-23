@@ -102,7 +102,7 @@ const App = () => {
             </Button>
           )}
         </Form.Item>
-        <Link to={"/fogotpassword"}>Quên mật khẩu?</Link>
+        <Link to={"/forgotpassword"}>Quên mật khẩu?</Link>
       </Form>
     </div>
   );
