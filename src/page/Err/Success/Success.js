@@ -16,7 +16,7 @@ const App = () => {
   const orderCodeParam = url.searchParams.get("orderCode");
   const data = async () => {
     const emailLogin = await localStorage.getItem("email");
-    console.log(emailLogin);
+
     const response = await axios.get(
       `https://api-merchant.payos.vn/v2/payment-requests/${orderCodeParam}`,
       {
@@ -59,6 +59,11 @@ const App = () => {
       seatsId: 1,
       seat: filterCode?.seat,
     });
+    const food = filterCode.food?.map((item) => {
+      return `${item.foodname} - (${item.quantity})`;
+    });
+
+    const listFoodEmail = food.join("\n ");
 
     const emailParams = {
       toemail: emailLogin,
@@ -68,6 +73,7 @@ const App = () => {
       day: filterCode?.date,
       seat: filterCode?.seat,
       cinema: filterCode?.cinema,
+      food: listFoodEmail,
     };
 
     emailjs
