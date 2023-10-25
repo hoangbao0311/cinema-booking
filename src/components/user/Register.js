@@ -115,6 +115,7 @@ const App = () => {
           <Form.Item
             label="Password"
             name="password"
+            pattern=".{8,12}"
             rules={[
               {
                 required: true,

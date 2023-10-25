@@ -5,7 +5,7 @@ function EditUser() {
   const [fullname, setFullname] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const isLogin = localStorage.getItem("fullname");
+  const isLogin = localStorage.getItem("email");
 
   const getData = async () => {
     try {
@@ -18,7 +18,7 @@ function EditUser() {
     }
   };
 
-  const object = listUser.find((item) => item.fullname === isLogin);
+  const object = listUser.find((item) => item.email === isLogin);
 
   const handleUpdateAccount = async () => {
     if (!fullname) {
@@ -26,7 +26,7 @@ function EditUser() {
       return;
     }
     if (!email) {
-      alert("Bạn chưa điền số điện thoại");
+      alert("Bạn chưa điền Email");
       return;
     }
     if (!password) {

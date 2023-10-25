@@ -71,6 +71,7 @@ const App = () => {
             prefix={<LockOutlined className="site-form-item-icon" />}
             type="password"
             placeholder="Password"
+            pattern=".{8,12}"
             onChange={(e) => setPassword(e.target.value)}
           />
         </Form.Item>

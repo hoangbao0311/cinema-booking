@@ -145,7 +145,7 @@ const Header = () => {
                     >
                       <UserOutlined />
                     </button>
-                    <div class="hidden absolute z-10 -ml-2 w-44 space-y-2 bg-white text-gray-700 border rounded-md group-hover:block">
+                    <div class="hidden absolute z-10 -ml-2 w-60 space-y-2 bg-white text-gray-700 border rounded-md group-hover:block">
                       {userLogin ? (
                         <div className="flex gap-5 flex-col justify-center items-center w-full ">
                           <div className="flex justify-start px-5 gap-5 p-2 items-center w-full">
