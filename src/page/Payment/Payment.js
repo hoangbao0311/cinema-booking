@@ -124,6 +124,20 @@ const Payment = () => {
   return (
     <div className="flex justify-evenly">
       <div className="flex flex-col gap-5">
+        <div className="flex flex-col gap-2">
+          <h1 className="font-semibold text-xl">Nhập mã khuyến mãi</h1>
+          <div className="flex gap-2">
+            <input
+              className="outline-none border border-orange-500 p-2 rounded-xl"
+              type="text"
+              name=""
+              value=""
+            />
+            <div className="bg-[#F58020] rounded-xl text-white font-bold text-center hover:bg-[#e8933f] px-10 py-2 hover:cursor-pointer">
+              Áp dụng
+            </div>
+          </div>
+        </div>
         <h1 className="font-semibold text-xl">Chọn phương thức thanh toán</h1>
         <div className="flex gap-5">
           <input type="radio" checked />
