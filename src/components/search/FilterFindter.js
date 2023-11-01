@@ -18,8 +18,7 @@ function SearchFilter() {
   const [selectedTime, setSelectedTime] = useState("");
   const [room, setRoom] = useState(null);
   const [roomId, setRoomId] = useState(0);
-
-  console.log(ticketInfo, cinemaInfo);
+  const [cinemaCT, setCinemaCT] = useState("");
 
   useEffect(() => {
     axios.get("http://localhost:3004/films").then((response) => {
@@ -36,7 +35,7 @@ function SearchFilter() {
         .then((response) => {
           const cinemasSet = new Set();
           response.data.forEach((showtime) => {
-            cinemasSet.add(showtime.cinemas.name);
+            cinemasSet.add(showtime.cinemas);
           });
           setCinemas(Array.from(cinemasSet));
           setSelectedCinema("");
@@ -57,7 +56,7 @@ function SearchFilter() {
     if (selectedCinema) {
       axios
         .get(
-          `http://localhost:3004/showtimes?_expand=rooms&filmsId=${selectedFilm}&cinemas.name=${selectedCinema}`
+          `http://localhost:3004/showtimes?_expand=rooms&filmsId=${selectedFilm}&cinemasId=${selectedCinema}&_expand=cinemas`
         )
         .then((response) => {
           const datesSet = new Set();
@@ -67,6 +66,8 @@ function SearchFilter() {
           setDates(Array.from(datesSet));
           setSelectedDate("");
           setSelectedTime("");
+
+          setCinemaCT(response.data);
         });
     } else {
       setDates([]);
@@ -76,6 +77,8 @@ function SearchFilter() {
     }
   }, [selectedCinema, selectedFilm]);
 
+  const nameCinema = cinemaCT ? cinemaCT[0] : "";
+  console.log(nameCinema);
   useEffect(() => {
     if (selectedDate) {
       axios
@@ -122,12 +125,12 @@ function SearchFilter() {
     date: selectedDate,
   };
 
-  console.log(ticketContexts);
+  console.log("ticketContexts", ticketContexts);
 
   const handleBuy = () => {
     if (selectedFilm && selectedCinema && selectedDate && selectedTime) {
       setTicketInfo(ticketContexts);
-      setCinemaInfo(selectedCinema);
+      setCinemaInfo(nameCinema?.cinemas.name);
       navigate(`/selectseat/${selectedFilm}`);
     } else {
       toast.warning("Vui lòng chọn đủ các trường.");
@@ -161,8 +164,8 @@ function SearchFilter() {
               Chọn rạp
             </option>
             {cinemas.map((cinema, index) => (
-              <option key={index} value={cinema} className="text-black">
-                {cinema}
+              <option key={index} value={cinema.id} className="text-black">
+                {cinema.name}
               </option>
             ))}
           </select>
