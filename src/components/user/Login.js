@@ -18,21 +18,25 @@ const App = () => {
   const { state, setState } = useContext(Context);
   console.log(email);
   const onFinish = (values) => {
-    console.log("Finish:", values);
-    const foundUser = listUser.find(
-      (user) => user.email === email && user.password === password
-    );
+  console.log("Finish:", values);
+  const foundUser = listUser.find(
+    (user) => user.email === email && user.password === password
+  );
 
-    if (foundUser) {
+  if (foundUser) {
+    if (foundUser.rolesId === 4) {
+      toast.warning("Tài khoản bị khóa!");
+    } else {
       window.localStorage.setItem("fullname", foundUser.fullname);
       window.localStorage.setItem("email", email);
-      toast.success("Đăng nhập thành công !");
+      toast.success("Đăng nhập thành công!");
       window.location.href = "/";
       setState(foundUser);
-    } else {
-      toast.warning("Đăng nhập không thành công !");
     }
-  };
+  } else {
+    toast.warning("Đăng nhập không thành công !");
+  }
+};
 
   return (
     <div className="flex flex-col">

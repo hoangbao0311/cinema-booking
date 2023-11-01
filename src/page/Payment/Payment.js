@@ -4,6 +4,7 @@ import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import SelectFilm from "../../components/SelectFilm/SelectFilm";
 import { toast } from "react-toastify";
+import { useVoucher } from "../../context/voucherContext";
 
 const CryptoJS = require("crypto-js");
 
@@ -121,18 +122,47 @@ const Payment = () => {
   const handleGoBack = () => {
     navigate(-1);
   };
+
+  const [voucherCode, setVoucherCode] = useState("");
+  const { voucherPrice, addVoucherPrice } = useVoucher();
+
+  const handleApplyVoucher = async () => {
+    try {
+      // Gọi API hoặc thực hiện bất kỳ xử lý nào để lấy giá của mã từ API
+      const response = await axios.get(
+        `http://localhost:3004/voucher?code=${voucherCode}`
+      );
+      const findCode = response.data.find((item) => item.code === voucherCode);
+
+      if (findCode) {
+        // Lưu giá của mã từ API vào context
+        addVoucherPrice(findCode.price);
+        toast.success("Áp dụng mã voucher thành công!");
+      } else {
+        toast.error("Mã voucher không hợp lệ.");
+      }
+    } catch (error) {
+      console.error("Lỗi khi áp dụng mã voucher:", error);
+      toast.error("Đã có lỗi xảy ra khi áp dụng mã voucher.");
+    }
+  };
   return (
     <div className="flex justify-evenly">
       <div className="flex flex-col gap-5">
-        <div className="flex flex-col gap-2">
+        <div iv className="flex flex-col gap-2">
           <h1 className="font-semibold text-xl">Nhập mã khuyến mãi</h1>
           <div className="flex gap-2">
             <input
               className="outline-none border border-orange-500 p-2 rounded-xl"
               type="text"
               name=""
+              value={voucherCode}
+              onChange={(e) => setVoucherCode(e.target.value)}
             />
-            <div className="bg-[#F58020] rounded-xl text-white font-bold text-center hover:bg-[#e8933f] px-10 py-2 hover:cursor-pointer">
+            <div
+              className="bg-[#F58020] rounded-xl text-white font-bold text-center hover:bg-[#e8933f] px-10 py-2 hover:cursor-pointer"
+              onClick={handleApplyVoucher}
+            >
               Áp dụng
             </div>
           </div>

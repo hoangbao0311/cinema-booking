@@ -32,6 +32,8 @@ import CinemaNew from "./components/Admin/CinemaAdmin/CinemaNew";
 import EditCinema from "./components/Admin/CinemaAdmin/EditCinema";
 import ShowtimeNew from "./components/Admin/ShowtimeAdmin/ShowtimeNew";
 import EditShowtime from "./components/Admin/ShowtimeAdmin/EditShowtime";
+import FoodEdit from "./components/Admin/FoodAdmin/FoodEdit";
+import FoodNew from "./components/Admin/FoodAdmin/FoodNew";
 
 function App() {
   return (
@@ -70,6 +72,8 @@ function App() {
             <Route path="/admin/showtimenew" element={<ShowtimeNew />} />
             <Route path="/admin/editshowtime/:id" element={<EditShowtime />} />
             <Route path="/admin/voucheradmin" element={<VoucherAdmin />} />
+            <Route path="/admin/foodadmin/:id" element={<FoodEdit />} />
+            <Route path="/admin/foodNew" element={<FoodNew />} />
           </Route>
         </Routes>
       </BrowserRouter>
