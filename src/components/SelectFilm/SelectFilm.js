@@ -2,6 +2,9 @@ import React, { useState, useEffect, useContext } from "react";
 import { Context, TicketContext } from "../../context/ticketContext";
 import { Link, useParams } from "react-router-dom";
 import emailjs from "@emailjs/browser";
+import { useVoucher } from "../../context/voucherContext";
+import axios from "axios";
+import { toast } from "react-toastify";
 
 const SelectFilm = () => {
   const {
@@ -35,6 +38,15 @@ const SelectFilm = () => {
   const lengthSeat = selectedSeats.length;
   totalFilm = lengthSeat * priceShowtime;
   total = lengthSeat * priceShowtime + totalFood;
+
+  const { voucherPrice } = useVoucher();
+  console.log(voucherPrice);
+  let totalDiscount = total - voucherPrice;
+  if (voucherPrice > totalDiscount) {
+    totalDiscount = 0;
+  } else {
+    totalDiscount = totalDiscount - voucherPrice;
+  }
 
   return (
     <div>
@@ -116,11 +128,21 @@ const SelectFilm = () => {
             <div className="font-semibold"></div>
           )}
         </div>
+        {voucherPrice && (
+          <div>
+            <label className="font-semibold flex justify-between" for="">
+              <div>Giảm giá:</div>
+              <div className="text-[#F58020]">
+                {parseInt(voucherPrice).toLocaleString("vi-VN")} Đ
+              </div>
+            </label>
+          </div>
+        )}
         <div>
           <label className="font-semibold flex justify-between" for="">
             <div>Tổng cộng:</div>
             <div className="text-[#F58020]">
-              {parseInt(total).toLocaleString("vi-VN")} Đ
+              {parseInt(totalDiscount).toLocaleString("vi-VN")} Đ
             </div>
           </label>
         </div>

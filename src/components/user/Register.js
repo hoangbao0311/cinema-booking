@@ -11,7 +11,7 @@ const App = () => {
       fullname: data.fullname,
       email: data.email,
       password: data.password,
-      role: "user",
+      rolesId: 1,
       resetpassword:''
     });
     if (response.status === 200) {
