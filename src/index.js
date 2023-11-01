@@ -7,6 +7,7 @@ import { MyContext } from "./context/Context";
 import { RoomContext } from "./context/roomContext";
 import { TicketContext } from "./context/ticketContext";
 import { AppSearch } from "./context/searchContext";
+import { VoucherProvider } from "./context/voucherContext";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
@@ -16,7 +17,9 @@ root.render(
       <RoomContext>
         <TicketContext>
           <AppSearch>
-            <App />
+            <VoucherProvider>
+              <App />
+            </VoucherProvider>
           </AppSearch>
         </TicketContext>
       </RoomContext>
