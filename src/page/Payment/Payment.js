@@ -131,7 +131,6 @@ const Payment = () => {
               className="outline-none border border-orange-500 p-2 rounded-xl"
               type="text"
               name=""
-              value=""
             />
             <div className="bg-[#F58020] rounded-xl text-white font-bold text-center hover:bg-[#e8933f] px-10 py-2 hover:cursor-pointer">
               Áp dụng

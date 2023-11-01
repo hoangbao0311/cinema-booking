@@ -2,7 +2,7 @@ import React from "react";
 
 const Footer = () => {
   return (
-    <div className="border-[1px] border-black text-[#8d8d8d]">
+    <div className="border-[1px] border-black text-[#8d8d8d] relative mt-10">
       <div className="flex items-center py-10 justify-center bg-[#333] gap-5">
         <div>
           <img

@@ -19,11 +19,19 @@ import ForgotPassword from "./components/user/forgotPassword";
 import Admin from "./components/Admin/Admin";
 import ManageUser from "./components/Admin/ManageUser/ManageUser";
 import CinemaAdmin from "./components/Admin/CinemaAdmin/CinemaAdmin";
-import FilmAdmin from "./components/Admin/FilmAdmin/FilmAdmin";
 import FoodAdmin from "./components/Admin/FoodAdmin/FoodAdmin";
 import RoomAdmin from "./components/Admin/RoomAdmin/RoomAdmin";
 import ShowtimeAdmin from "./components/Admin/ShowtimeAdmin/ShowtimeAdmin";
 import VoucherAdmin from "./components/Admin/VoucherAdmin/VoucherAdmin";
+import FilmHome from "./components/Admin/FilmAdmin/FilmHome";
+import FilmNew from "./components/Admin/FilmAdmin/FilmNew";
+import EditFilm from "./components/Admin/FilmAdmin/EditFilm";
+import EditRoom from "./components/Admin/RoomAdmin/EditRoom";
+import RoomNew from "./components/Admin/RoomAdmin/RoomNew";
+import CinemaNew from "./components/Admin/CinemaAdmin/CinemaNew";
+import EditCinema from "./components/Admin/CinemaAdmin/EditCinema";
+import ShowtimeNew from "./components/Admin/ShowtimeAdmin/ShowtimeNew";
+import EditShowtime from "./components/Admin/ShowtimeAdmin/EditShowtime";
 
 function App() {
   return (
@@ -48,11 +56,19 @@ function App() {
           </Route>
           <Route path="admin" element={<Admin />}>
             <Route path="/admin/manageuser" element={<ManageUser />} />
-            <Route path="/admin/cinemaadmin" element={<CinemaAdmin />} />
-            <Route path="/admin/filmadmin" element={<FilmAdmin />} />
-            <Route path="/admin/foodadmin" element={<FoodAdmin />} />
+            <Route path="/admin/filmhome" element={<FilmHome />} />
+            <Route path="/admin/filmhome/:id" element={<EditFilm />} />
+            <Route path="/admin/filmnew" element={<FilmNew />} />
             <Route path="/admin/roomadmin" element={<RoomAdmin />} />
+            <Route path="/admin/roomnew" element={<RoomNew />} />
+            <Route path="/admin/editroom/:id" element={<EditRoom />} />
+            <Route path="/admin/cinemaadmin" element={<CinemaAdmin />} />
+            <Route path="/admin/cinemanew" element={<CinemaNew />} />
+            <Route path="/admin/editcinema/:id" element={<EditCinema />} />
+            <Route path="/admin/foodadmin" element={<FoodAdmin />} />
             <Route path="/admin/showtimeadmin" element={<ShowtimeAdmin />} />
+            <Route path="/admin/showtimenew" element={<ShowtimeNew />} />
+            <Route path="/admin/editshowtime/:id" element={<EditShowtime />} />
             <Route path="/admin/voucheradmin" element={<VoucherAdmin />} />
           </Route>
         </Routes>
