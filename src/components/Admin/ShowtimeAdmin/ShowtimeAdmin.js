@@ -2,9 +2,12 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Link, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
+import SearchAdmin from "../search.js/SearchAdmin";
 
 const ShowtimeAdmin = () => {
   const [listShowtime, setListShowtime] = useState([]);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [showtimes, setShowtimes] = useState([]);
 
   const data = async () => {
     const responseFilms = await axios.get(
@@ -12,9 +15,22 @@ const ShowtimeAdmin = () => {
     );
     if (responseFilms.status === 200) {
       setListShowtime(responseFilms.data);
+      setShowtimes(responseFilms.data);
     } else {
       console.log("loi");
     }
+  };
+
+  const handleSearch = () => {
+    const filteredShowtimes = showtimes.filter((time) => {
+      const searchString =
+        time.films.name.toLowerCase() +
+        time.starttime +
+        time.cinemas.name.toLowerCase() +
+        time.date;
+      return searchString.includes(searchTerm.toLowerCase());
+    });
+    setListShowtime(filteredShowtimes);
   };
 
   console.log(listShowtime);
@@ -26,6 +42,11 @@ const ShowtimeAdmin = () => {
     <div>
       <div className="flex justify-between p-3 border-b-4 border-[#151929]">
         <div className="p-3 font-semibold text-xl ">Thiết lập xuất chiếu</div>
+        <SearchAdmin
+          searchTerm={searchTerm}
+          setSearchTerm={setSearchTerm}
+          handleSearch={handleSearch}
+        />
         <Link to="/admin/showtimenew">
           <div className="bg-[#151929] rounded-lg font-semibold text-lg cursor-pointer p-3">
             Thêm xuất chiếu

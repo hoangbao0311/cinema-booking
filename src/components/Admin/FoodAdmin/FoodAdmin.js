@@ -2,14 +2,18 @@ import axios from "axios";
 import React, { useState, useEffect } from "react";
 import { toast } from "react-toastify";
 import { Link, useNavigate } from "react-router-dom";
+import SearchAdmin from "../search.js/SearchAdmin";
 const FoodAdmin = () => {
   const [showFood, setShowFood] = useState([]);
   const navigate = useNavigate();
+  const [searchTerm, setSearchTerm] = useState("");
+  const [foods, setFoods] = useState([]);
 
   const getFood = async () => {
     const response = await axios.get("http://localhost:3004/foods");
     if (response.status === 200) {
       setShowFood(response.data);
+      setFoods(response.data);
     }
   };
 
@@ -22,15 +26,30 @@ const FoodAdmin = () => {
       toast.success("Xóa thành công !");
     }
   };
+  const handleSearch = () => {
+    const filteredFoods = foods.filter((food) => {
+      const searchString =
+        food.nameFood.toLowerCase() +
+        food.description.toLowerCase() +
+        food.price;
+      return searchString.includes(searchTerm.toLowerCase());
+    });
+    setShowFood(filteredFoods);
+  };
 
   useEffect(() => {
     getFood();
-  }, [showFood]);
+  }, []);
 
   return (
     <div>
       <div className="flex justify-between p-3 border-b-4 border-[#151929]">
         <div className="p-3 font-semibold text-xl ">Thiết lập food</div>
+        <SearchAdmin
+          searchTerm={searchTerm}
+          setSearchTerm={setSearchTerm}
+          handleSearch={handleSearch}
+        />
         <div className="bg-[#151929] rounded-lg font-semibold text-lg cursor-pointer p-3">
           <Link to={`/admin/foodNew`}>Thêm food</Link>
         </div>
