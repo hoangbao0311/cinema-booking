@@ -2,17 +2,29 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
+import SearchAdmin from "../search.js/SearchAdmin";
 
 const RoomAdmin = () => {
   const [listRoom, setListRoom] = useState([]);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [rooms, setRooms] = useState([]);
 
   const data = async () => {
     const responseFilms = await axios.get("http://localhost:3004/rooms");
     if (responseFilms.status === 200) {
       setListRoom(responseFilms.data);
+      setRooms(responseFilms.data);
     } else {
       console.log("loi");
     }
+  };
+
+  const handleSearch = () => {
+    const filteredRooms = rooms.filter((room) => {
+      const searchString = room.nameRoom.toLowerCase();
+      return searchString.includes(searchTerm.toLowerCase());
+    });
+    setListRoom(filteredRooms);
   };
 
   console.log(listRoom);
@@ -28,6 +40,11 @@ const RoomAdmin = () => {
           <div className="p-3 font-semibold text-xl ">
             Thiết lập phòng chiếu
           </div>
+          <SearchAdmin
+            searchTerm={searchTerm}
+            setSearchTerm={setSearchTerm}
+            handleSearch={handleSearch}
+          />
           <div className="bg-[#151929] rounded-lg font-semibold text-lg cursor-pointer p-3">
             <Link to="/admin/roomnew">Thêm phòng chiếu mới</Link>
           </div>

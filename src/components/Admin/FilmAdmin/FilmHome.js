@@ -2,14 +2,18 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Link, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
+import SearchAdmin from "../search.js/SearchAdmin";
 
 const FilmEdit = () => {
   const [listFilm, setListFilm] = useState([]);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [films, setFilms] = useState([]);
 
   const data = async () => {
     const responseFilms = await axios.get("http://localhost:3004/films");
     if (responseFilms.status === 200) {
       setListFilm(responseFilms.data);
+      setFilms(responseFilms.data);
     } else {
       console.log("loi");
     }
@@ -27,6 +31,13 @@ const FilmEdit = () => {
       toast.warning("Không thành công !");
     }
   };
+  const handleSearch = () => {
+    const filteredFilms = films.filter((film) => {
+      const searchString = film.name.toLowerCase();
+      return searchString.includes(searchTerm.toLowerCase());
+    });
+    setListFilm(filteredFilms);
+  };
 
   useEffect(() => {
     data();
@@ -36,6 +47,11 @@ const FilmEdit = () => {
     <div>
       <div className="flex justify-between p-3 border-b-4 border-[#151929]">
         <div className="p-3 font-semibold text-xl ">Thiết lập phim</div>
+        <SearchAdmin
+          searchTerm={searchTerm}
+          setSearchTerm={setSearchTerm}
+          handleSearch={handleSearch}
+        />
         <div className="bg-[#151929] rounded-lg font-semibold text-lg cursor-pointer p-3">
           <Link to="/admin/filmnew">Thêm phim mới</Link>
         </div>

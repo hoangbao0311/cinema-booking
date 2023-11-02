@@ -1,31 +1,19 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
+import SearchAdmin from "../search.js/SearchAdmin";
+import { Link } from "react-router-dom";
 
 const VoucherAdmin = () => {
-  const [voucher, setVoucher] = useState("");
-  const [price, setPrice] = useState("");
-  const [showVoucher, setShowvoucher] = useState("");
-
-  const handleAddVoucher = async () => {
-    if (!voucher || !price) {
-      toast.error("Vui lòng điền đầy đủ thông tin.");
-      return;
-    }
-    const response = await axios.post("http://localhost:3004/voucher", {
-      code: voucher,
-      price: parseFloat(price),
-    });
-    if (response.status === 201) {
-      toast.success("Thêm mã thành công !");
-      getDataVoucher();
-    }
-  };
+  const [showVoucher, setShowVoucher] = useState([]);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [defaultVoucher, setDefaultVoucher] = useState([]);
 
   const getDataVoucher = async () => {
     const response = await axios.get("http://localhost:3004/voucher");
     if (response.status === 200) {
-      setShowvoucher(response.data);
+      setShowVoucher(response.data);
+      setDefaultVoucher(response.data);
     }
   };
 
@@ -37,40 +25,30 @@ const VoucherAdmin = () => {
     }
   };
 
+  const handleSearch = () => {
+    const filteredVouchers = defaultVoucher.filter((voucher) => {
+      const searchString = voucher.code.toLowerCase() + voucher.price;
+      return searchString.includes(searchTerm.toLowerCase());
+    });
+    setShowVoucher(filteredVouchers);
+  };
+
   useEffect(() => {
     getDataVoucher();
   }, []);
-  console.log(showVoucher);
 
   return (
     <div>
-      <div className="max-w-md mx-auto p-6 bg-white rounded-lg shadow-lg flex flex-col gap-3">
-        <div className="text-black w-full">
-          <label for="" className="font-semibold">
-            Mã giảm giá:
-          </label>
-          <input
-            value={voucher}
-            onChange={(e) => setVoucher(e.target.value)}
-            className="outline-none border w-full mt-1 py-1 px-2 text-lg font-semibold border-[#1C2438] rounded-lg"
-          />
+      <div className="flex justify-between p-3 border-b-4 border-[#151929]">
+        <div className="p-3 font-semibold text-xl ">Thiết lập phòng chiếu</div>
+        <SearchAdmin
+        searchTerm={searchTerm}
+        setSearchTerm={setSearchTerm}
+        handleSearch={handleSearch}
+      />
+        <div className="bg-[#151929] rounded-lg font-semibold text-lg cursor-pointer p-3">
+          <Link to="/admin/vouchernew">Thêm phòng voucher mới</Link>
         </div>
-        <div className="text-black w-full">
-          <label for="" className="font-semibold ">
-            Số tiền:
-          </label>
-          <input
-            value={price}
-            onChange={(e) => setPrice(e.target.value)}
-            className="outline-none border w-full mt-1 py-1 px-2 text-lg font-semibold border-[#1C2438] rounded-lg"
-          />
-        </div>
-        <button
-          className="bg-[#1C2438] text-white font-semibold px-4 py-2 rounded-lg cursor-pointer text-center hover:bg-[#151929]"
-          onClick={handleAddVoucher}
-        >
-          Thêm mã giảm giá
-        </button>
       </div>
       <div className="flex flex-col gap-5 p-5">
         {showVoucher.length === 0 ? (

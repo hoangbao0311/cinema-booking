@@ -1,17 +1,28 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import SearchAdmin from "../search.js/SearchAdmin";
 
 const CinemaAdmin = () => {
   const [listCinema, setListCinema] = useState([]);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [cinemas, setCinemas] = useState("");
 
   const data = async () => {
     const responseFilms = await axios.get("http://localhost:3004/cinemas");
     if (responseFilms.status === 200) {
       setListCinema(responseFilms.data);
+      setCinemas(responseFilms.data);
     } else {
       console.log("loi");
     }
+  };
+  const handleSearch = () => {
+    const filteredCinemas = cinemas.filter((cinema) => {
+      const searchString = cinema.name.toLowerCase() + cinema.address.toLowerCase();
+      return searchString.includes(searchTerm.toLowerCase());
+    });
+    setListCinema(filteredCinemas);
   };
 
   console.log(listCinema);
@@ -24,11 +35,15 @@ const CinemaAdmin = () => {
       <div>
         <div className="flex justify-between p-3 border-b-4 border-[#151929]">
           <div className="p-3 font-semibold text-xl ">Thiết lập rạp</div>
+          <SearchAdmin
+          searchTerm={searchTerm}
+          setSearchTerm={setSearchTerm}
+          handleSearch={handleSearch}
+        />
           <div className="bg-[#151929] rounded-lg font-semibold text-lg cursor-pointer p-3">
             <Link to="/admin/cinemanew">Thêm rạp mới</Link>
           </div>
         </div>
-
         <div className="flex flex-col gap-5 p-5">
           <div className="flex">
             <div className="flex-1">ID</div>

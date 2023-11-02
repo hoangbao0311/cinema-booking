@@ -34,6 +34,7 @@ import ShowtimeNew from "./components/Admin/ShowtimeAdmin/ShowtimeNew";
 import EditShowtime from "./components/Admin/ShowtimeAdmin/EditShowtime";
 import FoodEdit from "./components/Admin/FoodAdmin/FoodEdit";
 import FoodNew from "./components/Admin/FoodAdmin/FoodNew";
+import VoucherNew from "./components/Admin/VoucherAdmin/VoucherNew";
 
 function App() {
   return (
@@ -74,6 +75,7 @@ function App() {
             <Route path="/admin/voucheradmin" element={<VoucherAdmin />} />
             <Route path="/admin/foodadmin/:id" element={<FoodEdit />} />
             <Route path="/admin/foodNew" element={<FoodNew />} />
+            <Route path="/admin/vouchernew" element={<VoucherNew />} />
           </Route>
         </Routes>
       </BrowserRouter>
