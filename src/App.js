@@ -34,6 +34,13 @@ import ShowtimeNew from "./components/Admin/ShowtimeAdmin/ShowtimeNew";
 import EditShowtime from "./components/Admin/ShowtimeAdmin/EditShowtime";
 import FoodEdit from "./components/Admin/FoodAdmin/FoodEdit";
 import FoodNew from "./components/Admin/FoodAdmin/FoodNew";
+import Staff from "./components/Staff/Staff";
+import BookingManage from "./components/Staff/BookingManage/BookingManage";
+import CommentManage from "./components/Staff/CommentManage/CommentManage";
+import CustomerManage from "./components/Staff/CustomerManage/CustomerManage";
+import InvoiceManage from "./components/Staff/InvoiceManage/InvoiceManage";
+import ReviewManage from "./components/Staff/ReviewManage/ReviewManage";
+import VoteManage from "./components/Staff/VoteManage/VoteManage";
 
 function App() {
   return (
@@ -74,6 +81,14 @@ function App() {
             <Route path="/admin/voucheradmin" element={<VoucherAdmin />} />
             <Route path="/admin/foodadmin/:id" element={<FoodEdit />} />
             <Route path="/admin/foodNew" element={<FoodNew />} />
+          </Route>
+          <Route path="staff" element={<Staff />}>
+            <Route path="/staff/bookingManage" element={<BookingManage />} />
+            <Route path="/staff/commentManage" element={<CommentManage />} />
+            <Route path="/staff/customerManage" element={<CustomerManage />} />
+            <Route path="/staff/invoiceManage" element={<InvoiceManage />} />
+            <Route path="/staff/reviewManage" element={<ReviewManage />} />
+            <Route path="/staff/voteManage" element={<VoteManage />} />
           </Route>
         </Routes>
       </BrowserRouter>
