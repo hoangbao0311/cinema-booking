@@ -32,7 +32,7 @@ const Index = () => {
     }
 
     const responseTicket = await axios.get(
-      `http://localhost:3004/ticket?_expand=showtimes`
+      `http://localhost:3004/tickets?_expand=showtimes`
     );
     if (responseTicket.status === 200) {
       setListDataTicket(responseTicket.data);
