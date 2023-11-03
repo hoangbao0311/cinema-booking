@@ -3,51 +3,63 @@ import SlideShow from "./SlideShow";
 import { Link } from "react-router-dom";
 import { Context } from "../../context/Context";
 import SearchFilter from "../../components/search/FilterFindter";
+import axios from "axios";
 
 const Home = () => {
   const [selectedCategory, setSelectedCategory] = useState("PHIM ĐANG CHIẾU");
-  const { listFilm } = useContext(Context);
+  const [listFilm, setListFilm] = useState([]);
+  const [filmDC, setFilmDC] = useState([]);
+  const [filmSC, setFilmSC] = useState([]);
+
+  // const { listFilm } = useContext(Context);
+
   const currentDate = new Date();
+
   console.log(currentDate);
-  console.log("listFilm", listFilm);
 
-  const filmDangChieu = listFilm?.filter((item) => item.status == "DC");
+  const getData = async () => {
+    const responseFilm = await axios.get(`http://localhost:3004/films`);
 
-  const handleRenderFilm = () => {
-    return filmDangChieu?.map((item, index) => {
-      return (
-        <div>
-          <div className="overflow-hidden w-[225px]" key={index}>
-            <Link to={`/film/${item.id}`}>
-              <img className="h-[335px] w-[225px]" src={item.banner} alt="" />
-              <div>
-                <p className="font-bold text-lg">{item.name}</p>
-              </div>
-            </Link>
-          </div>
-        </div>
-      );
+    await responseFilm.data.map((item) => {
+      const startDay = new Date(item.startDay);
+      console.log("startDay", startDay);
+
+      if (currentDate > startDay) {
+        console.log("da qua");
+        console.log(item);
+        // axios.patch(
+        //   (`http://localhost:3004/films/${item.id}`,
+        //   {
+        //     status: "DC",
+        //   })
+        // );
+      } else {
+        console.log("chua qua");
+      }
+      return;
     });
+
+    setListFilm(responseFilm.data);
+    console.log("flim", responseFilm.data);
+    const filmDangChieu = await responseFilm.data.filter(
+      (item) => item.status == "DC"
+    );
+
+    setFilmDC(filmDangChieu);
+
+    const filmSapChieu = await responseFilm.data.filter(
+      (item) => item.status == "SC"
+    );
+
+    setFilmSC(filmSapChieu);
+
+    console.log("filmDangChieu", filmDangChieu);
+    console.log("filmSapChieu", filmSapChieu);
   };
 
-  const filmSapChieu = listFilm?.filter((item) => item.status == "SC");
-
-  const handleRenderFilm2 = () => {
-    return filmSapChieu?.map((item, index) => {
-      return (
-        <div>
-          <div className="overflow-hidden w-[225px]" key={index}>
-            <Link to={`/film/${item.id}`}>
-              <img className="h-[335px] w-[225px]" src={item.banner} alt="" />
-              <div>
-                <p className="font-bold text-lg">{item.name}</p>
-              </div>
-            </Link>
-          </div>
-        </div>
-      );
-    });
-  };
+  useEffect(() => {
+    getData();
+  }, []);
 
   return (
     <div>
@@ -113,14 +125,56 @@ const Home = () => {
           {selectedCategory === "PHIM ĐANG CHIẾU" && (
             <div>
               <div className="grid gap-x-8 gap-y-12 xl:grid-cols-4 md:grid-cols-2 sm:grid-cols-1">
-                {handleRenderFilm()}
+                {filmDC ? (
+                  filmDC?.map((item, index) => {
+                    return (
+                      <div key={index}>
+                        <div className="overflow-hidden w-[225px]" key={index}>
+                          <Link to={`/film/${item.id}`}>
+                            <img
+                              className="h-[335px] w-[225px]"
+                              src={item.banner}
+                              alt=""
+                            />
+                            <div>
+                              <p className="font-bold text-lg">{item.name}</p>
+                            </div>
+                          </Link>
+                        </div>
+                      </div>
+                    );
+                  })
+                ) : (
+                  <div>loading...</div>
+                )}
               </div>
             </div>
           )}
           {selectedCategory === "PHIM SẮP CHIẾU" && (
             <div>
               <div className="grid gap-x-8 gap-y-12 xl:grid-cols-4 md:grid-cols-2 sm:grid-cols-1">
-                {handleRenderFilm2()}
+                {filmSC ? (
+                  filmSC?.map((item, index) => {
+                    return (
+                      <div key={index}>
+                        <div className="overflow-hidden w-[225px]" key={index}>
+                          <Link to={`/film/${item.id}`}>
+                            <img
+                              className="h-[335px] w-[225px]"
+                              src={item.banner}
+                              alt=""
+                            />
+                            <div>
+                              <p className="font-bold text-lg">{item.name}</p>
+                            </div>
+                          </Link>
+                        </div>
+                      </div>
+                    );
+                  })
+                ) : (
+                  <div>loading...</div>
+                )}
               </div>
             </div>
           )}

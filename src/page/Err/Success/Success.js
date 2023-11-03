@@ -8,6 +8,7 @@ import { toast } from "react-toastify";
 const App = () => {
   const [dataPayment, setDataPay] = useState([]);
   const [listPayment, setListPayment] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   const form = useRef();
   const [toEmail, setToEmail] = useState("");
@@ -33,17 +34,25 @@ const App = () => {
       console.log("Lỗi khi gửi yêu cầu.");
     }
 
-    const responsePayment = await axios.get(`http://localhost:3004/payment`);
+    const responsePayment = await axios.get(
+      `http://localhost:3004/payment?code=${orderCodeParam}`
+    );
     if (responsePayment.status === 200) {
       setListPayment(responsePayment.data);
     }
 
-    const filterCode = await responsePayment.data.find(
-      (item) => item.code == orderCodeParam
-    );
+    console.log("responsePayment", responsePayment.data);
+
+    const filterCode = await responsePayment.data[0];
+
+    console.log("vfilterCode", filterCode);
+
+    const idShowtime = await filterCode.showtimesId;
+
+    console.log("idShowtime", idShowtime);
 
     const findFilm = await axios.get(
-      `http://localhost:3004/showtimes/${filterCode.showtime}?_expand=films`
+      `http://localhost:3004/showtimes/${idShowtime}?_expand=films`
     );
 
     console.log("findFilm", findFilm.data.films.name);
@@ -53,8 +62,8 @@ const App = () => {
       status: "paid",
     });
 
-    await axios.post("http://localhost:3004/ticket", {
-      showtimesId: filterCode?.showtime,
+    await axios.post("http://localhost:3004/tickets", {
+      showtimesId: idShowtime,
       usersId: 1,
       code: +orderCodeParam,
       seat: filterCode?.seat,
@@ -85,6 +94,7 @@ const App = () => {
       )
       .then((result) => {
         toast.success("Gửi mail thành công !");
+        setLoading(true);
       })
       .catch((error) => {
         toast.warning("Gửi mail không thành công !");
@@ -96,12 +106,20 @@ const App = () => {
   }, []);
 
   return (
-    <Result
-      status="success"
-      title="Đặt vé thành công"
-      subTitle="Thanh toán thành công vui lòng kiểm tra email."
-      extra={[<Link to="/">Về Trang Chủ</Link>]}
-    />
+    <div>
+      {loading ? (
+        <Result
+          status="success"
+          title="Đặt vé thành công"
+          subTitle="Thanh toán thành công vui lòng kiểm tra email."
+          extra={[<Link to="/">Về Trang Chủ</Link>]}
+        />
+      ) : (
+        <div className="flex justify-center items-center text-5xl font-bold">
+          LOADING...
+        </div>
+      )}
+    </div>
   );
 };
 

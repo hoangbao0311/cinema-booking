@@ -193,6 +193,7 @@ const Index = () => {
                             <div key={index}>
                               <div className="font-medium border-[1px] border-stone-400 py-1 px-4 cursor-pointer hover:border-[#f26b38] hover:text-[#f26b38]">
                                 {item.showtime}
+                                {console.log(item)}
                               </div>
                             </div>
                           </Link>

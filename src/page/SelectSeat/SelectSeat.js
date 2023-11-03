@@ -32,7 +32,7 @@ const Index = () => {
     }
 
     const responseTicket = await axios.get(
-      `http://localhost:3004/ticket?_expand=seats&_expand=showtimes`
+      `http://localhost:3004/tickets?_expand=showtimes`
     );
     if (responseTicket.status === 200) {
       setListDataTicket(responseTicket.data);
@@ -56,6 +56,8 @@ const Index = () => {
 
     setPriceShowtime(responseShowtime.data.unitPrice);
 
+    console.log("responseTicket", responseTicket);
+
     const ticketFilter = await responseTicket.data.filter(
       (item) => item.showtimes.id == id
     );
@@ -64,6 +66,8 @@ const Index = () => {
       (acc, item) => acc.concat(item.seat),
       []
     );
+
+    console.log("seatMap", seatMap);
 
     setNumRow(responseShowtime.data.rooms.horizon);
     setNumCol(responseShowtime.data.rooms.vertical);

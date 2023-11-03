@@ -12,19 +12,17 @@ import { VoucherProvider } from "./context/voucherContext";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
 root.render(
-  <React.StrictMode>
-    <MyContext>
-      <RoomContext>
-        <TicketContext>
-          <AppSearch>
-            <VoucherProvider>
-              <App />
-            </VoucherProvider>
-          </AppSearch>
-        </TicketContext>
-      </RoomContext>
-    </MyContext>
-  </React.StrictMode>
+  <MyContext>
+    <RoomContext>
+      <TicketContext>
+        <AppSearch>
+          <VoucherProvider>
+            <App />
+          </VoucherProvider>
+        </AppSearch>
+      </TicketContext>
+    </RoomContext>
+  </MyContext>
 );
 
 // If you want to start measuring performance in your app, pass a function
