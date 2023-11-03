@@ -97,7 +97,7 @@ const Payment = () => {
       date: ticketInfo?.date,
       seat: selectedSeats,
       food: listFoodContext,
-      showtime: ticketInfo?.id,
+      showtimeId: ticketInfo?.id,
       status: "unpaid",
     });
     if (response.status === 201) {

@@ -56,7 +56,7 @@ const App = () => {
     await axios.post("http://localhost:3004/ticket", {
       showtimesId: filterCode?.showtime,
       usersId: 1,
-      seatsId: 1,
+      code: +orderCodeParam,
       seat: filterCode?.seat,
     });
     const food = filterCode.food?.map((item) => {

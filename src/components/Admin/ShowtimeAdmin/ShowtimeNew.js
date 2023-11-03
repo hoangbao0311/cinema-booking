@@ -19,7 +19,7 @@ const ShowtimeNew = () => {
   let startTimes = selectedHour + ":" + selectedMinute;
   let endTimes = selectedEndHour + ":" + selectedEndMinute;
 
-  const hours = Array.from({ length: 12 }, (_, i) =>
+  const hours = Array.from({ length: 24 }, (_, i) =>
     (i + 1).toString().padStart(2, "0")
   );
   const minutes = Array.from({ length: 60 }, (_, i) =>
