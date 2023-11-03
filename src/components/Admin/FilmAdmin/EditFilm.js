@@ -99,7 +99,6 @@ const FilmAdmin = () => {
       endDay: endDay,
       time: time,
       coutry: coutry,
-      status: "Đang Chiếu",
     });
     if (response.status === 200) {
       toast.success("Tải lên thành công !");

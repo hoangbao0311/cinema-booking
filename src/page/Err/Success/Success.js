@@ -43,7 +43,7 @@ const App = () => {
     );
 
     const findFilm = await axios.get(
-      `http://localhost:3004/showtimes/${filterCode.showtime}?_expand=films`
+      `http://localhost:3004/showtimes/${filterCode.showtimesId}?_expand=films`
     );
 
     console.log("findFilm", findFilm.data.films.name);

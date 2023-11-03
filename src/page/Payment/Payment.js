@@ -11,10 +11,21 @@ const CryptoJS = require("crypto-js");
 const Payment = () => {
   const navigate = useNavigate();
   const codeRand = Math.floor(Math.random() * 100000000);
+  const [idUpload, setIdUpload] = useState(0);
 
   const email = localStorage.getItem("email");
   console.log("email", email);
 
+  const getId = async () => {
+    const response = await axios.get(`http://localhost:3004/users`);
+    console.log(response.data);
+    const filterId = await response.data.find((item) => item.email == email);
+    console.log("filterId", filterId.id);
+    setIdUpload(filterId.id);
+  };
+  useEffect(() => {
+    getId();
+  }, []);
   const {
     ticketInfo,
     selectedSeats,
@@ -98,6 +109,7 @@ const Payment = () => {
       seat: selectedSeats,
       food: listFoodContext,
       showtimeId: ticketInfo?.id,
+      userId: idUpload,
       status: "unpaid",
     });
     if (response.status === 201) {
