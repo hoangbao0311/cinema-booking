@@ -7,9 +7,14 @@ import SearchFilter from "../../components/search/FilterFindter";
 const Home = () => {
   const [selectedCategory, setSelectedCategory] = useState("PHIM ĐANG CHIẾU");
   const { listFilm } = useContext(Context);
+  const currentDate = new Date();
+  console.log(currentDate);
+  console.log("listFilm", listFilm);
+
+  const filmDangChieu = listFilm?.filter((item) => item.status == "DC");
 
   const handleRenderFilm = () => {
-    return listFilm?.map((item, index) => {
+    return filmDangChieu?.map((item, index) => {
       return (
         <div>
           <div className="overflow-hidden w-[225px]" key={index}>
@@ -17,10 +22,25 @@ const Home = () => {
               <img className="h-[335px] w-[225px]" src={item.banner} alt="" />
               <div>
                 <p className="font-bold text-lg">{item.name}</p>
-                <div className="flex justify-between">
-                  <label for="">93Phút</label>
-                  <label for="">29/09/2023</label>
-                </div>
+              </div>
+            </Link>
+          </div>
+        </div>
+      );
+    });
+  };
+
+  const filmSapChieu = listFilm?.filter((item) => item.status == "SC");
+
+  const handleRenderFilm2 = () => {
+    return filmSapChieu?.map((item, index) => {
+      return (
+        <div>
+          <div className="overflow-hidden w-[225px]" key={index}>
+            <Link to={`/film/${item.id}`}>
+              <img className="h-[335px] w-[225px]" src={item.banner} alt="" />
+              <div>
+                <p className="font-bold text-lg">{item.name}</p>
               </div>
             </Link>
           </div>
@@ -100,86 +120,7 @@ const Home = () => {
           {selectedCategory === "PHIM SẮP CHIẾU" && (
             <div>
               <div className="grid gap-x-8 gap-y-12 xl:grid-cols-4 md:grid-cols-2 sm:grid-cols-1">
-                <div className="overflow-hidden w-[225px]">
-                  <img
-                    className="h-[335px] w-[225px]"
-                    src="/image/Film/11236_103_100001.jpg"
-                    alt=""
-                  />
-                  <div>
-                    <p className="font-bold text-lg">
-                      PAW PATROL: PHIM SIÊU ĐẲNG
-                    </p>
-                    <div className="flex justify-between">
-                      <label for="">93Phút</label>
-                      <label for="">29/09/2023</label>
-                    </div>
-                  </div>
-                </div>
-                <div className="overflow-hidden w-[225px]">
-                  <img
-                    className="h-[335px] w-[225px]"
-                    src="/image/Film/11236_103_100001.jpg"
-                    alt=""
-                  />
-                  <div>
-                    <p className="font-bold text-lg">
-                      PAW PATROL: PHIM SIÊU ĐẲNG
-                    </p>
-                    <div className="flex justify-between">
-                      <label for="">93Phút</label>
-                      <label for="">29/09/2023</label>
-                    </div>
-                  </div>
-                </div>
-                <div className="overflow-hidden w-[225px]">
-                  <img
-                    className="h-[335px] w-[225px]"
-                    src="/image/Film/11236_103_100001.jpg"
-                    alt=""
-                  />
-                  <div>
-                    <p className="font-bold text-lg">
-                      PAW PATROL: PHIM SIÊU ĐẲNG
-                    </p>
-                    <div className="flex justify-between">
-                      <label for="">93Phút</label>
-                      <label for="">29/09/2023</label>
-                    </div>
-                  </div>
-                </div>
-                <div className="overflow-hidden w-[225px]">
-                  <img
-                    className="h-[335px] w-[225px]"
-                    src="/image/Film/11236_103_100001.jpg"
-                    alt=""
-                  />
-                  <div>
-                    <p className="font-bold text-lg">
-                      PAW PATROL: PHIM SIÊU ĐẲNG
-                    </p>
-                    <div className="flex justify-between">
-                      <label for="">93Phút</label>
-                      <label for="">29/09/2023</label>
-                    </div>
-                  </div>
-                </div>
-                <div className="overflow-hidden w-[225px]">
-                  <img
-                    className="h-[335px] w-[225px]"
-                    src="/image/Film/11236_103_100001.jpg"
-                    alt=""
-                  />
-                  <div>
-                    <p className="font-bold text-lg">
-                      PAW PATROL: PHIM SIÊU ĐẲNG
-                    </p>
-                    <div className="flex justify-between">
-                      <label for="">93Phút</label>
-                      <label for="">29/09/2023</label>
-                    </div>
-                  </div>
-                </div>
+                {handleRenderFilm2()}
               </div>
             </div>
           )}

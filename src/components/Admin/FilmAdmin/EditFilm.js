@@ -23,6 +23,7 @@ const FilmAdmin = () => {
   const [description, setDescription] = useState(null);
   const [director, setDirector] = useState(null);
   const [startDay, setStartDay] = useState(null);
+  const [endDay, setEndDay] = useState(null);
   const [time, setTime] = useState(null);
   const [coutry, setCoutry] = useState(null);
   const [status, setStatus] = useState(null);
@@ -83,6 +84,7 @@ const FilmAdmin = () => {
     setTime(listfilm ? listfilm.time : "");
     setCoutry(listfilm ? listfilm.coutry : "");
     setStatus(listfilm ? listfilm.status : "");
+    setEndDay(listfilm ? listfilm.endDay : "");
   }, [listfilm]);
 
   const postData = async (downloadURL) => {
@@ -94,6 +96,7 @@ const FilmAdmin = () => {
       description: description,
       director: director,
       startDay: startDay,
+      endDay: endDay,
       time: time,
       coutry: coutry,
       status: "Đang Chiếu",
@@ -113,6 +116,7 @@ const FilmAdmin = () => {
       description: description,
       director: director,
       startDay: startDay,
+      endDay: endDay,
       time: time,
       coutry: coutry,
       status: "Đang Chiếu",
@@ -256,6 +260,17 @@ const FilmAdmin = () => {
             </div>
             <div className="text-black w-full">
               <label for="" className="font-semibold ">
+                Ngày kết thúc:
+              </label>
+              <input
+                onChange={(e) => setEndDay(e.target.value)}
+                className="outline-none border w-full mt-1 py-1 px-2 text-lg  border-[#1C2438] rounded-lg"
+                type="date"
+                defaultValue={listfilm?.endDay}
+              />
+            </div>
+            <div className="text-black w-full">
+              <label for="" className="font-semibold ">
                 Thời lượng:
               </label>
               <input
@@ -276,7 +291,7 @@ const FilmAdmin = () => {
                 defaultValue={listfilm?.coutry}
               />
             </div>
-            <div className="text-black w-full">
+            {/* <div className="text-black w-full">
               <label for="" className="font-semibold ">
                 Status:
               </label>
@@ -285,7 +300,7 @@ const FilmAdmin = () => {
                 type="text"
                 defaultValue={listfilm?.status}
               />
-            </div>
+            </div> */}
             <div
               className="bg-[#1C2438] text-white font-semibold px-4 py-2 rounded-lg cursor-pointer text-center hover:bg-[#151929]"
               onClick={() => handleEditUpload()}

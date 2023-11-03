@@ -14,6 +14,7 @@ const FilmAdmin = () => {
   const [description, setDescription] = useState(null);
   const [director, setDirector] = useState(null);
   const [startDay, setStartDay] = useState(null);
+  const [endDay, setEndDay] = useState(null);
   const [time, setTime] = useState(null);
   const [coutry, setCoutry] = useState(null);
 
@@ -87,6 +88,7 @@ const FilmAdmin = () => {
       description: description,
       director: director,
       startDay: startDay,
+      endDay: endDay,
       time: time,
       coutry: coutry,
       status: "Đang Chiếu",
@@ -193,6 +195,16 @@ const FilmAdmin = () => {
               </label>
               <input
                 onChange={(e) => setStartDay(e.target.value)}
+                className="outline-none border w-full mt-1 py-1 px-2 text-lg  border-[#1C2438] rounded-lg"
+                type="date"
+              />
+            </div>
+            <div className="text-black w-full">
+              <label for="" className="font-semibold ">
+                Ngày kết thúc:
+              </label>
+              <input
+                onChange={(e) => setEndDay(e.target.value)}
                 className="outline-none border w-full mt-1 py-1 px-2 text-lg  border-[#1C2438] rounded-lg"
                 type="date"
               />

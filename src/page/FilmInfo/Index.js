@@ -17,6 +17,9 @@ const Index = () => {
   const [listFilm, setListFilm] = useState([]);
   const [listFilmFind, setListFilmFind] = useState([]);
 
+  const [selectedDate, setSelectedDate] = useState("2023-11-01");
+  const [options, setOptions] = useState([]);
+  console.log(selectedDate);
   const data = async () => {
     // API
     const responseShowtime = await axios.get(
@@ -51,12 +54,16 @@ const Index = () => {
     );
     setShowtimeData(showtimeDataFind);
 
+    const showtimeDate = await responseShowtime.data.filter(
+      (item) => selectedDate == item.date && item.films.id == id
+    );
+
     const filmFind = await responseFilms.data.find((item) => item.id == id);
     setListFilmFind(filmFind);
 
     const cinemaShowtimes = new Map();
 
-    showtimeDataFind.forEach((item) => {
+    showtimeDate.forEach((item) => {
       const cinemaName = item.cinemas.name;
       const showtime = item.starttime;
       const idShowtime = item.id;
@@ -85,7 +92,33 @@ const Index = () => {
 
   useEffect(() => {
     data();
-  }, [id, setShowtimeData]);
+    getCurrentDate();
+  }, [id, setShowtimeData, selectedDate]);
+
+  const getCurrentDate = () => {
+    const currentDate = new Date();
+    const year = currentDate.getFullYear();
+    const month = (currentDate.getMonth() + 1).toString().padStart(2, "0");
+    const day = currentDate.getDate().toString().padStart(2, "0");
+    return `${year}-${month}-${day}`;
+  };
+
+  useEffect(() => {
+    const currentDate = new Date();
+    const options = [];
+
+    for (let i = 0; i < 7; i++) {
+      const nextDate = new Date(currentDate);
+      nextDate.setDate(currentDate.getDate() + i);
+      options.push({
+        value: nextDate.toISOString().split("T")[0],
+        label: nextDate.toISOString().split("T")[0],
+      });
+    }
+
+    setOptions(options);
+    setSelectedDate(options[0].value);
+  }, []);
 
   return (
     <div className="flex justify-center flex-col w-full items-center">
@@ -125,6 +158,20 @@ const Index = () => {
         </div>
       </div>
       <div className="w-1/2">
+        <div className="flex items-center gap-5 my-3">
+          <label className="block font-semibold mb-2">Chọn ngày chiếu:</label>
+          <select
+            value={selectedDate}
+            className="border rounded-md p-2 focus:outline-none"
+            onChange={(e) => setSelectedDate(e.target.value)}
+          >
+            {options.map((option) => (
+              <option className="py-1" key={option.value} value={option.value}>
+                {option.label}
+              </option>
+            ))}
+          </select>
+        </div>
         <div>
           {listShowTimeInCinema.size > 0 ? (
             Array.from(listShowTimeInCinema).map(([cinema, showtimes]) => {
@@ -157,7 +204,7 @@ const Index = () => {
               );
             })
           ) : (
-            <div>Phim này hiện chưa có xuất chiếu</div>
+            <div>Hiện chưa có xuất chiếu ở thời gian này</div>
           )}
         </div>
       </div>
