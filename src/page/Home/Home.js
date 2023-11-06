@@ -11,8 +11,6 @@ const Home = () => {
   const [filmDC, setFilmDC] = useState([]);
   const [filmSC, setFilmSC] = useState([]);
 
-  // const { listFilm } = useContext(Context);
-
   const currentDate = new Date();
 
   console.log(currentDate);
