@@ -5,6 +5,7 @@ import Login from "../components/user/Login";
 import { useNavigate } from "react-router-dom";
 import Search from "../components/search/Search";
 import {
+  HistoryOutlined,
   InfoCircleOutlined,
   InfoOutlined,
   LogoutOutlined,
@@ -154,7 +155,11 @@ const Header = () => {
                           </div>
                           <div className="flex justify-start px-5 gap-5 p-2 items-center w-full">
                             <InfoCircleOutlined />
-                            <Link to={"/editUser"}>Tài khoản </Link>
+                            <Link to={"/editUser"}>Tài khoản</Link>
+                          </div>
+                          <div className="flex justify-start px-5 gap-5 p-2 items-center w-full">
+                            <HistoryOutlined />
+                            <Link to={"/history"}>Lịch sử</Link>
                           </div>
                           <button
                             className="text-black w-full flex justify-start px-5 gap-5 p-2 items-center"

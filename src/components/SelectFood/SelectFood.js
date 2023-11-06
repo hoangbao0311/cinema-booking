@@ -18,6 +18,8 @@ const SelectFood = () => {
 
   const handleInputChange = async (e, itemId, nameFoods, prices) => {
     const { name, value } = e.target;
+    console.log(e.target);
+    console.log(e.target.value);
     const updatedQuantity = name === "quantity" ? value : quantity;
 
     setQuantity(updatedQuantity);
@@ -38,11 +40,22 @@ const SelectFood = () => {
     }
   };
 
-  console.log(listFoodContext);
+  console.log("listFoodContext", listFoodContext);
 
   useEffect(() => {
     data();
   }, []);
+
+  useEffect(() => {
+    getQuantityFood();
+  }, [listFoodContext]);
+
+  const getQuantityFood = (itemId) => {
+    const qty = listFoodContext?.find((item) => {
+      return item?.id === itemId;
+    });
+    return qty ? qty?.quantity : 0;
+  };
 
   return (
     <div>
@@ -72,7 +85,7 @@ const SelectFood = () => {
                       type="number"
                       name="quantity"
                       min="0"
-                      defaultValue={listFoodContext[index]?.quantity}
+                      defaultValue={getQuantityFood(item?.id)}
                       onChange={(e) =>
                         handleInputChange(e, item.id, item.nameFood, item.price)
                       }

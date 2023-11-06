@@ -41,6 +41,7 @@ import CustomerManage from "./components/Staff/CustomerManage/CustomerManage";
 import InvoiceManage from "./components/Staff/InvoiceManage/InvoiceManage";
 import ReviewManage from "./components/Staff/ReviewManage/ReviewManage";
 import VoteManage from "./components/Staff/VoteManage/VoteManage";
+import History from "./components/user/History.js";
 
 function App() {
   return (
@@ -51,6 +52,7 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/register" element={<Register />} />
             <Route path="/editUser" element={<EditUser />} />
+            <Route path="/history" element={<History />} />
             <Route path="/film/:id" element={<Film />} />
             <Route path="/selectseat/:id" element={<SelectSeat />} />
             <Route path="/food/:id" element={<Food />} />

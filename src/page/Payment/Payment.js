@@ -97,8 +97,12 @@ const Payment = () => {
       console.error("Lỗi khi gửi yêu cầu thanh toán:", error);
     }
   };
-
+  console.log("listDataShowtime", listDataShowtime);
   const handleBuy = async () => {
+    if (listDataShowtime.length == 0) {
+      toast.warning("Vui lòng chọn lại suất chiếu");
+      return;
+    }
     const response = await axios.post("http://localhost:3004/payment", {
       amount: amount,
       code: codeRand,
@@ -108,8 +112,9 @@ const Payment = () => {
       date: ticketInfo?.date,
       seat: selectedSeats,
       food: listFoodContext,
-      showtimeId: ticketInfo?.id,
-      userId: idUpload,
+      showtimesId: ticketInfo?.id,
+      usersId: idUpload,
+      filmsId: listDataShowtime?.filmsId,
       status: "unpaid",
     });
     if (response.status === 201) {

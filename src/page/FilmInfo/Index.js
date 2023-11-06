@@ -3,8 +3,17 @@ import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import { Context, TicketContext } from "../../context/ticketContext";
+import ReactStar from "react-rating-star-with-type";
+import { toast } from "react-toastify";
+import { AiOutlineStar } from "react-icons/ai";
 
 const Index = () => {
+  const [star, setStar] = useState(5);
+
+  const handleOnChangeStar = (nextValue) => {
+    setStar(nextValue);
+  };
+
   const { id } = useParams();
   const navigate = useNavigate();
   const { setTicketInfo, setCinemaInfo } = useContext(Context);
@@ -16,10 +25,13 @@ const Index = () => {
   const [listShowTimeInCinema, setListShowTimeInCinema] = useState([]);
   const [listFilm, setListFilm] = useState([]);
   const [listFilmFind, setListFilmFind] = useState([]);
-
+  const [comment, setComment] = useState(null);
   const [selectedDate, setSelectedDate] = useState("2023-11-01");
   const [options, setOptions] = useState([]);
-  console.log(selectedDate);
+  const [userId, setUserId] = useState(null);
+  const [dataComent, setDataComent] = useState([]);
+  const [login, setLogin] = useState(true);
+  const [starFilm, setStarFlim] = useState(5);
   const data = async () => {
     // API
     const responseShowtime = await axios.get(
@@ -120,38 +132,158 @@ const Index = () => {
     setSelectedDate(options[0].value);
   }, []);
 
+  // Comments
+
+  const getUserId = async () => {
+    const email = localStorage.getItem("email");
+
+    if (email) {
+      const responseUsers = await axios.get(
+        `http://localhost:3004/users?email=${email}`
+      );
+      if (responseUsers.status === 200) {
+        setUserId(responseUsers.data[0].id);
+      }
+    } else {
+      setLogin(false);
+    }
+  };
+
+  const handleComment = async () => {
+    if (comment === null) {
+      toast.warning("Không được để trống bình luận");
+      return;
+    }
+    const response = await axios.post("http://localhost:3004/comments", {
+      body: comment,
+      filmsId: +id,
+      star: +star,
+      date: getCurrentDate(),
+      usersId: userId,
+    });
+    if (response.status === 201) {
+      toast.success("Bình luận thành công !");
+    } else {
+      console.log("Thất bại !");
+    }
+    handleViewComent();
+  };
+
+  useEffect(() => {
+    getUserId();
+    handleViewComent();
+  }, []);
+
+  const handleViewComent = async () => {
+    try {
+      const response = await axios.get(
+        `http://localhost:3004/comments?filmsId=${id}&_expand=users`
+      );
+      if (response.status === 200) {
+        setDataComent(response.data);
+        const a = response.data.reduce((total, item) => {
+          return total + item.star;
+        }, 0);
+        let totalStar = 0;
+
+        totalStar = a / response.data.length;
+        setStarFlim(+totalStar.toFixed(1));
+      }
+    } catch (error) {
+      console.error("Lỗi khi lấy dữ liệu :", error);
+    }
+  };
+
   return (
     <div className="flex justify-center flex-col w-full items-center">
       {listFilmFind ? (
         <div>
-          <div className="flex justify-center gap-8">
-            <img
-              className="h-[335px] w-[225px]"
-              src={listFilmFind.banner}
-              alt=""
-            />
-            <div className="flex flex-col gap-3">
-              <p className="font-bold text-lg"> {listFilmFind.name}</p>
-              <p>Thời lượng: {listFilmFind.time} phút</p>
-              <p>Nhà sản xuất: {listFilmFind.author}</p>
-              <p>Diễn viên: {listFilmFind.main_actor}</p>
-              <p>Quốc gia: {listFilmFind.coutry}</p>
-              <p>Đạo diễn: {listFilmFind.director}</p>
-              <p>Ngày khởi chiếu: {listFilmFind.startDay} </p>
+          <div className="flex flex-col justify-center items-center gap-8">
+            <div className="flex justify-center gap-8">
+              <img
+                className="h-[335px] w-[225px]"
+                src={listFilmFind.banner}
+                alt=""
+              />
+              <div className="flex flex-col gap-3">
+                <p className="font-bold text-lg"> {listFilmFind.name}</p>
+                <p>Thời lượng: {listFilmFind.time} phút</p>
+                <p>Nhà sản xuất: {listFilmFind.author}</p>
+                <p>Diễn viên: {listFilmFind.main_actor}</p>
+                <p>Quốc gia: {listFilmFind.coutry}</p>
+                <p>Đạo diễn: {listFilmFind.director}</p>
+                <p>Ngày khởi chiếu: {listFilmFind.startDay} </p>
+                {starFilm < 5 && (
+                  <div className="flex items-center gap-3">
+                    <ReactStar
+                      value={starFilm}
+                      isEdit={false}
+                      activeColors={[
+                        "red",
+                        "orange",
+                        "#FFCE00",
+                        "#9177FF",
+                        "green",
+                      ]}
+                    />{" "}
+                    <div className="font-semibold flex items-center gap-1">
+                      {starFilm} <AiOutlineStar />
+                    </div>
+                  </div>
+                )}
+                <div>
+                  {starFilm == 5 && (
+                    <div className="flex items-center gap-3">
+                      <ReactStar
+                        value={5}
+                        isEdit={false}
+                        activeColors={[
+                          "red",
+                          "orange",
+                          "#FFCE00",
+                          "#9177FF",
+                          "green",
+                        ]}
+                      />{" "}
+                      <div className="font-semibold flex items-center gap-1">
+                        {5} <AiOutlineStar />
+                      </div>
+                    </div>
+                  )}
+                </div>
+                {!starFilm && (
+                  <div className="flex items-center gap-3">
+                    <ReactStar
+                      value={5}
+                      isEdit={false}
+                      activeColors={[
+                        "red",
+                        "orange",
+                        "#FFCE00",
+                        "#9177FF",
+                        "green",
+                      ]}
+                    />{" "}
+                    <div className="font-semibold flex items-center gap-1">
+                      {5} <AiOutlineStar />
+                    </div>
+                  </div>
+                )}
+              </div>
             </div>
-          </div>
-          <div className="flex flex-col items-center">
-            <div className="w-1/2">
-              <h1 className="text-2xl font-bold ">Nội dung phim:</h1>
-              <p className="border-b-[2px] border-orange-600 w-40 my-2"></p>
+            <div className="flex flex-col items-center">
+              <div className="w-1/2">
+                <h1 className="text-2xl font-bold ">Nội dung phim:</h1>
+                <p className="border-b-[2px] border-orange-600 w-40 my-2"></p>
+              </div>
+              <p className="w-1/2">{listFilmFind.description}</p>
             </div>
-            <p className="w-1/2">{listFilmFind.description}</p>
           </div>
         </div>
       ) : (
         <div>loading...</div>
       )}
-      <div className="flex flex-col items-center w-full">
+      <div className="flex flex-col items-center w-full pt-8">
         <div className="w-1/2">
           <h1 className="text-2xl font-bold ">Lịch chiếu</h1>
           <p className="border-b-[2px] border-orange-600 w-28 my-2"></p>
@@ -184,7 +316,7 @@ const Index = () => {
                     Xuất chiếu:
                     {showtimes?.map((item, index) => {
                       return (
-                        <div>
+                        <div key={index}>
                           <Link
                             onClick={() =>
                               handleItemClick(item, cinema, item.id)
@@ -206,6 +338,81 @@ const Index = () => {
             })
           ) : (
             <div>Hiện chưa có xuất chiếu ở thời gian này</div>
+          )}
+        </div>
+        <div className="w-full border-t border-black my-2">
+          <div className="font-bold text-xl pt-4">
+            Xếp hạng và đánh giá phim
+          </div>
+          <div className="flex w-full items-center gap-3 py-8">
+            <div>
+              <ReactStar
+                onChange={(value) => handleOnChangeStar(value)}
+                value={star}
+                isEdit={true}
+                activeColors={[
+                  "red",
+                  "orange",
+                  "#FFCE00",
+                  "#9177FF",
+                  "#8568FC",
+                ]}
+              />
+            </div>
+            <div className="flex-1">
+              <input
+                onChange={(e) => setComment(e.target.value)}
+                className="outline-none h-10 text-xl border w-full p-2"
+                type="text"
+                placeholder="Viết đánh giá của bạn tại đây"
+              />
+            </div>
+            {login ? (
+              <div>
+                <div
+                  onClick={() => handleComment()}
+                  className="text-white bg-black px-4 py-2 cursor-pointer"
+                >
+                  Bình luận
+                </div>
+              </div>
+            ) : (
+              <div>
+                <div className="text-white bg-black px-4 py-2">
+                  Đăng nhập để bình luận
+                </div>
+              </div>
+            )}
+          </div>
+        </div>
+        <div className="my-4"></div>
+        <div>
+          {dataComent && (
+            <div className="flex flex-col gap-3 ">
+              {dataComent?.map((item, index) => {
+                return (
+                  <div key={index} className="border-b py-5 border-black">
+                    <div className="flex items-center gap-5 py-2">
+                      <div>{item?.users.fullname}</div>
+                      <div>
+                        <ReactStar
+                          value={item.star}
+                          isEdit={false}
+                          activeColors={[
+                            "red",
+                            "orange",
+                            "#FFCE00",
+                            "#9177FF",
+                            "green",
+                          ]}
+                        />
+                      </div>
+                    </div>
+                    <div>{item?.body}</div>
+                  </div>
+                );
+              })}
+            </div>
           )}
         </div>
       </div>
