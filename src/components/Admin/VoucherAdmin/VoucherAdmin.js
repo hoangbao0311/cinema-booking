@@ -3,17 +3,22 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import SearchAdmin from "../search.js/SearchAdmin";
 import { Link } from "react-router-dom";
+import Pagination from "../../Pagination/Pagination";
 
 const VoucherAdmin = () => {
   const [showVoucher, setShowVoucher] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [defaultVoucher, setDefaultVoucher] = useState([]);
+  const [itemsPerPage] = useState(1);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [maxPage, setMaxPage] = useState(1);
 
   const getDataVoucher = async () => {
     const response = await axios.get("http://localhost:3004/voucher");
     if (response.status === 200) {
       setShowVoucher(response.data);
       setDefaultVoucher(response.data);
+      setMaxPage(Math.ceil(response.data.length / itemsPerPage));
     }
   };
 
@@ -31,7 +36,12 @@ const VoucherAdmin = () => {
       return searchString.includes(searchTerm.toLowerCase());
     });
     setShowVoucher(filteredVouchers);
+    setMaxPage(Math.ceil(filteredVouchers.length / itemsPerPage));
   };
+
+  const firstItem = (currentPage - 1) * itemsPerPage;
+  const lastItem = firstItem + itemsPerPage;
+  const displayedVouchers = showVoucher.slice(firstItem, lastItem);
 
   useEffect(() => {
     getDataVoucher();
@@ -40,22 +50,22 @@ const VoucherAdmin = () => {
   return (
     <div>
       <div className="flex justify-between p-3 border-b-4 border-[#151929]">
-        <div className="p-3 font-semibold text-xl ">Thiết lập phòng chiếu</div>
+        <div className="p-3 font-semibold text-xl ">Thiết lập Voucher</div>
         <SearchAdmin
-        searchTerm={searchTerm}
-        setSearchTerm={setSearchTerm}
-        handleSearch={handleSearch}
-      />
+          searchTerm={searchTerm}
+          setSearchTerm={setSearchTerm}
+          handleSearch={handleSearch}
+        />
         <div className="bg-[#151929] rounded-lg font-semibold text-lg cursor-pointer p-3">
           <Link to="/admin/vouchernew">Thêm phòng voucher mới</Link>
         </div>
       </div>
       <div className="flex flex-col gap-5 p-5">
-        {showVoucher.length === 0 ? (
+        {displayedVouchers.length === 0 ? (
           <div>Loading...</div>
         ) : (
           <div>
-            {showVoucher.map((item) => (
+            {displayedVouchers.map((item) => (
               <div key={item.id} className="flex items-center gap-5">
                 <div className="flex-1 font-semibold text-xl">
                   Mã Voucher: {item.code}
@@ -74,6 +84,12 @@ const VoucherAdmin = () => {
           </div>
         )}
       </div>
+      <Pagination
+        itemsPerPage={itemsPerPage}
+        totalItems={showVoucher.length}
+        currentPage={currentPage}
+        onPageChange={(newpage) => setCurrentPage(newpage)}
+      />
     </div>
   );
 };

@@ -39,9 +39,10 @@ import Staff from "./components/Staff/Staff";
 import BookingManage from "./components/Staff/BookingManage/BookingManage";
 import CommentManage from "./components/Staff/CommentManage/CommentManage";
 import CustomerManage from "./components/Staff/CustomerManage/CustomerManage";
-import InvoiceManage from "./components/Staff/InvoiceManage/InvoiceManage";
+import Report from "./components/Staff/InvoiceManage/Report.js";
 import ReviewManage from "./components/Staff/ReviewManage/ReviewManage";
 import VoteManage from "./components/Staff/VoteManage/VoteManage";
+import TicketDetail from "./components/Staff/BookingManage/TicketDetail.js";
 
 
 function App() {
@@ -89,9 +90,10 @@ function App() {
             <Route path="/staff/bookingManage" element={<BookingManage />} />
             <Route path="/staff/commentManage" element={<CommentManage />} />
             <Route path="/staff/customerManage" element={<CustomerManage />} />
-            <Route path="/staff/invoiceManage" element={<InvoiceManage />} />
+            <Route path="/staff/Report" element={<Report />} />
             <Route path="/staff/reviewManage" element={<ReviewManage />} />
             <Route path="/staff/voteManage" element={<VoteManage />} />
+            <Route path="/staff/ticketDetail/:id" element={<TicketDetail />} />
           </Route>
         </Routes>
       </BrowserRouter>

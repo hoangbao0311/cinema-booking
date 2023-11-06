@@ -3,17 +3,22 @@ import React, { useState, useEffect } from "react";
 import { toast } from "react-toastify";
 import { Link, useNavigate } from "react-router-dom";
 import SearchAdmin from "../search.js/SearchAdmin";
+import Pagination from "../../Pagination/Pagination";
 const FoodAdmin = () => {
   const [showFood, setShowFood] = useState([]);
   const navigate = useNavigate();
   const [searchTerm, setSearchTerm] = useState("");
   const [foods, setFoods] = useState([]);
+  const [itemsPerPage] = useState(1);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [maxPage, setMaxPage] = useState(1);
 
   const getFood = async () => {
     const response = await axios.get("http://localhost:3004/foods");
     if (response.status === 200) {
       setShowFood(response.data);
       setFoods(response.data);
+      setMaxPage(Math.ceil(response.data.length / itemsPerPage));
     }
   };
 
@@ -35,7 +40,12 @@ const FoodAdmin = () => {
       return searchString.includes(searchTerm.toLowerCase());
     });
     setShowFood(filteredFoods);
+    setCurrentPage(1);
+    setMaxPage(Math.ceil(filteredFoods.length / itemsPerPage));
   };
+  const firstItem = (currentPage - 1) * itemsPerPage;
+  const lastItem = firstItem + itemsPerPage;
+  const displayedFoods = showFood.slice(firstItem, lastItem);
 
   useEffect(() => {
     getFood();
@@ -55,10 +65,10 @@ const FoodAdmin = () => {
         </div>
       </div>
       <div className="flex flex-col gap-5 p-5">
-        {showFood.map((food) => {
+        {displayedFoods.map((food, index) => {
           return (
             <div className="flex items-center gap-5">
-              <div>{food.id}</div>
+              <div>{index + 1 + firstItem}</div>
               <img className="h-36" src={food.image} alt={food.nameFood} />
               <div className="flex-1 font-semibold text-xl">
                 {food.nameFood}
@@ -85,6 +95,12 @@ const FoodAdmin = () => {
           );
         })}
       </div>
+      <Pagination
+        itemsPerPage={itemsPerPage}
+        totalItems={showFood.length}
+        currentPage={currentPage}
+        onPageChange={(newPage) => setCurrentPage(newPage)}
+      />
     </div>
   );
 };

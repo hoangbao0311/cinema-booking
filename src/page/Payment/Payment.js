@@ -108,8 +108,8 @@ const Payment = () => {
       date: ticketInfo?.date,
       seat: selectedSeats,
       food: listFoodContext,
-      showtimeId: ticketInfo?.id,
-      userId: idUpload,
+      showtimesId: ticketInfo?.id,
+      usersId: idUpload,
       status: "unpaid",
     });
     if (response.status === 201) {
