@@ -13,9 +13,9 @@ const Staff = () => {
           <div className="text-white flex justify-center font-bold">STAFF</div>
           <div className="flex gap-3 hover:cursor-pointer text-white items-center  hover:text-[#595FAA] p-3 ">
             <TbBrandBooking size={24} />
-            <Link to="/staff/bookingManage">Quản lý đặt chổ</Link>
+            <Link to="/staff/bookingManage">Quản lý đặt chỗ</Link>
           </div>
-          <div className="flex gap-3 hover:cursor-pointer text-white items-center  hover:text-[#595FAA] p-3">
+          <div className="flex gap-3 hover:cursor -pointer text-white items-center  hover:text-[#595FAA] p-3">
             <BiSolidComment size={24} />
             <Link to="/staff/commentManage">Quản lý bình luận</Link>
           </div>
@@ -25,7 +25,7 @@ const Staff = () => {
           </div>
           <div className="flex gap-3 hover:cursor-pointer text-white items-center  hover:text-[#595FAA] p-3">
             <FaFileInvoiceDollar size={24} />
-            <Link to="/staff/invoiceManage">Quản lý hóa đơn </Link>
+            <Link to="/staff/Report">Báo cáo </Link>
           </div>
           <div className="flex gap-3 hover:cursor-pointer text-white items-center  hover:text-[#595FAA] p-3">
             <MdReviews size={24} />

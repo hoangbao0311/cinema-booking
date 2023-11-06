@@ -2,12 +2,13 @@ import React, { useContext, useEffect, useState } from "react";
 import { LockOutlined, UserOutlined } from "@ant-design/icons";
 import { Button, Form, Input, Checkbox } from "antd";
 import { Context } from "../../context/Context";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
 const App = () => {
   const [form] = Form.useForm();
   const [clientReady, setClientReady] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     setClientReady(true);
@@ -18,25 +19,31 @@ const App = () => {
   const { state, setState } = useContext(Context);
   console.log(email);
   const onFinish = (values) => {
-  console.log("Finish:", values);
-  const foundUser = listUser.find(
-    (user) => user.email === email && user.password === password
-  );
+    console.log("Finish:", values);
+    const foundUser = listUser.find(
+      (user) => user.email === email && user.password === password
+    );
 
-  if (foundUser) {
-    if (foundUser.rolesId === 4) {
-      toast.warning("Tài khoản bị khóa!");
+    if (foundUser) {
+      if (foundUser.rolesId === 4) {
+        toast.warning("Tài khoản bị khóa!");
+      } else if (foundUser.rolesId === 2) {
+        navigate("admin");
+        toast.success("Đăng nhập thành công!");
+      } else if (foundUser.rolesId === 3) {
+        navigate("staff");
+        toast.success("Đăng nhập thành công!");
+      } else {
+        window.localStorage.setItem("fullname", foundUser.fullname);
+        window.localStorage.setItem("email", email);
+        toast.success("Đăng nhập thành công!");
+        window.location.href = "/";
+        setState(foundUser);
+      }
     } else {
-      window.localStorage.setItem("fullname", foundUser.fullname);
-      window.localStorage.setItem("email", email);
-      toast.success("Đăng nhập thành công!");
-      window.location.href = "/";
-      setState(foundUser);
+      toast.warning("Đăng nhập không thành công !");
     }
-  } else {
-    toast.warning("Đăng nhập không thành công !");
-  }
-};
+  };
 
   return (
     <div className="flex flex-col">
