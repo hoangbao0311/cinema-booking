@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const SearchAdmin = ({ searchTerm, setSearchTerm, handleSearch }) => {
+const SearchStaff = ({ searchTerm, setSearchTerm, handleSearch }) => {
   return (
     <div>
       <div className="flex flex-col justify-center items-center">
@@ -23,4 +23,4 @@ const SearchAdmin = ({ searchTerm, setSearchTerm, handleSearch }) => {
   );
 };
 
-export default SearchAdmin;
+export default SearchStaff;

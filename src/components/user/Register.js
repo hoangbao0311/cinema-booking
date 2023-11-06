@@ -109,7 +109,7 @@ const App = () => {
               },
             ]}
           >
-            <Input />
+            <Input type="email" />
           </Form.Item>
 
           <Form.Item

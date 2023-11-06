@@ -2,9 +2,16 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Link, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
+import SearchAdmin from "../search.js/SearchAdmin";
+import Pagination from "../../Pagination/Pagination";
 
 const ShowtimeAdmin = () => {
   const [listShowtime, setListShowtime] = useState([]);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [showtimes, setShowtimes] = useState([]);
+  const [itemsPerPage] = useState(1);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [maxPage, setMaxPage] = useState(1);
 
   const data = async () => {
     const responseFilms = await axios.get(
@@ -12,10 +19,29 @@ const ShowtimeAdmin = () => {
     );
     if (responseFilms.status === 200) {
       setListShowtime(responseFilms.data);
+      setShowtimes(responseFilms.data);
+      setMaxPage(Math.ceil(responseFilms.data.length / itemsPerPage));
     } else {
       console.log("loi");
     }
   };
+
+  const handleSearch = () => {
+    const filteredShowtimes = showtimes.filter((time) => {
+      const searchString =
+        time.films.name.toLowerCase() +
+        time.starttime +
+        time.cinemas.name.toLowerCase() +
+        time.date;
+      return searchString.includes(searchTerm.toLowerCase());
+    });
+    setListShowtime(filteredShowtimes);
+    setMaxPage(Math.ceil(filteredShowtimes.length / itemsPerPage));
+  };
+
+  const firstItem = (currentPage - 1) * itemsPerPage;
+  const lastItem = firstItem + itemsPerPage;
+  const displayedShowtimes = listShowtime.slice(firstItem, lastItem);
 
   console.log(listShowtime);
 
@@ -26,6 +52,11 @@ const ShowtimeAdmin = () => {
     <div>
       <div className="flex justify-between p-3 border-b-4 border-[#151929]">
         <div className="p-3 font-semibold text-xl ">Thiết lập xuất chiếu</div>
+        <SearchAdmin
+          searchTerm={searchTerm}
+          setSearchTerm={setSearchTerm}
+          handleSearch={handleSearch}
+        />
         <Link to="/admin/showtimenew">
           <div className="bg-[#151929] rounded-lg font-semibold text-lg cursor-pointer p-3">
             Thêm xuất chiếu
@@ -33,10 +64,10 @@ const ShowtimeAdmin = () => {
         </Link>
       </div>
       <div className="flex flex-col gap-5 p-5">
-        {listShowtime?.map((item, index) => {
+        {displayedShowtimes?.map((item, index) => {
           return (
             <div className="flex items-center gap-5">
-              <div>{index + 1}</div>
+              <div>{index + 1 + firstItem}</div>
               <div className="flex-1 font-semibold text-xl">
                 {item.films.name}
               </div>
@@ -66,6 +97,12 @@ const ShowtimeAdmin = () => {
           );
         })}
       </div>
+      <Pagination
+        itemsPerPage={itemsPerPage}
+        totalItems={listShowtime.length}
+        currentPage={currentPage}
+        onPageChange={(newpage) => setCurrentPage(newpage)}
+      />
     </div>
   );
 };

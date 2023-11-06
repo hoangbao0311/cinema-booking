@@ -34,14 +34,16 @@ import ShowtimeNew from "./components/Admin/ShowtimeAdmin/ShowtimeNew";
 import EditShowtime from "./components/Admin/ShowtimeAdmin/EditShowtime";
 import FoodEdit from "./components/Admin/FoodAdmin/FoodEdit";
 import FoodNew from "./components/Admin/FoodAdmin/FoodNew";
+import VoucherNew from "./components/Admin/VoucherAdmin/VoucherNew";
 import Staff from "./components/Staff/Staff";
 import BookingManage from "./components/Staff/BookingManage/BookingManage";
 import CommentManage from "./components/Staff/CommentManage/CommentManage";
 import CustomerManage from "./components/Staff/CustomerManage/CustomerManage";
-import InvoiceManage from "./components/Staff/InvoiceManage/InvoiceManage";
+import Report from "./components/Staff/InvoiceManage/Report.js";
 import ReviewManage from "./components/Staff/ReviewManage/ReviewManage";
 import VoteManage from "./components/Staff/VoteManage/VoteManage";
 import History from "./components/user/History.js";
+import TicketDetail from "./components/Staff/BookingManage/TicketDetail.js";
 
 function App() {
   return (
@@ -83,14 +85,16 @@ function App() {
             <Route path="/admin/voucheradmin" element={<VoucherAdmin />} />
             <Route path="/admin/foodadmin/:id" element={<FoodEdit />} />
             <Route path="/admin/foodNew" element={<FoodNew />} />
+            <Route path="/admin/vouchernew" element={<VoucherNew />} />
           </Route>
           <Route path="staff" element={<Staff />}>
             <Route path="/staff/bookingManage" element={<BookingManage />} />
             <Route path="/staff/commentManage" element={<CommentManage />} />
             <Route path="/staff/customerManage" element={<CustomerManage />} />
-            <Route path="/staff/invoiceManage" element={<InvoiceManage />} />
+            <Route path="/staff/Report" element={<Report />} />
             <Route path="/staff/reviewManage" element={<ReviewManage />} />
             <Route path="/staff/voteManage" element={<VoteManage />} />
+            <Route path="/staff/ticketDetail/:id" element={<TicketDetail />} />
           </Route>
         </Routes>
       </BrowserRouter>
