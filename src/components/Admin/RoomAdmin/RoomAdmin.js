@@ -9,7 +9,7 @@ const RoomAdmin = () => {
   const [listRoom, setListRoom] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [rooms, setRooms] = useState([]);
-  const [itemsPerPage] = useState(1);
+  const [itemsPerPage] = useState(5);
   const [currentPage, setCurrentPage] = useState(1);
   const [maxPage, setMaxPage] = useState(1);
 
@@ -73,7 +73,7 @@ const RoomAdmin = () => {
           {displayedRooms?.map((item, index) => {
             return (
               <div className="flex items-center gap-5">
-                <div className="flex-1">{index + 1 +firstItem}</div>
+                <div className="flex-1">{index + 1 + firstItem}</div>
                 <div className="flex-1 font-semibold text-xl">
                   {item.nameRoom}
                 </div>
@@ -96,11 +96,11 @@ const RoomAdmin = () => {
           })}
         </div>
         <Pagination
-        itemsPerPage={itemsPerPage}
-        totalItems={listRoom.length}
-        currentPage={currentPage}
-        onPageChange={(newPage) => setCurrentPage(newPage)}
-      />
+          itemsPerPage={itemsPerPage}
+          totalItems={listRoom.length}
+          currentPage={currentPage}
+          onPageChange={(newPage) => setCurrentPage(newPage)}
+        />
       </div>
     </div>
   );

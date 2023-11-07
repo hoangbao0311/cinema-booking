@@ -1,11 +1,19 @@
 import React from "react";
 import { Link, Outlet, useParams } from "react-router-dom";
-import { BiSolidComment, BiFilm, BiTime } from "react-icons/bi";
+import { BiSolidComment, BiLogOut } from "react-icons/bi";
 import { MdReviews } from "react-icons/md";
 import { TbBrandBooking } from "react-icons/tb";
 import { FaFileInvoiceDollar, FaUserEdit } from "react-icons/fa";
+import LoginStaff from "./LoginStaff/LoginStaff";
 
 const Staff = () => {
+  const role = localStorage.getItem("roleStaff");
+
+  const handleLogout = () => {
+    localStorage.removeItem("roleStaff");
+    window.location.href = "/staff";
+  };
+
   return (
     <div className="">
       <div className="bg-[#151929] h-full flex">
@@ -20,10 +28,6 @@ const Staff = () => {
             <Link to="/staff/commentManage">Quản lý bình luận</Link>
           </div>
           <div className="flex gap-3 hover:cursor-pointer text-white items-center  hover:text-[#595FAA] p-3">
-            <FaUserEdit size={24} />
-            <Link to="/staff/customerManage">Quản lý khách hàng</Link>
-          </div>
-          <div className="flex gap-3 hover:cursor-pointer text-white items-center  hover:text-[#595FAA] p-3">
             <FaFileInvoiceDollar size={24} />
             <Link to="/staff/Report">Báo cáo </Link>
           </div>
@@ -31,9 +35,18 @@ const Staff = () => {
             <MdReviews size={24} />
             <Link to="/staff/voteManage">Quản lý đánh giá</Link>
           </div>
+          {role === "3" && (
+            <div
+              onClick={handleLogout}
+              className="flex gap-3 hover:cursor-pointer text-white items-center  hover:text-[#595FAA] p-3"
+            >
+              <BiLogOut size={24} />
+              <div>Đăng Xuất</div>
+            </div>
+          )}
         </div>
-        <div className="m-5 bg-[#1C2438] w-full rounded-xl text-white">
-          <Outlet />
+        <div className="m-5 bg-[#1C2438] w-full rounded-xl  text-white h-[900px]">
+          {role === "3" ? <Outlet /> : <LoginStaff />}
         </div>
       </div>
     </div>

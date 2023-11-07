@@ -1,11 +1,19 @@
 import React from "react";
 import { Link, Outlet, useParams } from "react-router-dom";
-import { BiSolidUserCircle, BiFilm, BiTime } from "react-icons/bi";
+import { BiSolidUserCircle, BiFilm, BiTime, BiLogOut } from "react-icons/bi";
 import { IoFastFoodSharp } from "react-icons/io5";
 import { GiTheater } from "react-icons/gi";
 import { MdBedroomParent, MdPointOfSale } from "react-icons/md";
+import LoginAdmin from "./LoginAdmin/LoginAdmin";
 
 const Admin = () => {
+  const role = localStorage.getItem("roleAdmin");
+
+  const handleLogout = () => {
+    localStorage.removeItem("roleAdmin");
+    window.location.href = "/admin";
+  };
+
   return (
     <div className="">
       <div className="bg-[#151929] h-full flex">
@@ -39,9 +47,18 @@ const Admin = () => {
             <MdPointOfSale size={24} />
             <Link to="/admin/voucheradmin">Voucher</Link>
           </div>
+          {role === "2" && (
+            <div
+              onClick={handleLogout}
+              className="flex gap-3 hover:cursor-pointer text-white items-center  hover:text-[#595FAA] p-3"
+            >
+              <BiLogOut size={24} />
+              <div>Đăng Xuất</div>
+            </div>
+          )}
         </div>
-        <div className="m-5 bg-[#1C2438] w-full rounded-xl text-white">
-          <Outlet />
+        <div className="m-5 bg-[#1C2438] w-full rounded-xl text-white h-[900px]">
+          {role === "2" ? <Outlet /> : <LoginAdmin />}
         </div>
       </div>
     </div>

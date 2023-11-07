@@ -9,7 +9,7 @@ const ShowtimeAdmin = () => {
   const [listShowtime, setListShowtime] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [showtimes, setShowtimes] = useState([]);
-  const [itemsPerPage] = useState(1);
+  const [itemsPerPage] = useState(5);
   const [currentPage, setCurrentPage] = useState(1);
   const [maxPage, setMaxPage] = useState(1);
 

@@ -9,7 +9,7 @@ const FilmEdit = () => {
   const [listFilm, setListFilm] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [films, setFilms] = useState([]);
-  const [itemsPerPage] = useState(1);
+  const [itemsPerPage] = useState(5);
   const [currentPage, setCurrentPage] = useState(1);
   const [maxPage, setMaxPage] = useState(1);
 

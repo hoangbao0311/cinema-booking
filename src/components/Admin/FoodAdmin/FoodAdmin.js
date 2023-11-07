@@ -9,7 +9,7 @@ const FoodAdmin = () => {
   const navigate = useNavigate();
   const [searchTerm, setSearchTerm] = useState("");
   const [foods, setFoods] = useState([]);
-  const [itemsPerPage] = useState(1);
+  const [itemsPerPage] = useState(5);
   const [currentPage, setCurrentPage] = useState(1);
   const [maxPage, setMaxPage] = useState(1);
 

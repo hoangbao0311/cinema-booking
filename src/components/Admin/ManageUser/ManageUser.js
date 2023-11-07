@@ -8,7 +8,7 @@ const ManageUser = () => {
   const [rolesList, setRolesList] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [users, setUsers] = useState([]);
-  const [itemsPerPage] = useState(2);
+  const [itemsPerPage] = useState(5);
   const [currentPage, setCurrentPage] = useState(1);
   const [maxPage, setMaxPage] = useState(1);
 
@@ -81,8 +81,12 @@ const ManageUser = () => {
             <div className="flex justify-between items-center gap-5">
               <div className="flex-1">{firstItem + index + 1}</div>
               <div className="flex-1 font-semibold text-xl">{user.email}</div>
-              <div className="flex-1 font-semibold text-xl">{user.fullname}</div>
-              <div className="flex-1 flex-1font-semibold text-xl">{user.password}</div>
+              <div className="flex-1 font-semibold text-xl">
+                {user.fullname}
+              </div>
+              <div className="flex-1 flex-1font-semibold text-xl">
+                {user.password}
+              </div>
               <div className="">
                 <select
                   className="bg-inherit "

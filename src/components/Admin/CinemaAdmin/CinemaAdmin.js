@@ -8,7 +8,7 @@ const CinemaAdmin = () => {
   const [listCinema, setListCinema] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [cinemas, setCinemas] = useState("");
-  const [itemsPerPage] = useState(1);
+  const [itemsPerPage] = useState(5);
   const [currentPage, setCurrentPage] = useState(1);
   const [maxPage, setMaxPage] = useState(1);
 

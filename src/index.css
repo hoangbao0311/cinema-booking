@@ -5,6 +5,7 @@
 * {
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
 }
 
 body {
@@ -19,18 +20,4 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
-}
-
-.bg-cgv {
-  background: url("../public/image/bg-top.png") repeat-x scroll left bottom
-    transparent;
-  background-size: 10px 135px;
-  height: 135px;
-}
-
-.bg-view {
-  background: url("../public/image/bg_c_bricks.png") repeat-x scroll left bottom
-    transparent;
-  background-size: 110px 450px;
-  height: 450px;
 }

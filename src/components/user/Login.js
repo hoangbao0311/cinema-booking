@@ -28,9 +28,11 @@ const App = () => {
       if (foundUser.rolesId === 4) {
         toast.warning("Tài khoản bị khóa!");
       } else if (foundUser.rolesId === 2) {
+        window.localStorage.setItem("roleAdmin", foundUser.rolesId);
         navigate("admin");
         toast.success("Đăng nhập thành công!");
       } else if (foundUser.rolesId === 3) {
+        window.localStorage.setItem("roleStaff", foundUser.rolesId);
         navigate("staff");
         toast.success("Đăng nhập thành công!");
       } else {

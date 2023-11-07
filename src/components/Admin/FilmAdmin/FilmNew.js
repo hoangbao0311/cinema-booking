@@ -103,7 +103,7 @@ const FilmAdmin = () => {
   return (
     <div>
       <div>
-        <div className="py-10">
+        <div className="py-10 ">
           <div className="max-w-md mx-auto p-6 bg-white rounded-lg shadow-lg flex flex-col gap-3">
             <div className="mb-4">
               <input
