@@ -67,8 +67,6 @@ const Index = () => {
       []
     );
 
-    console.log("seatMap", seatMap);
-
     setNumRow(responseShowtime.data.rooms.horizon);
     setNumCol(responseShowtime.data.rooms.vertical);
     setBookedSeats(seatMap);

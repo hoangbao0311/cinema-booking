@@ -70,7 +70,7 @@ const FilmEdit = () => {
       <div className="flex flex-col gap-5 p-5">
         {displayedFilms?.map((item, index) => {
           return (
-            <div className="flex items-center gap-5">
+            <div className="flex items-center gap-5 border-b border-slate-500 py-2">
               <div>{index + 1 + firstItem}</div>
               <img className=" h-36" src={item.banner} alt="" />
               <div className="flex-1 font-semibold text-xl">{item.name}</div>

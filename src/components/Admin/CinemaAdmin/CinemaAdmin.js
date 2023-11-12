@@ -63,7 +63,7 @@ const CinemaAdmin = () => {
           </div>
           {displayedCinemas?.map((item, index) => {
             return (
-              <div className="flex items-center gap-5">
+              <div className="flex items-center gap-5 border-b border-slate-500 py-2">
                 <div className="flex-1">{index + 1 + firstItem}</div>
                 <div className="flex-1 font-semibold text-xl">{item.name}</div>
                 <div className="flex-1 font-semibold text-xl">

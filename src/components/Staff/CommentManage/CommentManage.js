@@ -86,8 +86,11 @@ const CommentManage = () => {
         </div>
         <div className="flex flex-col gap-5 p-5">
           {currentItems.map((comment, index) => (
-            <div className="flex items-center gap-5" key={comment.id}>
-              <div className="flex-1">{index + 1 +firstItem}</div>
+            <div
+              className="flex items-center gap-5 border-b border-slate-500 py-2"
+              key={comment.id}
+            >
+              <div className="flex-1">{index + 1 + firstItem}</div>
               <div className="flex-1 font-semibold text-xl">
                 {comment.users.fullname}
               </div>

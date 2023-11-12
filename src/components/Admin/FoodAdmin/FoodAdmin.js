@@ -1,12 +1,11 @@
 import axios from "axios";
 import React, { useState, useEffect } from "react";
 import { toast } from "react-toastify";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import SearchAdmin from "../search.js/SearchAdmin";
 import Pagination from "../../Pagination/Pagination";
 const FoodAdmin = () => {
   const [showFood, setShowFood] = useState([]);
-  const navigate = useNavigate();
   const [searchTerm, setSearchTerm] = useState("");
   const [foods, setFoods] = useState([]);
   const [itemsPerPage] = useState(5);
@@ -67,7 +66,7 @@ const FoodAdmin = () => {
       <div className="flex flex-col gap-5 p-5">
         {displayedFoods.map((food, index) => {
           return (
-            <div className="flex items-center gap-5">
+            <div className="flex items-center gap-5 border-b border-slate-500 py-2">
               <div>{index + 1 + firstItem}</div>
               <img className="h-36" src={food.image} alt={food.nameFood} />
               <div className="flex-1 font-semibold text-xl">

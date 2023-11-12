@@ -14,7 +14,6 @@ const Payment = () => {
   const [idUpload, setIdUpload] = useState(0);
 
   const email = localStorage.getItem("email");
-  console.log("email", email);
 
   const getId = async () => {
     const response = await axios.get(`http://localhost:3004/users`);

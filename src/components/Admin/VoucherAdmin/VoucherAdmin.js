@@ -66,7 +66,10 @@ const VoucherAdmin = () => {
         ) : (
           <div>
             {displayedVouchers.map((item) => (
-              <div key={item.id} className="flex items-center gap-5">
+              <div
+                key={item.id}
+                className="flex items-center gap-5 border-b border-slate-500 py-2"
+              >
                 <div className="flex-1 font-semibold text-xl">
                   Mã Voucher: {item.code}
                 </div>

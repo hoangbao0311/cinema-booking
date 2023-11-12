@@ -58,7 +58,7 @@ const BookingManage = () => {
 
   const handleSearch = () => {
     const searchTermIsNumber = !isNaN(searchTerm);
-  
+
     const filteredResults = ticketData.filter((ticket) => {
       const searchString =
         ticket.users.fullname.toLowerCase() +
@@ -66,22 +66,23 @@ const BookingManage = () => {
         (String(ticket.code) || "").toLowerCase() +
         ticket.seat.join(", ").toLowerCase() +
         ticket.date.toLowerCase();
-  
+
       const ticketCode = parseFloat(ticket.code);
-  
+
       return (
         searchString.includes(searchTerm.toLowerCase()) ||
         (searchTermIsNumber && ticketCode === parseFloat(searchTerm)) || // Tìm kiếm theo số
-        ticket.users.fullname.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        ticket.users.fullname
+          .toLowerCase()
+          .includes(searchTerm.toLowerCase()) ||
         ticket.date.includes(searchTerm)
       );
     });
-  
+
     setMaxPage(Math.ceil(filteredResults.length / itemsPerPage));
     setSearchResults(filteredResults);
     setCurrentPage(1);
   };
-  
 
   const firstItem = startIndex;
   const lastItem = startIndex + itemsPerPage;
@@ -111,7 +112,7 @@ const BookingManage = () => {
       </div>
       <div className="flex flex-col gap-5 p-5">
         <div className="flex items-center gap-5">
-          <div className="flex-1">STT</div>
+          <div className="">STT</div>
           <div className="flex-1 font-semibold text-xl">Mã vé</div>
           <div className="flex-1 font-semibold text-xl">Khách hàng</div>
           <div className="flex-1 font-semibold text-xl">Tên phim</div>
@@ -120,15 +121,16 @@ const BookingManage = () => {
           <div className="flex-1 font-semibold text-xl"></div>
         </div>
         {currentItems.map((ticket, index) => (
-          <div className="flex items-center gap-5" key={ticket.id}>
-            <div className="flex-1">{index + 1 + startIndex}</div>
+          <div
+            className="flex items-center gap-5 border-b border-slate-500 py-2"
+            key={ticket.id}
+          >
+            <div className="">{index + 1 + startIndex}</div>
             <div className="flex-1 font-semibold text-xl">{ticket.code}</div>
             <div className="flex-1 font-semibold text-xl">
               {ticket.users.fullname}
             </div>
-            <div className="flex-1 font-semibold text-xl">
-              {ticket.filmName}
-            </div>
+            <div className="font-semibold text-xl">{ticket.filmName}</div>
             <div className="flex-1 font-semibold text-xl">
               {ticket.seat.join(", ")}
             </div>

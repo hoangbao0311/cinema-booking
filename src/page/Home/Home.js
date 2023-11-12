@@ -1,41 +1,20 @@
 import React, { useState, useEffect, useContext } from "react";
 import SlideShow from "./SlideShow";
-import { Link } from "react-router-dom";
-import { Context } from "../../context/Context";
+import { Link, useNavigate } from "react-router-dom";
 import SearchFilter from "../../components/search/FilterFindter";
 import axios from "axios";
+import { Context } from "../../context/ticketContext";
 
 const Home = () => {
   const [selectedCategory, setSelectedCategory] = useState("PHIM ĐANG CHIẾU");
   const [listFilm, setListFilm] = useState([]);
   const [filmDC, setFilmDC] = useState([]);
   const [filmSC, setFilmSC] = useState([]);
-
-  const currentDate = new Date();
-
-  console.log(currentDate);
+  const navigate = useNavigate();
+  const { setSelectedSeats } = useContext(Context);
 
   const getData = async () => {
     const responseFilm = await axios.get(`http://localhost:3004/films`);
-
-    await responseFilm.data.map((item) => {
-      const startDay = new Date(item.startDay);
-      console.log("startDay", startDay);
-
-      if (currentDate > startDay) {
-        console.log("da qua");
-        console.log(item);
-        // axios.patch(
-        //   (`http://localhost:3004/films/${item.id}`,
-        //   {
-        //     status: "DC",
-        //   })
-        // );
-      } else {
-        console.log("chua qua");
-      }
-      return;
-    });
 
     setListFilm(responseFilm.data);
     console.log("flim", responseFilm.data);
@@ -50,14 +29,16 @@ const Home = () => {
     );
 
     setFilmSC(filmSapChieu);
-
-    console.log("filmDangChieu", filmDangChieu);
-    console.log("filmSapChieu", filmSapChieu);
   };
 
   useEffect(() => {
     getData();
   }, []);
+
+  const handleOnclickFilm = (id) => {
+    setSelectedSeats([]);
+    navigate(`/film/${id}`);
+  };
 
   return (
     <div>
@@ -127,17 +108,19 @@ const Home = () => {
                   filmDC?.map((item, index) => {
                     return (
                       <div key={index}>
-                        <div className="overflow-hidden w-[225px]" key={index}>
-                          <Link to={`/film/${item.id}`}>
-                            <img
-                              className="h-[335px] w-[225px]"
-                              src={item.banner}
-                              alt=""
-                            />
-                            <div>
-                              <p className="font-bold text-lg">{item.name}</p>
-                            </div>
-                          </Link>
+                        <div
+                          onClick={() => handleOnclickFilm(item.id)}
+                          className=" overflow-hidden w-[225px] cursor-pointer"
+                          key={index}
+                        >
+                          <img
+                            className="h-[335px] w-[225px]"
+                            src={item.banner}
+                            alt=""
+                          />
+                          <div>
+                            <p className="font-bold text-lg">{item.name}</p>
+                          </div>
                         </div>
                       </div>
                     );
@@ -155,17 +138,19 @@ const Home = () => {
                   filmSC?.map((item, index) => {
                     return (
                       <div key={index}>
-                        <div className="overflow-hidden w-[225px]" key={index}>
-                          <Link to={`/film/${item.id}`}>
-                            <img
-                              className="h-[335px] w-[225px]"
-                              src={item.banner}
-                              alt=""
-                            />
-                            <div>
-                              <p className="font-bold text-lg">{item.name}</p>
-                            </div>
-                          </Link>
+                        <div
+                          onClick={() => handleOnclickFilm(item.id)}
+                          className="cursor-pointer overflow-hidden w-[225px]"
+                          key={index}
+                        >
+                          <img
+                            className="h-[335px] w-[225px]"
+                            src={item.banner}
+                            alt=""
+                          />
+                          <div>
+                            <p className="font-bold text-lg">{item.name}</p>
+                          </div>
                         </div>
                       </div>
                     );

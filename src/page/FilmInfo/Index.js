@@ -194,6 +194,10 @@ const Index = () => {
     }
   };
 
+  // Login
+
+  const email = localStorage.getItem("email");
+
   return (
     <div className="flex justify-center flex-col w-full items-center">
       {listFilmFind ? (
@@ -305,39 +309,47 @@ const Index = () => {
           </select>
         </div>
         <div>
-          {listShowTimeInCinema.size > 0 ? (
-            Array.from(listShowTimeInCinema).map(([cinema, showtimes]) => {
-              return (
-                <div key={cinema}>
-                  <div className="w-full bg-[#f26b38] text-white font-medium px-4 py-2">
-                    {cinema}
-                  </div>
-                  <div className="flex gap-5 items-center my-3">
-                    Xuất chiếu:
-                    {showtimes?.map((item, index) => {
-                      return (
-                        <div key={index}>
-                          <Link
-                            onClick={() =>
-                              handleItemClick(item, cinema, item.id)
-                            }
-                          >
+          {email ? (
+            <div>
+              {listShowTimeInCinema.size > 0 ? (
+                Array.from(listShowTimeInCinema).map(([cinema, showtimes]) => {
+                  return (
+                    <div key={cinema}>
+                      <div className="w-full bg-[#f26b38] text-white font-medium px-4 py-2">
+                        {cinema}
+                      </div>
+                      <div className="flex gap-5 items-center my-3">
+                        Xuất chiếu:
+                        {showtimes?.map((item, index) => {
+                          return (
                             <div key={index}>
-                              <div className="font-medium border-[1px] border-stone-400 py-1 px-4 cursor-pointer hover:border-[#f26b38] hover:text-[#f26b38]">
-                                {item.showtime}
-                                {console.log(item)}
-                              </div>
+                              <Link
+                                onClick={() =>
+                                  handleItemClick(item, cinema, item.id)
+                                }
+                              >
+                                <div key={index}>
+                                  <div className="font-medium border-[1px] border-stone-400 py-1 px-4 cursor-pointer hover:border-[#f26b38] hover:text-[#f26b38]">
+                                    {item.showtime}
+                                    {console.log(item)}
+                                  </div>
+                                </div>
+                              </Link>
                             </div>
-                          </Link>
-                        </div>
-                      );
-                    })}
-                  </div>
-                </div>
-              );
-            })
+                          );
+                        })}
+                      </div>
+                    </div>
+                  );
+                })
+              ) : (
+                <div>Hiện chưa có xuất chiếu ở thời gian này</div>
+              )}
+            </div>
           ) : (
-            <div>Hiện chưa có xuất chiếu ở thời gian này</div>
+            <div className="font-semibold text-lg py-2">
+              Đăng nhập để chọn vé
+            </div>
           )}
         </div>
         <div className="w-full border-t border-black my-2">
@@ -393,7 +405,9 @@ const Index = () => {
                 return (
                   <div key={index} className="border-b py-5 border-black">
                     <div className="flex items-center gap-5 py-2">
-                      <div>{item?.users.fullname}</div>
+                      <div className="font-semibold">
+                        {item?.users.fullname}
+                      </div>
                       <div>
                         <ReactStar
                           value={item.star}

@@ -68,8 +68,8 @@ const ManageUser = () => {
       </div>
       <div className="flex flex-col gap-5 p-5">
         <div className="flex justify-between items-center gap-5 ">
-          <div className="flex-1">STT</div>
-          <div className="flex-1 font-semibold text-xl">email</div>
+          <div className="">STT</div>
+          <div className="flex-1 font-semibold text-xl">Email</div>
           <div className="flex-1 font-semibold text-xl">Họ tên</div>
           <div className="flex-1 font-semibold text-xl">Mật khẩu</div>
           <div className=""></div>
@@ -78,8 +78,8 @@ const ManageUser = () => {
       <div className="flex flex-col gap-5 p-5">
         {displayedUsers.map((user, index) => (
           <div key={user.id}>
-            <div className="flex justify-between items-center gap-5">
-              <div className="flex-1">{firstItem + index + 1}</div>
+            <div className="flex justify-between items-center gap-5 border-b border-slate-500 py-2">
+              <div className="">{firstItem + index + 1}</div>
               <div className="flex-1 font-semibold text-xl">{user.email}</div>
               <div className="flex-1 font-semibold text-xl">
                 {user.fullname}
@@ -89,7 +89,7 @@ const ManageUser = () => {
               </div>
               <div className="">
                 <select
-                  className="bg-inherit "
+                  className="bg-inherit outline-none "
                   value={user.rolesId}
                   onChange={(e) => handleRoleChange(user.id, e.target.value)}
                 >

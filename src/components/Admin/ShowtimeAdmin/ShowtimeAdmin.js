@@ -66,14 +66,12 @@ const ShowtimeAdmin = () => {
       <div className="flex flex-col gap-5 p-5">
         {displayedShowtimes?.map((item, index) => {
           return (
-            <div className="flex items-center gap-5">
+            <div className="flex items-center gap-5 border-b border-slate-500 py-2">
               <div>{index + 1 + firstItem}</div>
               <div className="flex-1 font-semibold text-xl">
                 {item.films.name}
               </div>
-              <div className="flex-1 font-semibold text-xl">
-                {item.starttime}
-              </div>
+              <div className=" font-semibold text-xl">{item.starttime}</div>
               <div className="flex-1 font-semibold text-xl">
                 {item.cinemas.name}
               </div>
