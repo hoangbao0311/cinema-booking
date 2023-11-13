@@ -55,32 +55,36 @@ const CinemaAdmin = () => {
             <Link to="/admin/cinemanew">Thêm rạp mới</Link>
           </div>
         </div>
-        <div className="flex flex-col gap-5 p-5">
-          <div className="flex">
-            <div className="flex-1">STT</div>
-            <div className="flex-1">Tên rạp</div>
-            <div className="flex-1">Địa chỉ</div>
-          </div>
-          {displayedCinemas?.map((item, index) => {
-            return (
-              <div className="flex items-center gap-5 border-b border-slate-500 py-2">
-                <div className="flex-1">{index + 1 + firstItem}</div>
-                <div className="flex-1 font-semibold text-xl">{item.name}</div>
-                <div className="flex-1 font-semibold text-xl">
-                  {item.address}
-                </div>
-                <Link to={`/admin/editcinema/${item.id}`}>
-                  <button
-                    className="flex-1 hover:bg-green-900 bg-green-700 px-3 py-1 rounded-lg hover:cursor-pointer font-semibold"
-                    type=""
-                  >
-                    Edit
-                  </button>
-                </Link>
-              </div>
-            );
-          })}
-        </div>
+        <table className="mt-4 w-full border-collapse border border-gray-300">
+          <thead>
+            <tr>
+              <th className="p-2 border">STT</th>
+              <th className="p-2 border">Tên rạp</th>
+              <th className="p-2 border">Địa chỉ</th>
+            </tr>
+          </thead>
+          <tbody>
+            {displayedCinemas?.map((item, index) => {
+              return (
+                <tr>
+                  <td className="p-2 border">{index + 1 + firstItem}</td>
+                  <td className="p-2 border font-semibold text-xl">{item.name}</td>
+                  <td className="p-2 border font-semibold text-xl">{item.address}</td>
+                  <td className="p-2 border">
+                    <Link to={`/admin/editcinema/${item.id}`}>
+                      <button
+                        className="flex-1 hover:bg-green-900 bg-green-700 px-3 py-1 rounded-lg hover:cursor-pointer font-semibold"
+                        type=""
+                      >
+                        Edit
+                      </button>
+                    </Link>
+                  </td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
         <Pagination
           itemsPerPage={itemsPerPage}
           totalItems={listCinema.length}

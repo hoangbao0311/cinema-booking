@@ -63,38 +63,46 @@ const ShowtimeAdmin = () => {
           </div>
         </Link>
       </div>
-      <div className="flex flex-col gap-5 p-5">
-        {displayedShowtimes?.map((item, index) => {
-          return (
-            <div className="flex items-center gap-5 border-b border-slate-500 py-2">
-              <div>{index + 1 + firstItem}</div>
-              <div className="flex-1 font-semibold text-xl">
-                {item.films.name}
-              </div>
-              <div className=" font-semibold text-xl">{item.starttime}</div>
-              <div className="flex-1 font-semibold text-xl">
-                {item.cinemas.name}
-              </div>
-              <div className="flex-1 font-semibold text-xl">{item.date}</div>
-              <Link to={`/admin/editshowtime/${item.id}`}>
-                <button
-                  className="hover:bg-green-900 bg-green-700 px-3 py-1 rounded-lg hover:cursor-pointer font-semibold"
-                  type=""
-                >
-                  Edit
-                </button>
-              </Link>
-              <button
-                className="hover:bg-red-900 bg-red-700 px-3 py-1 rounded-lg hover:cursor-pointer font-semibold"
-                type=""
-                // onClick={() => handleDeleteFilm(item.id)}
-              >
-                Delete
-              </button>
-            </div>
-          );
-        })}
-      </div>
+      <table className="mt-4 w-full border-collapse border border-gray-300">
+        <thead>
+          {displayedShowtimes?.map((item, index) => {
+            return (
+              <tr>
+                <th className="p-2 border">{index + 1 + firstItem}</th>
+                <th className="p-2 border font-semibold text-xl">
+                  {item.films.name}
+                </th>
+                <th className="p-2 border font-semibold text-xl">
+                  {item.starttime}
+                </th>
+                <th className="p-2 border font-semibold text-xl">
+                  {item.cinemas.name}
+                </th>
+                <th className="p-2 border font-semibold text-xl">
+                  {item.date}
+                </th>
+                <th className="p-2 border flex gap-2">
+                  <Link to={`/admin/editshowtime/${item.id}`}>
+                    <button
+                      className="hover:bg-green-900 bg-green-700 px-3 py-1 rounded-lg hover:cursor-pointer font-semibold"
+                      type=""
+                    >
+                      Edit
+                    </button>
+                  </Link>
+                  <button
+                    className="hover:bg-red-900 bg-red-700 px-3 py-1 rounded-lg hover:cursor-pointer font-semibold"
+                    type=""
+                    // onClick={() => handleDeleteFilm(item.id)}
+                  >
+                    Delete
+                  </button>
+                </th>
+              </tr>
+            );
+          })}
+        </thead>
+      </table>
       <Pagination
         itemsPerPage={itemsPerPage}
         totalItems={listShowtime.length}

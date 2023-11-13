@@ -66,28 +66,30 @@ const ManageUser = () => {
         />
         <div></div>
       </div>
-      <div className="flex flex-col gap-5 p-5">
-        <div className="flex justify-between items-center gap-5 ">
-          <div className="">STT</div>
-          <div className="flex-1 font-semibold text-xl">Email</div>
-          <div className="flex-1 font-semibold text-xl">Họ tên</div>
-          <div className="flex-1 font-semibold text-xl">Mật khẩu</div>
-          <div className=""></div>
-        </div>
-      </div>
-      <div className="flex flex-col gap-5 p-5">
-        {displayedUsers.map((user, index) => (
-          <div key={user.id}>
-            <div className="flex justify-between items-center gap-5 border-b border-slate-500 py-2">
-              <div className="">{firstItem + index + 1}</div>
-              <div className="flex-1 font-semibold text-xl">{user.email}</div>
-              <div className="flex-1 font-semibold text-xl">
+      <table className="mt-4 w-full border-collapse border border-gray-300">
+        <thead>
+          <tr>
+            <th className="p-2 border ">STT</th>
+            <th className="p-2 border  font-semibold">Email</th>
+            <th className="p-2 border font-semibold">Họ tên</th>
+            <th className="p-2 border font-semibold">Mật khẩu</th>
+            <th className="p-2 border "></th>
+          </tr>
+        </thead>
+        <tbody>
+          {displayedUsers.map((user, index) => (
+            <tr key={user.id}>
+              <td className="p-2 border ">{firstItem + index + 1}</td>
+              <td className="p-2 border font-semibold text-xl">
+                {user.email}
+              </td>
+              <td className="p-2 border font-semibold text-xl">
                 {user.fullname}
-              </div>
-              <div className="flex-1 flex-1font-semibold text-xl">
+              </td>
+              <td className="p-2 border font-semibold text-xl">
                 {user.password}
-              </div>
-              <div className="">
+              </td>
+              <td className="p-2 border ">
                 <select
                   className="bg-inherit outline-none "
                   value={user.rolesId}
@@ -103,11 +105,11 @@ const ManageUser = () => {
                     </option>
                   ))}
                 </select>
-              </div>
-            </div>
-          </div>
-        ))}
-      </div>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
       <Pagination
         itemsPerPage={itemsPerPage}
         totalItems={listUser.length}

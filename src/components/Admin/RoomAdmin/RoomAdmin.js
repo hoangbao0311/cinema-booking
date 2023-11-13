@@ -60,41 +60,45 @@ const RoomAdmin = () => {
             <Link to="/admin/roomnew">Thêm phòng chiếu mới</Link>
           </div>
         </div>
-        <div className="flex flex-col gap-5 p-5">
-          <div className="flex items-center gap-5 ">
-            <div className="flex-1">STT</div>
-            <div className="flex-1 font-semibold text-xl">NameRoom</div>
-            <div className="flex-1 font-semibold text-xl">Số hàng</div>
-            <div className="flex-1 font-semibold text-xl">Số cột</div>
-            <div className="flex-1 w-3" type=""></div>
-          </div>
-        </div>
-        <div className="flex flex-col gap-5 p-5">
-          {displayedRooms?.map((item, index) => {
-            return (
-              <div className="flex items-center gap-5 border-b border-slate-500 py-2">
-                <div className="flex-1">{index + 1 + firstItem}</div>
-                <div className="flex-1 font-semibold text-xl">
-                  {item.nameRoom}
-                </div>
-                <div className="flex-1 font-semibold text-xl">
-                  {item.horizon}
-                </div>
-                <div className="flex-1 font-semibold text-xl">
-                  {item.vertical}
-                </div>
-                <Link to={`/admin/editroom/${item.id}`}>
-                  <button
-                    className="flex-1 hover:bg-green-900 bg-green-700 px-3 py-1 rounded-lg hover:cursor-pointer font-semibold"
-                    type=""
-                  >
-                    Edit
-                  </button>
-                </Link>
-              </div>
-            );
-          })}
-        </div>
+        <table className="mt-4 w-full border-collapse border border-gray-300">
+          <thead>
+            <tr>
+              <th className="p-2 border">STT</th>
+              <th className="p-2 border font-semibold text-xl">NameRoom</th>
+              <th className="p-2 border font-semibold text-xl">Số hàng</th>
+              <th className="p-2 border font-semibold text-xl">Số cột</th>
+              <th className="p-2 border" type=""></th>
+            </tr>
+          </thead>
+          <tbody>
+            {displayedRooms?.map((item, index) => {
+              return (
+                <tr>
+                  <td className="p-2 border">{index + 1 + firstItem}</td>
+                  <td className="p-2 border font-semibold text-xl">
+                    {item.nameRoom}
+                  </td>
+                  <div className="p-2 border font-semibold text-xl">
+                    {item.horizon}
+                  </div>
+                  <td className="p-2 border font-semibold text-xl">
+                    {item.vertical}
+                  </td>
+                  <td className="p-2 border">
+                    <Link to={`/admin/editroom/${item.id}`}>
+                      <button
+                        className="p-2 border hover:bg-green-900 bg-green-700 px-3 py-1 rounded-lg hover:cursor-pointer font-semibold"
+                        type=""
+                      >
+                        Edit
+                      </button>
+                    </Link>
+                  </td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
         <Pagination
           itemsPerPage={itemsPerPage}
           totalItems={listRoom.length}
