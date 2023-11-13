@@ -31,10 +31,6 @@ const Staff = () => {
             <FaFileInvoiceDollar size={24} />
             <Link to="/staff/Report">Báo cáo </Link>
           </div>
-          <div className="flex gap-3 hover:cursor-pointer text-white items-center  hover:text-[#595FAA] p-3">
-            <MdReviews size={24} />
-            <Link to="/staff/voteManage">Quản lý đánh giá</Link>
-          </div>
           {role === "3" && (
             <div
               onClick={handleLogout}

@@ -60,33 +60,31 @@ const VoucherAdmin = () => {
           <Link to="/admin/vouchernew">Thêm phòng voucher mới</Link>
         </div>
       </div>
-      <div className="flex flex-col gap-5 p-5">
-        {displayedVouchers.length === 0 ? (
-          <div>Loading...</div>
-        ) : (
-          <div>
-            {displayedVouchers.map((item) => (
-              <div
-                key={item.id}
-                className="flex items-center gap-5 border-b border-slate-500 py-2"
-              >
-                <div className="flex-1 font-semibold text-xl">
-                  Mã Voucher: {item.code}
-                </div>
-                <div className="flex-1 font-semibold text-xl">
-                  Số tiền: {item.price}
-                </div>
+      <table className="mt-4 w-full border-collapse border border-gray-300">
+        <thead>
+          <tr>
+            <th className="p-2 border">Mã Voucher</th>
+            <th className="p-2 border">Số tiền</th>
+            <th className="p-2 border"></th>
+          </tr>
+        </thead>
+        <tbody>
+          {displayedVouchers.map((item) => (
+            <tr key={item.id}>
+              <th className="p-2 border font-semibold text-xl">{item.code}</th>
+              <th className="p-2 border font-semibold text-xl">{item.price}</th>
+              <th className="p-2 border">
                 <button
                   className="hover:bg-red-900 bg-red-700 px-3 rounded-lg hover:cursor-pointer font-semibold"
                   onClick={() => handleDeleteVoucher(item.id)}
                 >
                   Xóa
                 </button>
-              </div>
-            ))}
-          </div>
-        )}
-      </div>
+              </th>
+            </tr>
+          ))}
+        </tbody>
+      </table>
       <Pagination
         itemsPerPage={itemsPerPage}
         totalItems={showVoucher.length}

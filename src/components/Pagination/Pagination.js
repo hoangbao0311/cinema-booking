@@ -9,7 +9,7 @@ const Pagination = ({
   const maxPage = Math.ceil(totalItems / itemsPerPage);
 
   return (
-    <div className="flex justify-center gap-5 ">
+    <div className="pt-5 flex justify-center gap-5 ">
       <button
         className="border px-3 rounded"
         onClick={() => onPageChange(currentPage - 1)}

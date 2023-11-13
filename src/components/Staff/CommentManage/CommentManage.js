@@ -74,42 +74,45 @@ const CommentManage = () => {
           />
           <div></div>
         </div>
-        <div className="flex flex-col gap-5 p-5">
-          <div className="flex items-center gap-5 ">
-            <div className="flex-1">STT</div>
-            <div className="flex-1 font-semibold text-xl">Khách hàng</div>
-            <div className="flex-1 font-semibold text-xl">Comment</div>
-            <div className="flex-1 font-semibold text-xl">Đánh giá</div>
-            <div className="flex-1 font-semibold text-xl">Ngày</div>
-            <div className="flex-1 w-3"></div>
-          </div>
-        </div>
-        <div className="flex flex-col gap-5 p-5">
-          {currentItems.map((comment, index) => (
-            <div
-              className="flex items-center gap-5 border-b border-slate-500 py-2"
-              key={comment.id}
-            >
-              <div className="flex-1">{index + 1 + firstItem}</div>
-              <div className="flex-1 font-semibold text-xl">
-                {comment.users.fullname}
-              </div>
-              <div className="flex-1 font-semibold text-xl">{comment.body}</div>
-              <div className="flex-1 font-semibold text-xl">
-                {comment.star} Sao
-              </div>
-              <div className="flex-1 font-semibold text-xl">{comment.date}</div>
-              <div className="flex-1">
-                <button
-                  onClick={() => handleDeleteComment(comment.id)}
-                  className="hover:bg-red-900 bg-red-700 px-3 py-1 rounded-lg hover:cursor-pointer font-semibold"
-                >
-                  Xóa
-                </button>
-              </div>
-            </div>
-          ))}
-        </div>
+        <table className="mt-4 w-full border-collapse border border-gray-300">
+          <thead>
+            <tr>
+              <th className="p-2 border">STT</th>
+              <th className="p-2 border font-semibold text-xl">Khách hàng</th>
+              <th className="p-2 border font-semibold text-xl">Comment</th>
+              <th className="p-2 border font-semibold text-xl">Đánh giá</th>
+              <th className="p-2 border font-semibold text-xl">Ngày</th>
+              <th className="p-2 border"></th>
+            </tr>
+          </thead>
+          <tbody>
+            {currentItems.map((comment, index) => (
+              <tr key={comment.id}>
+                <td className="p-2 border">{index + 1 + firstItem}</td>
+                <td className="p-2 border font-semibold text-xl">
+                  {comment.users.fullname}
+                </td>
+                <td className="p-2 border font-semibold text-xl">
+                  {comment.body}
+                </td>
+                <td className="p-2 border font-semibold text-xl">
+                  {comment.star} Sao
+                </td>
+                <td className="p-2 border font-semibold text-xl">
+                  {comment.date}
+                </td>
+                <td className="p-2 border">
+                  <button
+                    onClick={() => handleDeleteComment(comment.id)}
+                    className="hover:bg-red-900 bg-red-700 px-3 py-1 rounded-lg hover:cursor-pointer font-semibold"
+                  >
+                    Xóa
+                  </button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
         <Pagination
           itemsPerPage={itemsPerPage}
           totalItems={searchResults.length}
