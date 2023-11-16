@@ -67,31 +67,63 @@ const FilmEdit = () => {
           <Link to="/admin/filmnew">Thêm phim mới</Link>
         </div>
       </div>
-      <div className="flex flex-col gap-5 p-5">
-        {displayedFilms?.map((item, index) => {
-          return (
-            <div className="flex items-center gap-5 border-b border-slate-500 py-2">
-              <div>{index + 1 + firstItem}</div>
-              <img className=" h-36" src={item.banner} alt="" />
-              <div className="flex-1 font-semibold text-xl">{item.name}</div>
-              <Link to={`/admin/filmhome/${item.id}`}>
-                <button
-                  className="hover:bg-green-900 bg-green-700 px-3 py-1 rounded-lg hover:cursor-pointer font-semibold"
-                  type=""
-                >
-                  Edit
-                </button>
-              </Link>
-              <button
-                className="hover:bg-red-900 bg-red-700 px-3 py-1 rounded-lg hover:cursor-pointer font-semibold"
-                type=""
-                onClick={() => handleDeleteFilm(item.id)}
-              >
-                Delete
-              </button>
-            </div>
-          );
-        })}
+      <div className="px-4">
+        <table className="mt-4 w-full border-collapse border-b border-gray-300">
+          <thead>
+            <tr>
+              <th className=" border-b text-left font-semibold">STT</th>
+              <th className=" border-b text-left font-semibold text-xl"></th>
+              <th className=" border-b text-left font-semibold text-xl">
+                Tên phim
+              </th>
+              <th className=" border-b text-left font-semibold text-xl">
+                Thời lượng
+              </th>
+              <th className=" border-b text-left font-semibold text-xl">
+                Ngày khởi chiếu
+              </th>
+              <th className=" border-b text-left font-semibold text-xl"></th>
+            </tr>
+          </thead>
+          <tbody>
+            {displayedFilms?.map((item, index) => {
+              return (
+                <tr>
+                  <td className="border-b">{index + 1 + firstItem}</td>
+                  <td className="border-b p-3">
+                    <img className=" h-36" src={item.banner} alt="" />
+                  </td>
+                  <td className="border-b font-semibold text-xl">
+                    {item.name}
+                  </td>
+                  <td className="border-b font-semibold text-xl">
+                    {item.time} phút
+                  </td>
+                  <td className="border-b font-semibold text-xl">
+                    {item.startDay}
+                  </td>
+                  <td className="border-b text-right">
+                    <Link to={`/admin/filmhome/${item.id}`}>
+                      <button
+                        className="hover:bg-green-900 bg-green-700 m-3 px-3 py-1 rounded-lg hover:cursor-pointer font-semibold"
+                        type=""
+                      >
+                        Edit
+                      </button>
+                    </Link>
+                    <button
+                      className="hover:bg-red-900 bg-red-700 px-3 py-1 rounded-lg hover:cursor-pointer font-semibold"
+                      type=""
+                      onClick={() => handleDeleteFilm(item.id)}
+                    >
+                      Delete
+                    </button>
+                  </td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
       </div>
       <Pagination
         itemsPerPage={itemsPerPage}

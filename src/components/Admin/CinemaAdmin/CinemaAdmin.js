@@ -55,36 +55,51 @@ const CinemaAdmin = () => {
             <Link to="/admin/cinemanew">Thêm rạp mới</Link>
           </div>
         </div>
-        <table className="mt-4 w-full border-collapse border border-gray-300">
-          <thead>
-            <tr>
-              <th className="p-2 border">STT</th>
-              <th className="p-2 border">Tên rạp</th>
-              <th className="p-2 border">Địa chỉ</th>
-            </tr>
-          </thead>
-          <tbody>
-            {displayedCinemas?.map((item, index) => {
-              return (
-                <tr>
-                  <td className="p-2 border">{index + 1 + firstItem}</td>
-                  <td className="p-2 border font-semibold text-xl">{item.name}</td>
-                  <td className="p-2 border font-semibold text-xl">{item.address}</td>
-                  <td className="p-2 border">
-                    <Link to={`/admin/editcinema/${item.id}`}>
-                      <button
-                        className="flex-1 hover:bg-green-900 bg-green-700 px-3 py-1 rounded-lg hover:cursor-pointer font-semibold"
-                        type=""
-                      >
-                        Edit
-                      </button>
-                    </Link>
-                  </td>
-                </tr>
-              );
-            })}
-          </tbody>
-        </table>
+        <div className="px-4">
+          <table className="mt-4 w-full border-collapse border-b border-gray-300">
+            <thead>
+              <tr>
+                <th className=" p-2 border-b text-left py-4 border-gray-300">
+                  STT
+                </th>
+                <th className=" p-2 border-b text-left py-4 border-gray-300">
+                  Tên rạp
+                </th>
+                <th className=" p-2 border-b text-left py-4 border-gray-300">
+                  Địa chỉ
+                </th>
+                <th className=" p-2 border-b text-left py-4 border-gray-300"></th>
+              </tr>
+            </thead>
+            <tbody>
+              {displayedCinemas?.map((item, index) => {
+                return (
+                  <tr>
+                    <td className=" p-2 border-b text py-4 border-gray-300">
+                      {index + 1 + firstItem}
+                    </td>
+                    <td className=" p-2 border-b text py-4 border-gray-300 font-semibold text-xl">
+                      {item.name}
+                    </td>
+                    <td className=" p-2 border-b text py-4 border-gray-300 font-semibold text-xl">
+                      {item.address}
+                    </td>
+                    <td className=" p-2 border-b text py-4 text-right border-gray-300">
+                      <Link to={`/admin/editcinema/${item.id}`}>
+                        <button
+                          className="flex-1 hover:bg-green-900 bg-green-700 px-3 py-1 rounded-lg hover:cursor-pointer font-semibold"
+                          type=""
+                        >
+                          Edit
+                        </button>
+                      </Link>
+                    </td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+        </div>
         <Pagination
           itemsPerPage={itemsPerPage}
           totalItems={listCinema.length}

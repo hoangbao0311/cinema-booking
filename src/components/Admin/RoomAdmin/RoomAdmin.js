@@ -60,45 +60,53 @@ const RoomAdmin = () => {
             <Link to="/admin/roomnew">Thêm phòng chiếu mới</Link>
           </div>
         </div>
-        <table className="mt-4 w-full border-collapse border border-gray-300">
-          <thead>
-            <tr>
-              <th className="p-2 border">STT</th>
-              <th className="p-2 border font-semibold text-xl">NameRoom</th>
-              <th className="p-2 border font-semibold text-xl">Số hàng</th>
-              <th className="p-2 border font-semibold text-xl">Số cột</th>
-              <th className="p-2 border" type=""></th>
-            </tr>
-          </thead>
-          <tbody>
-            {displayedRooms?.map((item, index) => {
-              return (
-                <tr>
-                  <td className="p-2 border">{index + 1 + firstItem}</td>
-                  <td className="p-2 border font-semibold text-xl">
-                    {item.nameRoom}
-                  </td>
-                  <div className="p-2 border font-semibold text-xl">
-                    {item.horizon}
-                  </div>
-                  <td className="p-2 border font-semibold text-xl">
-                    {item.vertical}
-                  </td>
-                  <td className="p-2 border">
-                    <Link to={`/admin/editroom/${item.id}`}>
-                      <button
-                        className="p-2 border hover:bg-green-900 bg-green-700 px-3 py-1 rounded-lg hover:cursor-pointer font-semibold"
-                        type=""
-                      >
-                        Edit
-                      </button>
-                    </Link>
-                  </td>
-                </tr>
-              );
-            })}
-          </tbody>
-        </table>
+        <div className="px-4">
+          <table className="mt-4 w-full border-collapse border-b border-gray-300">
+            <thead>
+              <tr>
+                <th className="p-2 border-b text-left">STT</th>
+                <th className="p-2 border-b text-left font-semibold text-xl">
+                  NameRoom
+                </th>
+                <th className="p-2 border-b text-left font-semibold text-xl">
+                  Số hàng
+                </th>
+                <th className="p-2 border-b text-left font-semibold text-xl">
+                  Số cột
+                </th>
+                <th className="p-2 border-b" type=""></th>
+              </tr>
+            </thead>
+            <tbody>
+              {displayedRooms?.map((item, index) => {
+                return (
+                  <tr>
+                    <td className="p-2 border-b">{index + 1 + firstItem}</td>
+                    <td className="p-2 border-b font-semibold text-xl">
+                      {item.nameRoom}
+                    </td>
+                    <td className="p-2 border-b font-semibold text-xl">
+                      {item.horizon}
+                    </td>
+                    <td className="p-2 border-b font-semibold text-xl">
+                      {item.vertical}
+                    </td>
+                    <td className="p-2 border-b text-right">
+                      <Link to={`/admin/editroom/${item.id}`}>
+                        <button
+                          className="p-2 border hover:bg-green-900 bg-green-700 px-3 py-1 rounded-lg hover:cursor-pointer font-semibold"
+                          type=""
+                        >
+                          Edit
+                        </button>
+                      </Link>
+                    </td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+        </div>
         <Pagination
           itemsPerPage={itemsPerPage}
           totalItems={listRoom.length}

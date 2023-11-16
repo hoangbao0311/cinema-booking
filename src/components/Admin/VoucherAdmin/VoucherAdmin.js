@@ -60,31 +60,37 @@ const VoucherAdmin = () => {
           <Link to="/admin/vouchernew">Thêm phòng voucher mới</Link>
         </div>
       </div>
-      <table className="mt-4 w-full border-collapse border border-gray-300">
-        <thead>
-          <tr>
-            <th className="p-2 border">Mã Voucher</th>
-            <th className="p-2 border">Số tiền</th>
-            <th className="p-2 border"></th>
-          </tr>
-        </thead>
-        <tbody>
-          {displayedVouchers.map((item) => (
-            <tr key={item.id}>
-              <th className="p-2 border font-semibold text-xl">{item.code}</th>
-              <th className="p-2 border font-semibold text-xl">{item.price}</th>
-              <th className="p-2 border">
-                <button
-                  className="hover:bg-red-900 bg-red-700 px-3 rounded-lg hover:cursor-pointer font-semibold"
-                  onClick={() => handleDeleteVoucher(item.id)}
-                >
-                  Xóa
-                </button>
-              </th>
+      <div className="px-4">
+        <table className="mt-4 w-full border-collapse border-b border-gray-300">
+          <thead>
+            <tr>
+              <th className="p-2 border-b text-left">Mã Voucher</th>
+              <th className="p-2 border-b text-left">Số tiền</th>
+              <th className="p-2 border-b text-left"></th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {displayedVouchers.map((item) => (
+              <tr key={item.id}>
+                <td className="p-2 border-b font-semibold text-xl">
+                  {item.code}
+                </td>
+                <td className="p-2 border-b font-semibold text-xl">
+                  {item.price}
+                </td>
+                <td className="p-2 border-b text-right">
+                  <button
+                    className="hover:bg-red-900 bg-red-700 px-3 rounded-lg hover:cursor-pointer font-semibold"
+                    onClick={() => handleDeleteVoucher(item.id)}
+                  >
+                    Xóa
+                  </button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
       <Pagination
         itemsPerPage={itemsPerPage}
         totalItems={showVoucher.length}

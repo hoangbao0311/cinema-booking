@@ -66,50 +66,52 @@ const ManageUser = () => {
         />
         <div></div>
       </div>
-      <table className="mt-4 w-full border-collapse border border-gray-300">
-        <thead>
-          <tr>
-            <th className="p-2 border ">STT</th>
-            <th className="p-2 border  font-semibold">Email</th>
-            <th className="p-2 border font-semibold">Họ tên</th>
-            <th className="p-2 border font-semibold">Mật khẩu</th>
-            <th className="p-2 border "></th>
-          </tr>
-        </thead>
-        <tbody>
-          {displayedUsers.map((user, index) => (
-            <tr key={user.id}>
-              <td className="p-2 border ">{firstItem + index + 1}</td>
-              <td className="p-2 border font-semibold text-xl">
-                {user.email}
-              </td>
-              <td className="p-2 border font-semibold text-xl">
-                {user.fullname}
-              </td>
-              <td className="p-2 border font-semibold text-xl">
-                {user.password}
-              </td>
-              <td className="p-2 border ">
-                <select
-                  className="bg-inherit outline-none "
-                  value={user.rolesId}
-                  onChange={(e) => handleRoleChange(user.id, e.target.value)}
-                >
-                  {rolesList.map((role) => (
-                    <option
-                      className="text-black"
-                      key={role.id}
-                      value={role.id}
-                    >
-                      {role.value}
-                    </option>
-                  ))}
-                </select>
-              </td>
+      <div className="px-4">
+        <table className="mt-4 w-full border-collapse border-b border-gray-300">
+          <thead>
+            <tr>
+              <th className="p-2 border-b text-left ">STT</th>
+              <th className="p-2 border-b text-left  font-semibold">Email</th>
+              <th className="p-2 border-b text-left font-semibold">Họ tên</th>
+              <th className="p-2 border-b text-left font-semibold">Mật khẩu</th>
+              <th className="p-2 border-b text-left "></th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {displayedUsers.map((user, index) => (
+              <tr key={user.id}>
+                <td className="p-2 border-b ">{firstItem + index + 1}</td>
+                <td className="p-2 border-b font-semibold text-xl">
+                  {user.email}
+                </td>
+                <td className="p-2 border-b font-semibold text-xl">
+                  {user.fullname}
+                </td>
+                <td className="p-2 border-b font-semibold text-xl">
+                  {user.password}
+                </td>
+                <td className="p-2 border-b ">
+                  <select
+                    className="bg-inherit outline-none "
+                    value={user.rolesId}
+                    onChange={(e) => handleRoleChange(user.id, e.target.value)}
+                  >
+                    {rolesList.map((role) => (
+                      <option
+                        className="text-black"
+                        key={role.id}
+                        value={role.id}
+                      >
+                        {role.value}
+                      </option>
+                    ))}
+                  </select>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
       <Pagination
         itemsPerPage={itemsPerPage}
         totalItems={listUser.length}

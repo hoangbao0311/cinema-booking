@@ -63,36 +63,64 @@ const FoodAdmin = () => {
           <Link to={`/admin/foodNew`}>Thêm food</Link>
         </div>
       </div>
-      <div className="flex flex-col gap-5 p-5">
-        {displayedFoods.map((food, index) => {
-          return (
-            <div className="flex items-center gap-5 border-b border-slate-500 py-2">
-              <div>{index + 1 + firstItem}</div>
-              <img className="h-36" src={food.image} alt={food.nameFood} />
-              <div className="flex-1 font-semibold text-xl">
-                {food.nameFood}
-              </div>
-              <div className="flex-1 font-semibold text-xl">
-                {food.description}
-              </div>
-              <div className="flex-1 font-semibold text-xl">
-                Giá: {food.price}
-              </div>
-              <Link to={`/admin/foodadmin/${food.id}`}>
-                <button className="hover:bg-green-900 bg-green-700 px-3 py-1 rounded-lg hover:cursor-pointer font-semibold">
-                  Sửa
-                </button>
-              </Link>
+      <div className="px-4">
+        <table className="mt-4 w-full border-collapse border-b border-gray-300">
+          <thead>
+            <tr>
+              <th className="p-2 border-b text-left font-semibold ">STT</th>
+              <th className="p-2 border-b text-left font-semibold text-xl"></th>
+              <th className="p-2 border-b text-left font-semibold text-xl">
+                Tên
+              </th>
+              <th className="p-2 border-b text-left font-semibold text-xl">
+                Chi tiết
+              </th>
+              <th className="p-2 border-b text-left font-semibold text-xl">
+                Giá
+              </th>
+              <th className="p-2 border-b text-left font-semibold text-xl"></th>
+            </tr>
+          </thead>
+          <tbody>
+            {displayedFoods.map((food, index) => {
+              return (
+                <tr>
+                  <td className="border-b">{index + 1 + firstItem}</td>
+                  <td className="border-b p-3">
+                    <img
+                      className="h-36"
+                      src={food.image}
+                      alt={food.nameFood}
+                    />
+                  </td>
+                  <td className="border-b font-semibold text-xl">
+                    {food.nameFood}
+                  </td>
+                  <td className="border-b font-semibold text-xl">
+                    {food.description}
+                  </td>
+                  <td className="border-b font-semibold text-xl">
+                    Giá: {food.price}
+                  </td>
+                  <td className="border-b">
+                    <Link to={`/admin/foodadmin/${food.id}`}>
+                      <button className="hover:bg-green-900 m-3 bg-green-700 px-3 py-1 rounded-lg hover:cursor-pointer font-semibold">
+                        Sửa
+                      </button>
+                    </Link>
 
-              <button
-                onClick={() => handleDeleteFood(food.id)}
-                className="hover:bg-red-900 bg-red-700 px-3 py-1 rounded-lg hover:cursor-pointer font-semibold"
-              >
-                Xóa
-              </button>
-            </div>
-          );
-        })}
+                    <button
+                      onClick={() => handleDeleteFood(food.id)}
+                      className="hover:bg-red-900 bg-red-700  px-3 py-1 rounded-lg hover:cursor-pointer font-semibold"
+                    >
+                      Xóa
+                    </button>
+                  </td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
       </div>
       <Pagination
         itemsPerPage={itemsPerPage}
