@@ -101,6 +101,7 @@ function EditUser() {
                 className="bg-slate-200 rounded-[4px] border h-[45px] p-3 w-full flex-1 outline-none"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
+                pattern=".{8,20}"
               />
             </div>
           </div>

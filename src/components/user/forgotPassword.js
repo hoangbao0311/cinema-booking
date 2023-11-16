@@ -110,6 +110,7 @@ const ForgotPassword = () => {
             <input
               value={passwordNew}
               onChange={(e) => setPasswordNew(e.target.value)}
+              pattern=".{8,20}"
             />
             <label>Xác nhận mật khẩu mới</label>
             <input

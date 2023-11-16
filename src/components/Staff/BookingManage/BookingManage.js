@@ -110,46 +110,58 @@ const BookingManage = () => {
         />
         <div></div>
       </div>
-      <table className="mt-4 w-full border-collapse border border-gray-300">
-        <thead>
-          <tr>
-            <th className="p-2 border">STT</th>
-            <th className="p-2 border font-semibold text-xl">Mã vé</th>
-            <th className="p-2 border font-semibold text-xl">Khách hàng</th>
-            <th className="p-2 border font-semibold text-xl">Tên phim</th>
-            <th className="p-2 border font-semibold text-xl">Số ghế</th>
-            <th className="p-2 border font-semibold text-xl">Ngày mua</th>
-            <th className="p-2 border font-semibold text-xl"></th>
-          </tr>
-        </thead>
-        <tbody>
-          {currentItems.map((ticket, index) => (
-            <tr key={ticket.id}>
-              <td className="p-2 border">{index + 1 + startIndex}</td>
-              <td className="p-2 border font-semibold text-xl">
-                {ticket.code}
-              </td>
-              <td className="p-2 border font-semibold text-xl">
-                {ticket.users.fullname}
-              </td>
-              <td className="p-2 border font-semibold text-xl">
-                {ticket.filmName}
-              </td>
-              <td className="p-2 border font-semibold text-xl">
-                {ticket.seat.join(", ")}
-              </td>
-              <td className="p-2 border font-semibold text-xl">
-                {ticket.date}
-              </td>
-              <td className="p-2 border">
-                <Link to={`/staff/ticketDetail/${ticket.id}`}>
-                  Xem chi tiết
-                </Link>
-              </td>
+      <div className="px-4">
+        <table className="mt-4 w-full border-collapse border-b border-gray-300">
+          <thead>
+            <tr>
+              <th className="p-2 border-b text-left">STT</th>
+              <th className="p-2 border-b text-left font-semibold text-xl">
+                Mã vé
+              </th>
+              <th className="p-2 border-b text-left font-semibold text-xl">
+                Khách hàng
+              </th>
+              <th className="p-2 border-b text-left font-semibold text-xl">
+                Tên phim
+              </th>
+              <th className="p-2 border-b text-left font-semibold text-xl">
+                Số ghế
+              </th>
+              <th className="p-2 border-b text-left font-semibold text-xl">
+                Ngày mua
+              </th>
+              <th className="p-2 border-b text-left font-semibold text-xl"></th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {currentItems.map((ticket, index) => (
+              <tr key={ticket.id}>
+                <td className="p-2 border-b">{index + 1 + startIndex}</td>
+                <td className="p-2 border-b font-semibold text-xl">
+                  {ticket.code}
+                </td>
+                <td className="p-2 border-b font-semibold text-xl">
+                  {ticket.users.fullname}
+                </td>
+                <td className="p-2 border-b font-semibold text-xl">
+                  {ticket.filmName}
+                </td>
+                <td className="p-2 border-b font-semibold text-xl">
+                  {ticket.seat.join(", ")}
+                </td>
+                <td className="p-2 border-b font-semibold text-xl">
+                  {ticket.date}
+                </td>
+                <td className="p-2 border-b">
+                  <Link to={`/staff/ticketDetail/${ticket.id}`}>
+                    Xem chi tiết
+                  </Link>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
       <Pagination
         itemsPerPage={itemsPerPage}
         totalItems={searchResults.length}

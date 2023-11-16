@@ -63,46 +63,68 @@ const ShowtimeAdmin = () => {
           </div>
         </Link>
       </div>
-      <table className="mt-4 w-full border-collapse border border-gray-300">
-        <thead>
-          {displayedShowtimes?.map((item, index) => {
-            return (
-              <tr>
-                <th className="p-2 border">{index + 1 + firstItem}</th>
-                <th className="p-2 border font-semibold text-xl">
-                  {item.films.name}
-                </th>
-                <th className="p-2 border font-semibold text-xl">
-                  {item.starttime}
-                </th>
-                <th className="p-2 border font-semibold text-xl">
-                  {item.cinemas.name}
-                </th>
-                <th className="p-2 border font-semibold text-xl">
-                  {item.date}
-                </th>
-                <th className="p-2 border flex gap-2">
-                  <Link to={`/admin/editshowtime/${item.id}`}>
+      <div className="px-4">
+        <table className="mt-4 w-full border-collapse border-b border-gray-300">
+          <thead>
+            <tr>
+              <th className=" p-2 border-b text-left py-4 border-gray-300">
+                STT
+              </th>
+              <th className=" p-2 border-b text-left py-4 border-gray-300">
+                Tên phim
+              </th>
+              <th className=" p-2 border-b text-left py-4 border-gray-300">
+                Suất chiếu
+              </th>
+              <th className=" p-2 border-b text-left py-4 border-gray-300">
+                Rạp
+              </th>
+              <th className=" p-2 border-b text-left py-4 border-gray-300">
+                Ngày
+              </th>
+              <th className=" p-2 border-b text-left py-4 border-gray-300"></th>
+            </tr>
+          </thead>
+          <tbody>
+            {displayedShowtimes?.map((item, index) => {
+              return (
+                <tr>
+                  <td className="p-2 border-b">{index + 1 + firstItem}</td>
+                  <td className="p-2 border-b font-semibold text-xl">
+                    {item.films.name}
+                  </td>
+                  <td className="p-2 border-b font-semibold text-xl">
+                    {item.starttime}
+                  </td>
+                  <td className="p-2 border-b font-semibold text-xl">
+                    {item.cinemas.name}
+                  </td>
+                  <td className="p-2 border-b font-semibold text-xl">
+                    {item.date}
+                  </td>
+                  <td className="p-2 text-right border-b flex gap-2">
+                    <Link to={`/admin/editshowtime/${item.id}`}>
+                      <button
+                        className="hover:bg-green-900 bg-green-700 px-3 py-1 rounded-lg hover:cursor-pointer font-semibold"
+                        type=""
+                      >
+                        Edit
+                      </button>
+                    </Link>
                     <button
-                      className="hover:bg-green-900 bg-green-700 px-3 py-1 rounded-lg hover:cursor-pointer font-semibold"
+                      className="hover:bg-red-900 bg-red-700 px-3 py-1 rounded-lg hover:cursor-pointer font-semibold"
                       type=""
+                      // onClick={() => handleDeleteFilm(item.id)}
                     >
-                      Edit
+                      Delete
                     </button>
-                  </Link>
-                  <button
-                    className="hover:bg-red-900 bg-red-700 px-3 py-1 rounded-lg hover:cursor-pointer font-semibold"
-                    type=""
-                    // onClick={() => handleDeleteFilm(item.id)}
-                  >
-                    Delete
-                  </button>
-                </th>
-              </tr>
-            );
-          })}
-        </thead>
-      </table>
+                  </td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+      </div>
       <Pagination
         itemsPerPage={itemsPerPage}
         totalItems={listShowtime.length}
