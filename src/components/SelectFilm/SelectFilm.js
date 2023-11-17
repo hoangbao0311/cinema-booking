@@ -33,8 +33,6 @@ const SelectFilm = () => {
   if (totalDiscount < 0) {
     totalDiscount = 0;
   }
-  console.log("totalDiscount", totalDiscount);
-  console.log("total", total);
 
   useEffect(() => {
     setAmount(totalDiscount);
