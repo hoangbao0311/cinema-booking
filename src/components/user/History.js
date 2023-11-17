@@ -13,13 +13,11 @@ const History = () => {
 
     if (responseUser.status === 200) {
       const responsePayment = await axios.get(
-        `http://localhost:3004/payment?usersId=${responseUser.data[0].id}&_expand=showtimes&_expand=films`
+        `http://localhost:3004/payment?usersId=${responseUser.data[0].id}&_expand=showtimes&_expand=films&status=paid`
       );
       if (responsePayment.status === 200) {
         setDataPayment(responsePayment.data);
       }
-      console.log(responseUser.data);
-      console.log(responsePayment.data);
     }
   };
 
@@ -34,7 +32,7 @@ const History = () => {
           <div>
             {dataPatment?.reverse().map((item, index) => {
               return (
-                <div key={index}>
+                <div key={index} className="m-5">
                   <div className="flex items-center bg-white shadow-xl gap-5 p-5 rounded-xl">
                     <img
                       className="rounded-xl h-16"

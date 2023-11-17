@@ -1,10 +1,6 @@
-import React, { useState, useEffect, useContext } from "react";
-import { Context, TicketContext } from "../../context/ticketContext";
-import { Link, useParams } from "react-router-dom";
-import emailjs from "@emailjs/browser";
+import React, { useEffect, useContext } from "react";
+import { Context } from "../../context/ticketContext";
 import { useVoucher } from "../../context/voucherContext";
-import axios from "axios";
-import { toast } from "react-toastify";
 
 const SelectFilm = () => {
   const {
@@ -16,20 +12,12 @@ const SelectFilm = () => {
     priceShowtime,
     listFoodContext,
     setAmount,
-    amount,
   } = useContext(Context);
-
-  console.log(ticketInfo, "ticketInfo");
 
   let totalFood = 0;
   let totalFilm = 0;
   let total = 0;
-  console.log(listFoodContext);
 
-  useEffect(() => {
-    setAmount(total);
-  }, [total]);
-  console.log(amount);
   listFoodContext?.map((item) => {
     totalFood += parseFloat(item?.quantity) * parseFloat(item?.price);
     return totalFood;
@@ -40,13 +28,17 @@ const SelectFilm = () => {
   total = lengthSeat * priceShowtime + totalFood;
 
   const { voucherPrice } = useVoucher();
-  console.log(voucherPrice);
   let totalDiscount = total - voucherPrice;
-  if (voucherPrice > totalDiscount) {
+
+  if (totalDiscount < 0) {
     totalDiscount = 0;
-  } else {
-    totalDiscount = totalDiscount - voucherPrice;
   }
+  console.log("totalDiscount", totalDiscount);
+  console.log("total", total);
+
+  useEffect(() => {
+    setAmount(totalDiscount);
+  }, [totalDiscount]);
 
   return (
     <div>
