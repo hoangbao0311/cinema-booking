@@ -42,12 +42,9 @@ const SelectFilm = () => {
   const { voucherPrice } = useVoucher();
   console.log(voucherPrice);
   let totalDiscount = total - voucherPrice;
-  if (voucherPrice > totalDiscount) {
+  if (totalDiscount < 0) {
     totalDiscount = 0;
-  } else {
-    totalDiscount = totalDiscount - voucherPrice;
   }
-
   return (
     <div>
       <div className="flex flex-col gap-3 justify-center text-start">
