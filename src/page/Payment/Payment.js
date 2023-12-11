@@ -16,7 +16,7 @@ const Payment = () => {
   const email = localStorage.getItem("email");
 
   const getId = async () => {
-    const response = await axios.get(`http://localhost:3004/users`);
+    const response = await axios.get(`https://r636qt-3000.csb.app/users`);
     console.log(response.data);
     const filterId = await response.data.find((item) => item.email == email);
     console.log("filterId", filterId.id);
@@ -102,7 +102,7 @@ const Payment = () => {
       toast.warning("Vui lòng chọn lại suất chiếu");
       return;
     }
-    const response = await axios.post("http://localhost:3004/payment", {
+    const response = await axios.post("https://r636qt-3000.csb.app/payment", {
       amount: amount,
       code: codeRand,
       cinema: cinemaInfo,
@@ -140,13 +140,13 @@ const Payment = () => {
   };
 
   const [voucherCode, setVoucherCode] = useState("");
-  const { voucherPrice, addVoucherPrice } = useVoucher();
+  const { addVoucherPrice } = useVoucher();
 
   const handleApplyVoucher = async () => {
     try {
       // Gọi API hoặc thực hiện bất kỳ xử lý nào để lấy giá của mã từ API
       const response = await axios.get(
-        `http://localhost:3004/voucher?code=${voucherCode}`
+        `https://r636qt-3000.csb.app/voucher?code=${voucherCode}`
       );
       const findCode = response.data.find((item) => item.code === voucherCode);
 
@@ -163,7 +163,7 @@ const Payment = () => {
     }
   };
   return (
-    <div className="flex justify-evenly">
+    <div className="flex lg:flex-row flex-col justify-evenly">
       <div className="flex flex-col gap-5">
         <div iv className="flex flex-col gap-2">
           <h1 className="font-semibold text-xl">Nhập mã khuyến mãi</h1>

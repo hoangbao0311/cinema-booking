@@ -15,7 +15,7 @@ const ShowtimeAdmin = () => {
 
   const data = async () => {
     const responseFilms = await axios.get(
-      "http://localhost:3004/showtimes?_expand=films&_expand=rooms&_expand=cinemas"
+      "https://r636qt-3000.csb.app/showtimes?_expand=films&_expand=rooms&_expand=cinemas"
     );
     if (responseFilms.status === 200) {
       setListShowtime(responseFilms.data);
@@ -43,7 +43,20 @@ const ShowtimeAdmin = () => {
   const lastItem = firstItem + itemsPerPage;
   const displayedShowtimes = listShowtime.slice(firstItem, lastItem);
 
-  console.log(listShowtime);
+  const handleDeleteShowtime = async (id) => {
+    try {
+      const response = await axios.delete(
+        `https://r636qt-3000.csb.app/showtimes/${id}`
+      );
+      if (response.status === 200) {
+        data();
+        toast.success("Xóa thành công !");
+      }
+    } catch (error) {
+      console.error("Error deleting user:", error);
+      toast.warning("Không thành công !");
+    }
+  };
 
   useEffect(() => {
     data();
@@ -114,7 +127,7 @@ const ShowtimeAdmin = () => {
                     <button
                       className="hover:bg-red-900 bg-red-700 px-3 py-1 rounded-lg hover:cursor-pointer font-semibold"
                       type=""
-                      // onClick={() => handleDeleteFilm(item.id)}
+                      onClick={() => handleDeleteShowtime(item.id)}
                     >
                       Delete
                     </button>

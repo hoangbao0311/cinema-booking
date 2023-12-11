@@ -13,7 +13,7 @@ const ManageUser = () => {
   const [maxPage, setMaxPage] = useState(1);
 
   const getDataUser = async () => {
-    const response = await axios.get("http://localhost:3004/users");
+    const response = await axios.get("https://r636qt-3000.csb.app/users");
     if (response.status === 200) {
       setListUser(response.data);
       setUsers(response.data);
@@ -22,7 +22,7 @@ const ManageUser = () => {
   };
 
   const getRolesList = async () => {
-    const response = await axios.get("http://localhost:3004/roles");
+    const response = await axios.get("https://r636qt-3000.csb.app/roles");
     if (response.status === 200) {
       setRolesList(response.data);
     }
@@ -30,7 +30,7 @@ const ManageUser = () => {
 
   const handleRoleChange = async (userId, newRoleId) => {
     const roleIdAsNumber = parseInt(newRoleId, 10);
-    await axios.patch(`http://localhost:3004/users/${userId}`, {
+    await axios.patch(`https://r636qt-3000.csb.app/users/${userId}`, {
       rolesId: roleIdAsNumber,
     });
     getDataUser();

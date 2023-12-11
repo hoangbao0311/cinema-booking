@@ -8,7 +8,7 @@ const SelectFood = () => {
   const [quantity, setQuantity] = useState(1);
 
   const data = async () => {
-    const responseFood = await axios.get(`http://localhost:3004/foods`);
+    const responseFood = await axios.get(`https://r636qt-3000.csb.app/foods`);
     if (responseFood.status === 200) {
       setListFood(responseFood.data);
     } else {

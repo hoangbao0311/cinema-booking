@@ -13,7 +13,7 @@ const VoucherAdmin = () => {
       toast.error("Vui lòng điền đầy đủ thông tin.");
       return;
     }
-    const response = await axios.post("http://localhost:3004/voucher", {
+    const response = await axios.post("https://r636qt-3000.csb.app/voucher", {
       code: voucher,
       price: parseFloat(price),
     });
@@ -21,7 +21,6 @@ const VoucherAdmin = () => {
       toast.success("Thêm mã thành công !");
     }
   };
-
 
   return (
     <div>

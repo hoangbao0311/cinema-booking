@@ -35,34 +35,25 @@ const App = () => {
     }
 
     const responsePayment = await axios.get(
-      `http://localhost:3004/payment?code=${orderCodeParam}`
+      `https://r636qt-3000.csb.app/payment?code=${orderCodeParam}`
     );
     if (responsePayment.status === 200) {
       setListPayment(responsePayment.data);
     }
 
-    console.log("responsePayment", responsePayment.data);
-
     const filterCode = await responsePayment.data[0];
-
-    console.log("vfilterCode", filterCode);
 
     const idShowtime = await filterCode.showtimesId;
 
-    console.log("idShowtime", idShowtime);
-
     const findFilm = await axios.get(
-      `http://localhost:3004/showtimes/${idShowtime}?_expand=films`
+      `https://r636qt-3000.csb.app/showtimes/${idShowtime}?_expand=films`
     );
 
-    console.log("findFilm", findFilm.data.films.name);
-    console.log("filterCode", filterCode);
-
-    await axios.patch(`http://localhost:3004/payment/${filterCode.id}`, {
+    await axios.patch(`https://r636qt-3000.csb.app/payment/${filterCode.id}`, {
       status: "paid",
     });
 
-    await axios.post("http://localhost:3004/tickets", {
+    await axios.post("https://r636qt-3000.csb.app/tickets", {
       showtimesId: idShowtime,
       usersId: 1,
       code: +orderCodeParam,
@@ -106,7 +97,7 @@ const App = () => {
   }, []);
 
   return (
-    <div>
+    <div className="min-h-screen">
       {loading ? (
         <Result
           status="success"
@@ -116,7 +107,10 @@ const App = () => {
         />
       ) : (
         <div className="flex justify-center items-center text-5xl font-bold">
-          LOADING...
+          <div className="flex items-center justify-center h-screen">
+            <div className="border-t-4 border-blue-500 border-solid rounded-full animate-spin h-16 w-16"></div>
+            <p className="ml-2 text-gray-700">Loading...</p>
+          </div>
         </div>
       )}
     </div>

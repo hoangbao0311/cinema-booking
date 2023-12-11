@@ -23,7 +23,7 @@ const Index = () => {
 
   const data = async () => {
     const responseShowtime = await axios.get(
-      `http://localhost:3004/showtimes/${id}?_expand=films&_expand=rooms&_expand=cinemas`
+      `https://r636qt-3000.csb.app/showtimes/${id}?_expand=films&_expand=rooms&_expand=cinemas`
     );
     if (responseShowtime.status === 200) {
       setListDataShowtime(responseShowtime.data);
@@ -32,7 +32,7 @@ const Index = () => {
     }
 
     const responseTicket = await axios.get(
-      `http://localhost:3004/tickets?_expand=showtimes`
+      `https://r636qt-3000.csb.app/tickets?_expand=showtimes`
     );
     if (responseTicket.status === 200) {
       setListDataTicket(responseTicket.data);
@@ -41,7 +41,7 @@ const Index = () => {
     }
 
     const responseRoom = await axios.get(
-      `http://localhost:3004/rooms?_expand=cinemas`
+      `https://r636qt-3000.csb.app/rooms?_expand=cinemas`
     );
     if (responseRoom.status === 200) {
       setListDataRoom(responseRoom.data);
@@ -82,7 +82,7 @@ const Index = () => {
   }, [id]);
 
   return (
-    <div className="flex justify-center gap-5">
+    <div className="flex lg:flex-row flex-col justify-center gap-5">
       <div className="bg-orange-500">
         <h2 className="text-2xl font-semibold text-white m-5">Chọn ghế:</h2>
         <div className="bg-white mx-3 mt-6 px-20">

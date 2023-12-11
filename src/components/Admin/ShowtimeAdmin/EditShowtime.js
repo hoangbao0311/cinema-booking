@@ -32,7 +32,7 @@ const EditShowtime = () => {
 
   const getCinema = async () => {
     try {
-      const response = await axios.get(`http://localhost:3004/cinemas`);
+      const response = await axios.get(`https://r636qt-3000.csb.app/cinemas`);
       if (response.status === 200) {
         setCinema(response.data);
       }
@@ -43,7 +43,7 @@ const EditShowtime = () => {
 
   const getFilm = async () => {
     try {
-      const response = await axios.get(`http://localhost:3004/films`);
+      const response = await axios.get(`https://r636qt-3000.csb.app/films`);
       if (response.status === 200) {
         setFilm(response.data);
       }
@@ -54,7 +54,7 @@ const EditShowtime = () => {
 
   const getRoom = async () => {
     try {
-      const response = await axios.get(`http://localhost:3004/rooms`);
+      const response = await axios.get(`https://r636qt-3000.csb.app/rooms`);
       if (response.status === 200) {
         setRoom(response.data);
       }
@@ -75,16 +75,19 @@ const EditShowtime = () => {
       toast.warning("Không được để trống");
       return;
     } else {
-      const response = await axios.patch("http://localhost:3004/showtimes", {
-        cinemasId: +selectCinema,
-        filmsId: +selectMovie,
-        roomsId: +selectRoom,
-        starttime: startTimes,
-        endtime: endTimes,
-        date: date,
-        unitPrice: +price,
-        stattus: "on",
-      });
+      const response = await axios.patch(
+        "https://r636qt-3000.csb.app/showtimes",
+        {
+          cinemasId: +selectCinema,
+          filmsId: +selectMovie,
+          roomsId: +selectRoom,
+          starttime: startTimes,
+          endtime: endTimes,
+          date: date,
+          unitPrice: +price,
+          stattus: "on",
+        }
+      );
       if (response.status === 201) {
         toast.success("Tải lên thành công !");
       } else {
@@ -95,7 +98,9 @@ const EditShowtime = () => {
 
   const getShowtime = async () => {
     try {
-      const response = await axios.get(`http://localhost:3004/showtimes/${id}`);
+      const response = await axios.get(
+        `https://r636qt-3000.csb.app/showtimes/${id}`
+      );
       if (response.status === 200) {
         setDataShowtime(response.data);
         console.log(response.data);

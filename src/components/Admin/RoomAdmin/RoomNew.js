@@ -19,7 +19,7 @@ const RoomNew = () => {
       toast.warning("Không được để trống");
       return;
     } else {
-      const response = await axios.post("http://localhost:3004/rooms", {
+      const response = await axios.post("https://r636qt-3000.csb.app/rooms", {
         nameRoom: nameRoom,
         cinemasId: +selectedCinema,
         horizon: +horizon,
@@ -34,7 +34,9 @@ const RoomNew = () => {
   };
 
   const getData = async () => {
-    const responseFilms = await axios.get("http://localhost:3004/cinemas");
+    const responseFilms = await axios.get(
+      "https://r636qt-3000.csb.app/cinemas"
+    );
     if (responseFilms.status === 200) {
       setListCinema(responseFilms.data);
     } else {

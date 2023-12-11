@@ -41,7 +41,7 @@ const Staff = () => {
             </div>
           )}
         </div>
-        <div className="m-5 bg-[#1C2438] w-full rounded-xl  text-white h-[900px]">
+        <div className="m-5 bg-[#1C2438] w-full rounded-xl  text-white min-h-screen">
           {role === "3" ? <Outlet /> : <LoginStaff />}
         </div>
       </div>

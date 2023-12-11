@@ -88,18 +88,21 @@ const FilmAdmin = () => {
   }, [listfilm]);
 
   const postData = async (downloadURL) => {
-    const response = await axios.patch(`http://localhost:3004/films/${id}`, {
-      name: nameFilm,
-      banner: downloadURL,
-      author: author,
-      main_actor: actor,
-      description: description,
-      director: director,
-      startDay: startDay,
-      endDay: endDay,
-      time: time,
-      coutry: coutry,
-    });
+    const response = await axios.patch(
+      `https://r636qt-3000.csb.app/films/${id}`,
+      {
+        name: nameFilm,
+        banner: downloadURL,
+        author: author,
+        main_actor: actor,
+        description: description,
+        director: director,
+        startDay: startDay,
+        endDay: endDay,
+        time: time,
+        coutry: coutry,
+      }
+    );
     if (response.status === 200) {
       toast.success("Tải lên thành công !");
     } else {
@@ -108,18 +111,21 @@ const FilmAdmin = () => {
   };
 
   const postDataNoImage = async () => {
-    const response = await axios.patch(`http://localhost:3004/films/${id}`, {
-      name: nameFilm,
-      author: author,
-      main_actor: actor,
-      description: description,
-      director: director,
-      startDay: startDay,
-      endDay: endDay,
-      time: time,
-      coutry: coutry,
-      status: "Đang Chiếu",
-    });
+    const response = await axios.patch(
+      `https://r636qt-3000.csb.app/films/${id}`,
+      {
+        name: nameFilm,
+        author: author,
+        main_actor: actor,
+        description: description,
+        director: director,
+        startDay: startDay,
+        endDay: endDay,
+        time: time,
+        coutry: coutry,
+        status: "Đang Chiếu",
+      }
+    );
     if (response.status === 200) {
       toast.success("Tải lên thành công !");
     } else {
@@ -138,7 +144,9 @@ const FilmAdmin = () => {
 
   const getData = async () => {
     try {
-      const response = await axios.get(`http://localhost:3004/films/${id}`);
+      const response = await axios.get(
+        `https://r636qt-3000.csb.app/films/${id}`
+      );
       if (response.status === 200) {
         setListFilm(response.data);
         console.log(response.data);

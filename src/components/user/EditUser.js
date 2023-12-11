@@ -10,7 +10,7 @@ function EditUser() {
 
   const getData = async () => {
     try {
-      const response = await axios.get(`http://localhost:3004/users`);
+      const response = await axios.get(`https://r636qt-3000.csb.app/users`);
       if (response.status === 200) {
         setListUser(response.data);
       }
@@ -38,7 +38,7 @@ function EditUser() {
 
     try {
       const response = await axios.patch(
-        `http://localhost:3004/users/${object.id}`,
+        `https://r636qt-3000.csb.app/users/${object.id}`,
         {
           fullname: fullname,
           phone: fullname,

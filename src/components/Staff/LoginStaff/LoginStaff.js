@@ -12,7 +12,7 @@ const LoginStaff = () => {
     let isLoggedIn = false;
 
     axios
-      .get("http://localhost:3004/users")
+      .get("https://r636qt-3000.csb.app/users")
       .then((response) => {
         const data = response.data;
         data.forEach((user) => {

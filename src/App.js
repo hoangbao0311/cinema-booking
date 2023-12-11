@@ -43,6 +43,9 @@ import Report from "./components/Staff/Report/Report.js";
 import ReviewManage from "./components/Staff/ReviewManage/ReviewManage";
 import History from "./components/user/History.js";
 import TicketDetail from "./components/Staff/BookingManage/TicketDetail.js";
+import RecruitmentPage from "./page/PageNavbar/RecruitmentPage.js";
+import EventPage from "./page/PageNavbar/EventPage.js";
+import FilmPage from "./page/PageNavbar/FilmPage.js";
 
 function App() {
   return (
@@ -65,6 +68,9 @@ function App() {
             <Route path="/searchResult" element={<SearchResult />} />
             <Route path="/ticketemail" element={<TicketEmail />} />
             <Route path="/forgotpassword" element={<ForgotPassword />} />
+            <Route path="/recruitment" element={<RecruitmentPage />} />
+            <Route path="/event" element={<EventPage />} />
+            <Route path="/filmpage" element={<FilmPage />} />
           </Route>
           <Route path="admin" element={<Admin />}>
             <Route path="/admin/manageuser" element={<ManageUser />} />

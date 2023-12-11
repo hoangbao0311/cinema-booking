@@ -8,7 +8,7 @@ const Food = () => {
 
   return (
     <div>
-      <div className="flex justify-center gap-5">
+      <div className="flex lg:flex-row flex-col justify-center gap-5">
         <SelectFood />
         <div>
           <SelectFilm />

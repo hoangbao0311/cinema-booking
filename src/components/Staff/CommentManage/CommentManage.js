@@ -14,7 +14,7 @@ const CommentManage = () => {
 
   const getComments = async () => {
     const response = await axios.get(
-      "http://localhost:3004/comments?_expand=users"
+      "https://r636qt-3000.csb.app/comments?_expand=users"
     );
     if (response.status === 200) {
       const sortedComments = response.data.sort((a, b) => {
@@ -31,7 +31,9 @@ const CommentManage = () => {
   };
 
   const handleDeleteComment = async (id) => {
-    const response = await axios.delete(`http://localhost:3004/comments/${id}`);
+    const response = await axios.delete(
+      `https://r636qt-3000.csb.app/comments/${id}`
+    );
     getComments(response.data);
     toast.success("Xóa thành công !");
   };

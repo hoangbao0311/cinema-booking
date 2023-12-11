@@ -11,7 +11,7 @@ const TicketDetail = () => {
   const getTicketDetail = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:3004/payment/${id}?_expand=showtimes&_expand=users`
+        `https://r636qt-3000.csb.app/payment/${id}?_expand=showtimes&_expand=users`
       );
       if (response.status === 200) {
         setTicketDetail(response.data);
@@ -25,7 +25,7 @@ const TicketDetail = () => {
   const getFilmName = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:3004/showtimes/${ticketDetail.showtimesId}?_expand=films`
+        `https://r636qt-3000.csb.app/showtimes/${ticketDetail.showtimesId}?_expand=films`
       );
       if (response.status === 200) {
         setFilmName(response.data.films.name);
@@ -57,7 +57,9 @@ const TicketDetail = () => {
         <div className="font-semibold text-xl">
           Số ghế: {ticketDetail.seat ? ticketDetail.seat.join(", ") : "N/A"}
         </div>
-        <div className="font-semibold text-xl">Ngày mua: {ticketDetail.date}</div>
+        <div className="font-semibold text-xl">
+          Ngày mua: {ticketDetail.date}
+        </div>
         <div className="font-semibold text-xl">
           Thức ăn:
           <ul>

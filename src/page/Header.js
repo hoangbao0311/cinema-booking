@@ -70,7 +70,6 @@ const Header = () => {
                 src={`https://www.galaxycine.vn/_next/image/?url=%2F_next%2Fstatic%2Fmedia%2Fgalaxy-logo-mobile.074abeac.png&w=128&q=75`}
                 alt="CGV Logo"
               />
-
               {isOpen ? (
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -121,19 +120,27 @@ const Header = () => {
                   </Link>
                 </li>
                 <li>
-                  <p>PHIM</p>
+                  <Link to="/filmpage">
+                    <p>PHIM</p>
+                  </Link>
                 </li>
                 <li>
-                  <p>GÓC ĐIỆN ẢNH</p>
+                  <Link to="/filmpage">
+                    <p>GÓC ĐIỆN ẢNH</p>
+                  </Link>
                 </li>
                 <li>
-                  <p>SỰ KIỆN</p>
+                  <Link to="/event">
+                    <p>SỰ KIỆN</p>
+                  </Link>
                 </li>
                 <li>
                   <p>RẠP</p>
                 </li>
                 <li>
-                  <p>TUYỂN DỤNG</p>
+                  <Link to="/recruitment">
+                    <p>TUYỂN DỤNG</p>
+                  </Link>
                 </li>
                 <li>
                   <Search />

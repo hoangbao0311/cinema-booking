@@ -10,7 +10,7 @@ const Report = () => {
   const [showReport, setShowReport] = useState(false);
 
   const fetchBookings = async () => {
-    const response = await axios.get("http://localhost:3004/payment");
+    const response = await axios.get("https://r636qt-3000.csb.app/payment");
     if (response.status === 200) {
       const data = response.data;
       setOriginalBookings(data);

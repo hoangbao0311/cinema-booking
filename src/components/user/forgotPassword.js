@@ -20,7 +20,7 @@ const ForgotPassword = () => {
     e.preventDefault();
 
     try {
-      const response = await axios.get("http://localhost:3004/users");
+      const response = await axios.get("https://r636qt-3000.csb.app/users");
       const user = await response.data.find((user) => user.email === toEmail);
 
       if (user) {
@@ -40,9 +40,9 @@ const ForgotPassword = () => {
           "LKfTopoKtQRSRQg5i"
         );
 
-        await axios.patch(`http://localhost:3004/users/${user.id}`, user);
+        await axios.patch(`https://r636qt-3000.csb.app/users/${user.id}`, user);
         const responseCode = await axios.get(
-          `http://localhost:3004/users/${user.id}`
+          `https://r636qt-3000.csb.app/users/${user.id}`
         );
         setGetcode(responseCode.data.resetpassword);
         console.log(responseCode);
@@ -82,14 +82,14 @@ const ForgotPassword = () => {
   const handleConfirmPassword = async () => {
     if (passwordNew === confirmpassword) {
       const response = await axios.get(
-        `http://localhost:3004/users?email=${toEmail}`
+        `https://r636qt-3000.csb.app/users?email=${toEmail}`
       );
       console.log(response);
       const user = response.data[0];
 
       if (user) {
         user.password = passwordNew;
-        await axios.patch(`http://localhost:3004/users/${user.id}`, user);
+        await axios.patch(`https://r636qt-3000.csb.app/users/${user.id}`, user);
         toast.success("Mật khẩu đã được cập nhật thành công!");
         // window.localStorage.setItem("fullname", values.fullname);
         navigate("/");

@@ -12,7 +12,9 @@ const EditCinema = () => {
 
   const getData = async () => {
     try {
-      const response = await axios.get(`http://localhost:3004/cinemas/${id}`);
+      const response = await axios.get(
+        `https://r636qt-3000.csb.app/cinemas/${id}`
+      );
       if (response.status === 200) {
         setListCinema(response.data);
         console.log(response.data);
@@ -23,10 +25,13 @@ const EditCinema = () => {
   };
 
   const handleUpdate = async () => {
-    const response = await axios.patch(`http://localhost:3004/cinemas/${id}`, {
-      name: nameCinema,
-      address: address,
-    });
+    const response = await axios.patch(
+      `https://r636qt-3000.csb.app/cinemas/${id}`,
+      {
+        name: nameCinema,
+        address: address,
+      }
+    );
     if (response.status === 200) {
       toast.success("Tải lên thành công !");
     } else {

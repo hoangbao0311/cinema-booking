@@ -11,7 +11,7 @@ const CinemaNew = () => {
       toast.warning("Không được để trống");
       return;
     } else {
-      const response = await axios.post("http://localhost:3004/cinemas", {
+      const response = await axios.post("https://r636qt-3000.csb.app/cinemas", {
         name: nameCinema,
         address: address,
       });

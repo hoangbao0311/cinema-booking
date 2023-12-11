@@ -23,7 +23,7 @@ const FoodEdit = () => {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:3004/foods/${id}`)
+      .get(`https://r636qt-3000.csb.app/foods/${id}`)
       .then((response) => {
         setFood(response.data);
         setNameFood(response.data.nameFood);
@@ -39,7 +39,7 @@ const FoodEdit = () => {
   const handleChange = (e) => {
     if (e.target.files[0]) {
       setImage(e.target.files[0]);
-      setPreviewImage(URL.createObjectURL(e.target.files[0])); 
+      setPreviewImage(URL.createObjectURL(e.target.files[0]));
     }
   };
 
@@ -85,7 +85,7 @@ const FoodEdit = () => {
     };
 
     axios
-      .patch(`http://localhost:3004/foods/${id}`, updatedFood)
+      .patch(`https://r636qt-3000.csb.app/foods/${id}`, updatedFood)
       .then((response) => {
         if (response.status === 200) {
           toast.success("Cập nhật thành công !");

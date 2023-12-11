@@ -18,14 +18,14 @@ function MyContext({ children }) {
   const [id, setId] = useState(null);
 
   const getDataUser = async () => {
-    const response = await axios.get("http://localhost:3004/users");
+    const response = await axios.get("https://r636qt-3000.csb.app/users");
     if (response.status === 200) {
       setListUser(response.data);
     }
   };
 
   const getDataFilm = async () => {
-    const response = await axios.get("http://localhost:3004/films");
+    const response = await axios.get("https://r636qt-3000.csb.app/films");
     if (response.status === 200) {
       setListFilm(response.data);
     }

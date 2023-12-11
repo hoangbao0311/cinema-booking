@@ -64,7 +64,7 @@ const FoodNew = () => {
   };
 
   const postData = async (downloadURL) => {
-    const response = await axios.post("http://localhost:3004/foods", {
+    const response = await axios.post("https://r636qt-3000.csb.app/foods", {
       nameFood: nameFood,
       image: downloadURL,
       description: description,
@@ -146,7 +146,7 @@ const FoodNew = () => {
                 className="outline-none border w-full mt-1 py-1 px-2 text-lg  border-[#1C2438] rounded-lg"
                 type="text"
               />
-            </div>     
+            </div>
             <div
               className="bg-[#1C2438] text-white font-semibold px-4 py-2 rounded-lg cursor-pointer text-center hover:bg-[#151929]"
               onClick={() => handleUpload()}

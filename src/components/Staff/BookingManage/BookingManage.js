@@ -17,14 +17,14 @@ const BookingManage = () => {
   const getTicketData = async () => {
     try {
       const response = await axios.get(
-        "http://localhost:3004/payment?_expand=showtimes&_expand=users"
+        "https://r636qt-3000.csb.app/payment?_expand=showtimes&_expand=users"
       );
       if (response.status === 200) {
         const ticketData = response.data;
         const showtimesIds = ticketData.map((ticket) => ticket.showtimesId);
 
         const showtimesResponse = await axios.get(
-          `http://localhost:3004/showtimes?id=${showtimesIds.join(
+          `https://r636qt-3000.csb.app/showtimes?id=${showtimesIds.join(
             "&id="
           )}&_expand=films`
         );

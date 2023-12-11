@@ -35,14 +35,14 @@ const Index = () => {
   const data = async () => {
     // API
     const responseShowtime = await axios.get(
-      "http://localhost:3004/showtimes?_expand=films&_expand=rooms&_expand=cinemas"
+      "https://r636qt-3000.csb.app/showtimes?_expand=films&_expand=rooms&_expand=cinemas"
     );
     if (responseShowtime.status === 200) {
       setListDataShowtime(responseShowtime.data);
     } else {
       console.log("loi");
     }
-    const responseFilms = await axios.get("http://localhost:3004/films");
+    const responseFilms = await axios.get("https://r636qt-3000.csb.app/films");
     if (responseFilms.status === 200) {
       setListFilm(responseFilms.data);
     } else {
@@ -50,13 +50,15 @@ const Index = () => {
     }
 
     const responseRoom = await axios.get(
-      "http://localhost:3004/rooms?_expand=cinemas"
+      "https://r636qt-3000.csb.app/rooms?_expand=cinemas"
     );
     if (responseRoom.status === 200) {
       setListDataRoom(responseRoom.data);
     }
 
-    const responseCinema = await axios.get("http://localhost:3004/cinemas");
+    const responseCinema = await axios.get(
+      "https://r636qt-3000.csb.app/cinemas"
+    );
     if (responseCinema.status === 200) {
       setListCinema(responseCinema.data);
     }
@@ -139,7 +141,7 @@ const Index = () => {
 
     if (email) {
       const responseUsers = await axios.get(
-        `http://localhost:3004/users?email=${email}`
+        `https://r636qt-3000.csb.app/users?email=${email}`
       );
       if (responseUsers.status === 200) {
         setUserId(responseUsers.data[0].id);
@@ -154,7 +156,7 @@ const Index = () => {
       toast.warning("Không được để trống bình luận");
       return;
     }
-    const response = await axios.post("http://localhost:3004/comments", {
+    const response = await axios.post("https://r636qt-3000.csb.app/comments", {
       body: comment,
       filmsId: +id,
       star: +star,
@@ -177,7 +179,7 @@ const Index = () => {
   const handleViewComent = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:3004/comments?filmsId=${id}&_expand=users`
+        `https://r636qt-3000.csb.app/comments?filmsId=${id}&_expand=users`
       );
       if (response.status === 200) {
         setDataComent(response.data);

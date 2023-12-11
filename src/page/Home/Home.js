@@ -14,7 +14,7 @@ const Home = () => {
   const { setSelectedSeats } = useContext(Context);
 
   const getData = async () => {
-    const responseFilm = await axios.get(`http://localhost:3004/films`);
+    const responseFilm = await axios.get(`https://r636qt-3000.csb.app/films`);
 
     setListFilm(responseFilm.data);
     console.log("flim", responseFilm.data);
@@ -45,7 +45,7 @@ const Home = () => {
       <div className="hidden lg:block">
         <SlideShow />
       </div>
-      <div>
+      <div className="hidden md:block">
         <SearchFilter />
       </div>
       <div>
@@ -167,14 +167,13 @@ const Home = () => {
           <img src="/image/h3_event.gif" alt="" />
           <div className="border-y-[1px] w-full border-black mr-24"></div>
         </div>
-        <div className="flex justify-center gap-2 my-5">
-          <img src="/image/Event/2023_happy_wed_75k_000_240x201.png" alt="" />
-          <img src="/image/Event/240x201-uu.jpg" alt="" />
-          <img src="/image/Event/birthday_popcorn_box_240x201.png" alt="" />
-          <img
-            src="/image/Event/u22_2023_special_cinemas_240x201_1.png"
-            alt=""
-          />
+        <div className="flex justify-center mt-5">
+          <div className="grid gap-x-8 gap-y-12 xl:grid-cols-4 md:grid-cols-2 sm:grid-cols-1">
+            <img src="/image/Event/2023_happy_wed_75k_000_240x201.png" alt="" />
+            <img src="/image/Event/240x201-uu.jpg" alt="" />
+            <img src="/image/Event/birthday_popcorn_box_240x201.png" alt="" />
+            <img src="/image/Event/u22_2023_special_cinemas_240x201_1.png" />
+          </div>
         </div>
       </div>
     </div>

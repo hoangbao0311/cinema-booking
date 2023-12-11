@@ -14,7 +14,7 @@ const RoomAdmin = () => {
   const [maxPage, setMaxPage] = useState(1);
 
   const data = async () => {
-    const responseFilms = await axios.get("http://localhost:3004/rooms");
+    const responseFilms = await axios.get("https://r636qt-3000.csb.app/rooms");
     if (responseFilms.status === 200) {
       setListRoom(responseFilms.data);
       setRooms(responseFilms.data);

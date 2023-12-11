@@ -14,7 +14,7 @@ const FilmEdit = () => {
   const [maxPage, setMaxPage] = useState(1);
 
   const data = async () => {
-    const responseFilms = await axios.get("http://localhost:3004/films");
+    const responseFilms = await axios.get("https://r636qt-3000.csb.app/films");
     if (responseFilms.status === 200) {
       setListFilm(responseFilms.data);
       setFilms(responseFilms.data);
@@ -26,7 +26,9 @@ const FilmEdit = () => {
 
   const handleDeleteFilm = async (id) => {
     try {
-      const response = await axios.delete(`http://localhost:3004/films/${id}`);
+      const response = await axios.delete(
+        `https://r636qt-3000.csb.app/films/${id}`
+      );
       if (response.status === 200) {
         data();
         toast.success("Xóa thành công !");
@@ -49,6 +51,19 @@ const FilmEdit = () => {
   const firstItem = (currentPage - 1) * itemsPerPage;
   const lastItem = firstItem + itemsPerPage;
   const displayedFilms = listFilm.slice(firstItem, lastItem);
+
+  const handleSwitch = async (id, status) => {
+    const response = await axios.patch(
+      `https://r636qt-3000.csb.app/films/${id}`,
+      {
+        status: status,
+      }
+    );
+    if (response.status === 200) {
+      toast.success("Set thành công !");
+    }
+    data();
+  };
 
   useEffect(() => {
     data();
@@ -82,6 +97,9 @@ const FilmEdit = () => {
               <th className=" border-b text-left font-semibold text-xl">
                 Ngày khởi chiếu
               </th>
+              <th className=" border-b text-left font-semibold text-xl">
+                Trạng thái
+              </th>
               <th className=" border-b text-left font-semibold text-xl"></th>
             </tr>
           </thead>
@@ -101,6 +119,58 @@ const FilmEdit = () => {
                   </td>
                   <td className="border-b font-semibold text-xl">
                     {item.startDay}
+                  </td>
+                  <td className="border-b font-semibold text-xl">
+                    <form className="flex gap-3">
+                      <div
+                        className="border-b p-1 flex items-center border-white "
+                        s
+                      >
+                        <label className="p-1" for="">
+                          Đang chiếu
+                        </label>
+                        <input
+                          type="radio"
+                          className=" h-4 w-4"
+                          name="status"
+                          value="DC"
+                          defaultChecked={item.status == "DC"}
+                          onClick={(e) => handleSwitch(item.id, e.target.value)}
+                        />
+                      </div>
+                      <div
+                        className="border-b p-1 flex items-center border-white "
+                        s
+                      >
+                        <label className="p-1" for="">
+                          Sắp chiếu
+                        </label>
+                        <input
+                          type="radio"
+                          className=" h-4 w-4"
+                          name="status"
+                          value="SC"
+                          defaultChecked={item.status == "SC"}
+                          onClick={(e) => handleSwitch(item.id, e.target.value)}
+                        />
+                      </div>
+                      <div
+                        className="border-b p-1 flex items-center border-white "
+                        s
+                      >
+                        <label className="p-1" for="">
+                          Ẩn
+                        </label>
+                        <input
+                          type="radio"
+                          className=" h-4 w-4"
+                          name="status"
+                          value="OFF"
+                          defaultChecked={item.status == "OFF"}
+                          onClick={(e) => handleSwitch(item.id, e.target.value)}
+                        />
+                      </div>
+                    </form>
                   </td>
                   <td className="border-b text-right">
                     <Link to={`/admin/filmhome/${item.id}`}>

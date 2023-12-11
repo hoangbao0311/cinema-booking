@@ -14,7 +14,7 @@ const VoucherAdmin = () => {
   const [maxPage, setMaxPage] = useState(1);
 
   const getDataVoucher = async () => {
-    const response = await axios.get("http://localhost:3004/voucher");
+    const response = await axios.get("https://r636qt-3000.csb.app/voucher");
     if (response.status === 200) {
       setShowVoucher(response.data);
       setDefaultVoucher(response.data);
@@ -23,7 +23,9 @@ const VoucherAdmin = () => {
   };
 
   const handleDeleteVoucher = async (id) => {
-    const response = await axios.delete(`http://localhost:3004/voucher/${id}`);
+    const response = await axios.delete(
+      `https://r636qt-3000.csb.app/voucher/${id}`
+    );
     if (response.status === 200) {
       toast.success("Xóa mã thành công !");
       getDataVoucher();

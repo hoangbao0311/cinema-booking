@@ -13,7 +13,9 @@ const EditRoom = () => {
 
   const getData = async () => {
     try {
-      const response = await axios.get(`http://localhost:3004/rooms/${id}`);
+      const response = await axios.get(
+        `https://r636qt-3000.csb.app/rooms/${id}`
+      );
       if (response.status === 200) {
         setListRoom(response.data);
         console.log(response.data);
@@ -24,11 +26,14 @@ const EditRoom = () => {
   };
 
   const handleUpdate = async () => {
-    const response = await axios.patch(`http://localhost:3004/rooms/${id}`, {
-      nameRoom: nameRoom,
-      horizon: horizon,
-      vertical: vertical,
-    });
+    const response = await axios.patch(
+      `https://r636qt-3000.csb.app/rooms/${id}`,
+      {
+        nameRoom: nameRoom,
+        horizon: horizon,
+        vertical: vertical,
+      }
+    );
     if (response.status === 200) {
       toast.success("Tải lên thành công !");
       getData();

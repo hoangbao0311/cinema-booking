@@ -13,7 +13,7 @@ const FoodAdmin = () => {
   const [maxPage, setMaxPage] = useState(1);
 
   const getFood = async () => {
-    const response = await axios.get("http://localhost:3004/foods");
+    const response = await axios.get("https://r636qt-3000.csb.app/foods");
     if (response.status === 200) {
       setShowFood(response.data);
       setFoods(response.data);
@@ -23,7 +23,7 @@ const FoodAdmin = () => {
 
   const handleDeleteFood = async (foodId) => {
     const response = await axios.delete(
-      `http://localhost:3004/foods/${foodId}`
+      `https://r636qt-3000.csb.app/foods/${foodId}`
     );
     if (response.status === 200) {
       getFood(response.data);

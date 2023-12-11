@@ -8,12 +8,12 @@ const History = () => {
 
   const getPayment = async () => {
     const responseUser = await axios.get(
-      `http://localhost:3004/users?email=${email}`
+      `https://r636qt-3000.csb.app/users?email=${email}`
     );
 
     if (responseUser.status === 200) {
       const responsePayment = await axios.get(
-        `http://localhost:3004/payment?usersId=${responseUser.data[0].id}&_expand=showtimes&_expand=films&status=paid`
+        `https://r636qt-3000.csb.app/payment?usersId=${responseUser.data[0].id}&_expand=showtimes&_expand=films&status=paid`
       );
       if (responsePayment.status === 200) {
         setDataPayment(responsePayment.data);

@@ -13,7 +13,9 @@ const CinemaAdmin = () => {
   const [maxPage, setMaxPage] = useState(1);
 
   const data = async () => {
-    const responseFilms = await axios.get("http://localhost:3004/cinemas");
+    const responseFilms = await axios.get(
+      "https://r636qt-3000.csb.app/cinemas"
+    );
     if (responseFilms.status === 200) {
       setListCinema(responseFilms.data);
       setCinemas(responseFilms.data);

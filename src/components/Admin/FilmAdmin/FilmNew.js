@@ -80,7 +80,7 @@ const FilmAdmin = () => {
   };
 
   const postData = async (downloadURL) => {
-    const response = await axios.post("http://localhost:3004/films", {
+    const response = await axios.post("https://r636qt-3000.csb.app/films", {
       name: nameFilm,
       banner: downloadURL,
       author: author,
@@ -91,7 +91,7 @@ const FilmAdmin = () => {
       endDay: endDay,
       time: time,
       coutry: coutry,
-      status: "Đang Chiếu",
+      status: "DC",
     });
     if (response.status === 201) {
       toast.success("Tải lên thành công !");
@@ -229,15 +229,6 @@ const FilmAdmin = () => {
                 type="text"
               />
             </div>
-            {/* <div className="text-black w-full">
-              <label for="" className="font-semibold ">
-                Status:
-              </label>
-              <input
-                className="outline-none border w-full mt-1 py-1 px-2 text-lg  border-[#1C2438] rounded-lg"
-                type="text"
-              />
-            </div> */}
             <div
               className="bg-[#1C2438] text-white font-semibold px-4 py-2 rounded-lg cursor-pointer text-center hover:bg-[#151929]"
               onClick={() => handleUpload()}

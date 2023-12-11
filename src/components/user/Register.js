@@ -7,12 +7,12 @@ import { toast } from "react-toastify";
 const App = () => {
   const navigate = useNavigate();
   const postData = async (data) => {
-    const response = await axios.post("http://localhost:3004/users", {
+    const response = await axios.post("https://r636qt-3000.csb.app/users", {
       fullname: data.fullname,
       email: data.email,
       password: data.password,
       rolesId: 1,
-      resetpassword:''
+      resetpassword: "",
     });
     if (response.status === 200) {
     }
@@ -32,7 +32,7 @@ const App = () => {
     }
     let checkEmail = false;
     axios
-      .get("http://localhost:3004/users")
+      .get("https://r636qt-3000.csb.app/users")
       .then((response) => {
         response.data.forEach((check) => {
           const mail = check.email;
